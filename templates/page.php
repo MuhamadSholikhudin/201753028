@@ -1,4 +1,3 @@
-
 <!-- Content -->
 <div class="col-lg-9 col-md-8 col-12">
     <div class="row">
@@ -32,12 +31,9 @@
 
         <?php 
         
-        
             //Menampilkan data barang banyak dalam arrray
-            $sql_barangs = "SELECT * FROM barang";
-            $query_barangs = mysqli_query(
-                $koneksi, 
-            $sql_barangs);
+            $sql_barangs = "SELECT * FROM barang ";
+            $query_barangs = mysqli_query($koneksi, $sql_barangs);
             $no=1; //nilai awal nomer
             while ($data_barangs = mysqli_fetch_array($query_barangs, MYSQLI_BOTH)){
 
@@ -58,7 +54,7 @@
                                 <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
                             </div>
                             <div class="product-action-2">
-                                <a title="Add to cart" href="<?= base_url('cart/add_to_cart.php?id='. $data_barangs['id_barang']) ?>">Add to cart</a>
+                                <a title="Add to cart" href="<?= base_url('raja_vapor/cart/add_to_cart/'. $data_barangs['id_barang']) ?>">Add to cart</a>
                             </div>
                         </div>
                     </div>
