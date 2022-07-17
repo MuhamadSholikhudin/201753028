@@ -223,7 +223,7 @@
 											<a class="cart-img" href="#"><img src="<?= base_url('uploads/barang/') ?>61.png" alt="#"></a>
 											<h4><a href="#">
 											<?php
-											        $sql_barang_keranjang= "SELECT * FROM barang WHERE id_barang = $keranjang_user_id_barang";
+											        $sql_barang_keranjang= "SELECT * FROM barang WHERE id_produk = $keranjang_user_id_produk";
 													$query_barang_keranjang = mysqli_query($koneksi, $sql_barang_keranjang);
 													$data_barang_keranjang = mysqli_fetch_array($query_barang_keranjang,MYSQLI_BOTH);
 								
@@ -251,7 +251,7 @@
 											// Jika Sudah Login
 											if(isset($_SESSION['id_user'])){
 
-												$sql_total_barang = "SELECT SUM(harga_keranjang) as total FROM barang WHERE id_barang = $keranjang_user_id_barang";
+												$sql_total_barang = "SELECT SUM(harga_keranjang) as total FROM barang WHERE id_produk = $keranjang_user_id_produk";
 												$query_total_barang = mysqli_query($koneksi, $sql_total_barang);
 												$data_total_barang = mysqli_fetch_array($query_total_barang, MYSQLI_BOTH);
 												echo $data_total_barang['total'];
@@ -399,7 +399,7 @@
 
 							<!-- Single Post -->
 							<?php 
-								$sql_tampil_barang = "SELECT * FROM barang ORDER BY id_barang DESC LIMIT 3";
+								$sql_tampil_barang = "SELECT * FROM barang ORDER BY id_produk DESC LIMIT 3";
 								$query_tampil_barang = mysqli_query($koneksi, $sql_tampil_barang);
 								$no=1; //nilai awal nomer
 								while ($bar_bar = mysqli_fetch_array($query_tampil_barang,MYSQLI_BOTH)){
@@ -409,7 +409,7 @@
 									<img src="https://via.placeholder.com/75x75" alt="#">
 								</div>
 								<div class="content">
-									<h5><a href="<?= $bar_bar['id_barang']; ?>"><?= $bar_bar['nama_barang']; ?></a></h5>
+									<h5><a href="<?= $bar_bar['id_produk']; ?>"><?= $bar_bar['nama_barang']; ?></a></h5>
 									<p class="price"><?= rupiah($bar_bar['harga_barang']); ?></p>
 									<ul class="reviews">
 										<li class="yellow"><i class="ti-star"></i></li>
@@ -476,7 +476,7 @@
 							<div class="col-xl-3 col-lg-4 col-md-4 col-12">
 								<div class="single-product">
 									<div class="product-img">
-										<a href="<?= base_url('welcome/detail/') . $data_barangs['id_barang'] ?>">
+										<a href="<?= base_url('welcome/detail/') . $data_barangs['id_produk'] ?>">
 											<!-- <img class="default-img" src="https://source.unsplash.com/550x750" alt="#"> -->
 											<img class="default-img" src="https://source.unsplash.com/550x750/?<?= $data_barangs['nama_barang'] ?>" alt="#">
 											<img class="hover-img" src="https://source.unsplash.com/550x750" alt="#">
@@ -488,12 +488,12 @@
 												<a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
 											</div>
 											<div class="product-action-2">
-												<a title="Add to cart" href="<?= base_url('raja_vapor/cart/add_to_cart/'. $data_barangs['id_barang']) ?>">Add to cart</a>
+												<a title="Add to cart" href="<?= base_url('raja_vapor/cart/add_to_cart/'. $data_barangs['id_produk']) ?>">Add to cart</a>
 											</div>
 										</div>
 									</div>
 									<div class="product-content">
-										<h3><a href="<?= base_url('welcome/detail/') . $data_barangs['id_barang'] ?>"><?= $data_barangs['nama_barang'] ?></a></h3>
+										<h3><a href="<?= base_url('welcome/detail/') . $data_barangs['id_produk'] ?>"><?= $data_barangs['nama_barang'] ?></a></h3>
 										<div class="product-price">
 											<span><?= rupiah($data_barangs['harga_barang']) ?></span>
 										</div>

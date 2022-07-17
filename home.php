@@ -33,22 +33,22 @@
         <?php 
         
         
-            //Menampilkan data barang banyak dalam arrray
-            $sql_barangs = "SELECT * FROM barang";
-            $query_barangs = mysqli_query(
+            //Menampilkan data produk banyak dalam arrray
+            $sql_produks = "SELECT * FROM produk";
+            $query_produks = mysqli_query(
                 $koneksi, 
-            $sql_barangs);
+            $sql_produks);
             $no=1; //nilai awal nomer
-            while ($data_barangs = mysqli_fetch_array($query_barangs, MYSQLI_BOTH)){
+            while ($data_produks = mysqli_fetch_array($query_produks, MYSQLI_BOTH)){
 
         ?>
 
             <div class="col-xl-3 col-lg-4 col-md-4 col-12">
                 <div class="single-product">
                     <div class="product-img">
-                        <a href="<?= base_url('welcome/detail/') . $data_barangs['id_barang'] ?>">
+                        <a href="<?= base_url('welcome/detail/') . $data_produks['id_produk'] ?>">
                             <!-- <img class="default-img" src="https://source.unsplash.com/550x750" alt="#"> -->
-                            <img class="default-img" src="https://source.unsplash.com/550x750/?<?= $data_barangs['nama_barang'] ?>" alt="#">
+                            <img class="default-img" src="https://source.unsplash.com/550x750/?<?= $data_produks['nama_produk'] ?>" alt="#">
                             <img class="hover-img" src="https://source.unsplash.com/550x750" alt="#">
                         </a>
                         <div class="button-head">
@@ -58,14 +58,14 @@
                                 <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
                             </div>
                             <div class="product-action-2">
-                                <a title="Add to cart" href="<?= base_url('cart/add_to_cart.php?id='. $data_barangs['id_barang']) ?>">Add to cart</a>
+                                <a title="Add to cart" href="<?= base_url('cart/add_to_cart.php?id='. $data_produks['id_produk']) ?>">Add to cart</a>
                             </div>
                         </div>
                     </div>
                     <div class="product-content">
-                        <h3><a href="<?= base_url('welcome/detail/') . $data_barangs['id_barang'] ?>"><?= $data_barangs['nama_barang'] ?></a></h3>
+                        <h3><a href="<?= base_url('welcome/detail/') . $data_produks['id_produk'] ?>"><?= $data_produks['nama_produk'] ?></a></h3>
                         <div class="product-price">
-                            <span><?= rupiah($data_barangs['harga_barang']) ?></span>
+                            <span><?= rupiah($data_produks['harga_produk']) ?></span>
                         </div>
                     </div>
                 </div>

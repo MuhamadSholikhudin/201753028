@@ -56,18 +56,18 @@
 
             <!-- Single Post -->
             <?php 
-                $sql_tampil_barang = "SELECT * FROM barang ORDER BY id_barang DESC LIMIT 3";
-                $query_tampil_barang = mysqli_query($koneksi, $sql_tampil_barang);
+                $sql_tampil_produk = "SELECT * FROM produk ORDER BY id_produk DESC LIMIT 3";
+                $query_tampil_produk = mysqli_query($koneksi, $sql_tampil_produk);
                 $no=1; //nilai awal nomer
-                while ($bar_bar = mysqli_fetch_array($query_tampil_barang,MYSQLI_BOTH)){
+                while ($bar_bar = mysqli_fetch_array($query_tampil_produk,MYSQLI_BOTH)){
             ?>
             <div class="single-post first">
                 <div class="image">
                     <img src="https://via.placeholder.com/75x75" alt="#">
                 </div>
                 <div class="content">
-                    <h5><a href="<?= $bar_bar['id_barang']; ?>"><?= $bar_bar['nama_barang']; ?></a></h5>
-                    <p class="price"><?= rupiah($bar_bar['harga_barang']); ?></p>
+                    <h5><a href="<?= $bar_bar['id_produk']; ?>"><?= $bar_bar['nama_produk']; ?></a></h5>
+                    <p class="price"><?= rupiah($bar_bar['harga_produk']); ?></p>
                     <ul class="reviews">
                         <li class="yellow"><i class="ti-star"></i></li>
                         <li class="yellow"><i class="ti-star"></i></li>

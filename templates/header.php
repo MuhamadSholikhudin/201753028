@@ -223,21 +223,21 @@
 
 										<li>
 											<a href="<?= base_url('cart/remove_on.php?id=')?><?= $keranjang_user['id_keranjang']?>" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
-											<a class="cart-img" href="#"><img src="<?= base_url('uploads/barang/') ?>61.png" alt="#"></a>
+											<a class="cart-img" href="#"><img src="<?= base_url('uploads/produk/') ?>61.png" alt="#"></a>
 											<h4><a href="#">
 											<?php
-												$keranjang_user_id_barang = $keranjang_user['id_barang'];
-												$sql_barang_keranjang= "SELECT * FROM barang WHERE id_barang = $keranjang_user_id_barang";
-												$query_barang_keranjang = mysqli_query($koneksi, $sql_barang_keranjang);
+												$keranjang_user_id_produk = $keranjang_user['id_produk'];
+												$sql_produk_keranjang= "SELECT * FROM produk WHERE id_produk = $keranjang_user_id_produk";
+												$query_produk_keranjang = mysqli_query($koneksi, $sql_produk_keranjang);
 
-												$data_barang_keranjang = mysqli_fetch_array($query_barang_keranjang, MYSQLI_BOTH);
+												$data_produk_keranjang = mysqli_fetch_array($query_produk_keranjang, MYSQLI_BOTH);
 								
-												echo $data_barang_keranjang['nama_barang'];
+												echo $data_produk_keranjang['nama_produk'];
 											?>
 											
 											</a></h4>
 											<p class="quantity"><?= $keranjang_user['jumlah_keranjang'];?>x 
-											<?= $data_barang_keranjang['harga_barang'];?> <span class="amount"><?= rupiah($keranjang_user['harga_keranjang']) ?></span></p>
+											<?= $data_produk_keranjang['harga_produk'];?> <span class="amount"><?= rupiah($keranjang_user['harga_keranjang']) ?></span></p>
 										</li>
 
 										<?php
@@ -259,10 +259,10 @@
 
 
 
-												$sql_total_barang = "SELECT SUM(harga_keranjang) as total FROM keranjang WHERE id_user = $id_user";
-												$query_total_barang = mysqli_query($koneksi, $sql_total_barang);
-												$data_total_barang = mysqli_fetch_array($query_total_barang, MYSQLI_BOTH);
-												echo rupiah($data_total_barang['total']);
+												$sql_total_produk = "SELECT SUM(harga_keranjang) as total FROM keranjang WHERE id_user = $id_user";
+												$query_total_produk = mysqli_query($koneksi, $sql_total_produk);
+												$data_total_produk = mysqli_fetch_array($query_total_produk, MYSQLI_BOTH);
+												echo rupiah($data_total_produk['total']);
 
 											}else{
 												echo 0;

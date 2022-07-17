@@ -7,22 +7,22 @@ if(isset($_GET['id'])){
         //menampung data dari inputan html
         $id_user = $_SESSION['id_user'];
         $status_keranjang = 1;	
-        $id_barang = $_GET['id'];
+        $id_produk = $_GET['id'];
         
 
-        // Menampilkan data barang berdasarkan id_barang
-        $print_barang = mysqli_query($koneksi,"SELECT * FROM barang WHERE id_barang = $id_barang ");
+        // Menampilkan data barang berdasarkan id_produk
+        $print_barang = mysqli_query($koneksi,"SELECT * FROM barang WHERE id_produk = $id_produk ");
         $barang = mysqli_fetch_array($print_barang,MYSQLI_BOTH);
 
         // Mencari jumlah keranjang jika ada barangnya maka akan di update jika tida maka di tambah 1
-        $query_keranjang = mysqli_query($koneksi,"SELECT * FROM keranjang WHERE id_user = $id_user AND id_barang = $id_barang AND status_keranjang = 1  ");
+        $query_keranjang = mysqli_query($koneksi,"SELECT * FROM keranjang WHERE id_user = $id_user AND id_produk = $id_produk AND status_keranjang = 1  ");
         $cari_keranjang = mysqli_num_rows($query_keranjang);
 
         if($cari_keranjang > 0){
 
             // Menampilkan keranjang ynag jumlah lebih dari satu
-            // $tampil_keranjang = $this->db->query("SELECT * FROM keranjang WHERE id_user = $id_user AND id_barang = $id_barang AND status_keranjang = 1 ")->row();
-            $query_cari_keranjang = mysqli_query($koneksi, "SELECT * FROM keranjang WHERE id_user = ".$id_user." AND id_barang = ".$id_barang." AND status_keranjang = 1 ");
+            // $tampil_keranjang = $this->db->query("SELECT * FROM keranjang WHERE id_user = $id_user AND id_produk = $id_produk AND status_keranjang = 1 ")->row();
+            $query_cari_keranjang = mysqli_query($koneksi, "SELECT * FROM keranjang WHERE id_user = ".$id_user." AND id_produk = ".$id_produk." AND status_keranjang = 1 ");
             $tampil_keranjang = mysqli_fetch_array($query_cari_keranjang, MYSQLI_BOTH);
 
             
@@ -56,8 +56,8 @@ if(isset($_GET['id'])){
             //Menambahkan file melalui Model barang  dengan function tambah barang
             // $this->Model_keranjang->tambah_keranjang($data, 'keranjang');
 
-            $sql_simpan = "INSERT INTO keranjang (id_barang, jumlah_keranjang, harga_keranjang, status_keranjang, id_user) VALUES (
-                ".$id_barang.",
+            $sql_simpan = "INSERT INTO keranjang (id_produk, jumlah_keranjang, harga_keranjang, status_keranjang, id_user) VALUES (
+                ".$id_produk.",
                 1,
                 ".$barang['harga_barang'].",
                 1,

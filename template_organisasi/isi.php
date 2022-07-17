@@ -3,7 +3,7 @@
 <div class="page-header row no-gutters py-4">
   <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
     <span class="text-uppercase page-subtitle">Page</span>
-    <h3 class="page-title">Barang</h3>
+    <h3 class="page-title">produk</h3>
   </div>
 </div>
 <!-- End Page Header -->
@@ -21,7 +21,7 @@
       <div class="card-header border-bottom">
         <h6 class="m-0">
             
-        <a href="<?= base_url('pemilik/barang/tambah/') ?>" type="button" class="btn btn-primary"> + Tambah</a>
+        <a href="<?= base_url('pemilik/produk/tambah/') ?>" type="button" class="btn btn-primary"> + Tambah</a>
         </h6>
       </div>
       <div class="card-body  pb-3 text-center">

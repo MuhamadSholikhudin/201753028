@@ -31,8 +31,8 @@
                                                 $dataset = array();
                                                 while ($keranjang_user = mysqli_fetch_array($query_keranjang_user,MYSQLI_BOTH)){
 
-                                                    $keranjang_user_id_barang = $keranjang_user['id_barang'];
-                                                    $sql_barang_keranjang= "SELECT * FROM barang WHERE id_barang = $keranjang_user_id_barang";
+                                                    $keranjang_user_id_produk = $keranjang_user['id_produk'];
+                                                    $sql_barang_keranjang= "SELECT * FROM barang WHERE id_produk = $keranjang_user_id_produk";
                                                     $query_barang_keranjang = mysqli_query($koneksi, $sql_barang_keranjang);
 
                                                     $data_barang_keranjang = mysqli_fetch_array($query_barang_keranjang, MYSQLI_BOTH);

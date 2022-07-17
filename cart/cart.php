@@ -28,8 +28,8 @@
                         ?>
                         
                             <?php
-                                $keranjang_user_id_barang = $keranjang_user['id_barang'];
-                                $sql_barang_keranjang= "SELECT * FROM barang WHERE id_barang = $keranjang_user_id_barang";
+                                $keranjang_user_id_produk = $keranjang_user['id_produk'];
+                                $sql_barang_keranjang= "SELECT * FROM barang WHERE id_produk = $keranjang_user_id_produk";
                                 $query_barang_keranjang = mysqli_query($koneksi, $sql_barang_keranjang);
 
                                 $data_barang_keranjang = mysqli_fetch_array($query_barang_keranjang, MYSQLI_BOTH);
@@ -38,7 +38,7 @@
                             ?>
 
 							<?php
-								// $tbarang = $this->db->query("SELECT * FROM barang WHERE id_barang = $keranjang->id_barang ")->row();
+								// $tbarang = $this->db->query("SELECT * FROM barang WHERE id_produk = $keranjang->id_produk ")->row();
 							?>
 							<tr>
 								<td><img src="https://source.unsplash.com/100x100/?<?= $data_barang_keranjang['nama_barang'] ?>" alt="#"></td>

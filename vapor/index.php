@@ -1,18 +1,7 @@
 <?php
 
-//function url asset tampilah
-  function base_url($urlparam){
-    $url = "http://localhost/201753028/".$urlparam;
-    return $url;
-  }
-
-  //url internal raja vapor
-  function base_url_halaman($urlparam){
-    $url = "http://localhost/201753028/vapor/".$urlparam;
-    return $url;
-  }
-
   include '../koneksi.php';
+  include '../function.php';
 ?>
 
 <?php                
@@ -27,22 +16,43 @@
                 include '../template_organisasi/isi.php';
             break;
             
-            case 'barang': //barang    
+            case 'produk': //produk    
                 include '../template_organisasi/sidebar.php';
-                include '../vapor/barang/index.php';
+                include '../vapor/produk/index.php';
             break;
-            case 'barang_tambah': //barang    
+            case 'produk_tambah': //produk    
                 include '../template_organisasi/sidebar.php';
-                include '../vapor/barang/tambah.php';
+                include '../vapor/produk/tambah.php';
             break;
-            case 'barang_edit': //barang    
+            case 'produk_edit': //produk    
                 include '../template_organisasi/sidebar.php';
-                include '../vapor/barang/edit.php';
+                include '../vapor/produk/edit.php';
             break;
 
             case 'kategori': 
                 include '../template_organisasi/sidebar.php';
                 include '../vapor/kategori/index.php';
+            break;
+            case 'kategori_tambah': 
+                include '../template_organisasi/sidebar.php';
+                include '../vapor/kategori/tambah.php';
+            break;
+            case 'kategori_edit': 
+                include '../template_organisasi/sidebar.php';
+                include '../vapor/kategori/edit.php';
+            break;
+
+            case 'bank': 
+                include '../template_organisasi/sidebar.php';
+                include '../vapor/bank/index.php';
+            break;
+            case 'bank_tambah': 
+                include '../template_organisasi/sidebar.php';
+                include '../vapor/bank/tambah.php';
+            break;
+            case 'bank_edit': 
+                include '../template_organisasi/sidebar.php';
+                include '../vapor/bank/edit.php';
             break;
             case 'bank': 
                 include '../template_organisasi/sidebar.php';

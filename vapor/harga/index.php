@@ -3,7 +3,7 @@
 <div class="page-header row no-gutters py-4">
   <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
     <span class="text-uppercase page-subtitle">Page</span>
-    <h3 class="page-title">Harga Barang</h3>
+    <h3 class="page-title">Harga produk</h3>
   </div>
 </div>
 <!-- End Page Header -->
@@ -21,7 +21,7 @@
         <div class="card card-small mb-4 pt-3">
             <div class="card-header border-bottom text-center">
             <div class="mb-3 mx-auto">
-                <img src="<?= base_url('uploads/barang/') ?>61.png" alt="User Avatar" width="100%"> </div>
+                <img src="<?= base_url('uploads/produk/') ?>61.png" alt="User Avatar" width="100%"> </div>
            
             </div>
             <ul class="list-group list-group-flush">
@@ -29,7 +29,7 @@
             <li class="list-group-item p-4">
                 <strong class="text-muted d-block mb-2">Description</strong>
                 <span>
-                    <?= $barang->deskripsi ?>
+                    <?= $produk->deskripsi ?>
                 </span>
             </li>
             </ul>
@@ -38,7 +38,7 @@
         <div class="col-lg-8">
         <div class="card card-small mb-4">
             <div class="card-header border-bottom">
-            <h6 class="m-0"><?= $barang->nama_barang ?></h6>
+            <h6 class="m-0"><?= $produk->nama_produk ?></h6>
             </div>
             <ul class="list-group list-group-flush">
             <li class="list-group-item p-3">
