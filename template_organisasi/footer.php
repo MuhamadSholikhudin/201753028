@@ -1,24 +1,24 @@
 <footer class="main-footer d-flex p-2 px-3 bg-white border-top">
-<ul class="nav">
-  <li class="nav-item">
-    <a class="nav-link" href="#">Home</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Services</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">About</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Products</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Blog</a>
-  </li>
-</ul>
-<span class="copyright ml-auto my-auto mr-2">Copyright © 2018
-  <a href="https://designrevision.com" rel="nofollow">DesignRevision</a>
-</span>
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link" href="#">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Services</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">About</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Products</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Blog</a>
+    </li>
+  </ul>
+  <span class="copyright ml-auto my-auto mr-2">Copyright © 2018
+    <a href="https://designrevision.com" rel="nofollow">DesignRevision</a>
+  </span>
 </footer>
 </main>
 </div>
@@ -48,19 +48,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 <script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Sharrre/2.0.1/jquery.sharrre.min.js"></script>
-<script src="<?= base_url('assets/shards/')?>scripts/extras.1.1.0.min.js"></script>
-<script src="<?= base_url('assets/shards/')?>scripts/shards-dashboards.1.1.0.min.js"></script>
-<script src="<?= base_url('assets/shards/')?>scripts/app/app-blog-overview.1.1.0.js"></script>
+<script src="<?= base_url('assets/shards/') ?>scripts/extras.1.1.0.min.js"></script>
+<script src="<?= base_url('assets/shards/') ?>scripts/shards-dashboards.1.1.0.min.js"></script>
+<script src="<?= base_url('assets/shards/') ?>scripts/app/app-blog-overview.1.1.0.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bulma.min.js"></script>
-<script>
-$(document).ready( function () {
-    $('#table_id').DataTable(
-        
-    );
-} );
-</script>
+
+<script src="http://localhost/201753028/template_organisasi/script.js"></script>
 </body>
+
 </html>

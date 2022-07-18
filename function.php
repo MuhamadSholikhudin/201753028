@@ -35,5 +35,5 @@
     function querysatudata($query){
         $koneksi = mysqli_connect("localhost","root","","201753028");
         $query_cek = mysqli_query($koneksi, $query);
-        return mysqli_fetch_array($query_cek,MYSQLI_BOTH);
+        return mysqli_fetch_array($query_cek, MYSQLI_BOTH);
     }

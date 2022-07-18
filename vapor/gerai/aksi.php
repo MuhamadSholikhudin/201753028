@@ -1,6 +1,6 @@
 <?php
     include '../../koneksi.php';
-    if (isset ($_POST['btnSIMPAN'])){
+    if (isset($_POST['btnSIMPAN'])){
 
         //mulai proses simpan
         $sql_simpan = "INSERT INTO gerai (nama_gerai, cabang, alamat_gerai) VALUES (

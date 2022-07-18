@@ -79,6 +79,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=penjualan_gerai') ?>">
+                  <i class="material-icons">vertical_split</i>
+                  <span>Penjualan Gerai</span>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=bank') ?>">
                   <i class="material-icons">vertical_split</i>
                   <span>Pembayaran</span>

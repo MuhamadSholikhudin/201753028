@@ -99,14 +99,26 @@
                 include '../vapor/pesanan_stok/index.php';
             break;
 
-            case 'pembayaran': 
-                include '../template_organisasi/sidebar.php';
-                include '../vapor/pembayaran/index.php';
-            break;
             case 'penjualan_gerai': 
                 include '../template_organisasi/sidebar.php';
                 include '../vapor/penjualan_gerai/index.php';
             break;
+
+            case 'penjualan_gerai_keranjang': 
+                include '../template_organisasi/sidebar.php';
+                include '../vapor/penjualan_gerai/keranjang.php';
+            break;
+
+            case 'pembayaran': 
+                include '../template_organisasi/sidebar.php';
+                include '../vapor/pembayaran/index.php';
+            break;
+
+            // case 'penjualan_gerai': 
+            //     include '../template_organisasi/sidebar.php';
+            //     include '../vapor/penjualan_gerai/index.php';
+            // break;
+
             default: //jika memanggil halaman tidak ada maka..
                 include '../template_organisasi/sidebar.php';
                 include '../vapor/bank/index.php';
