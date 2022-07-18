@@ -54,10 +54,51 @@
                 include '../template_organisasi/sidebar.php';
                 include '../vapor/bank/edit.php';
             break;
-            case 'bank': 
+
+            case 'gerai': 
                 include '../template_organisasi/sidebar.php';
-                include '../vapor/bank/index.php';
+                include '../vapor/gerai/index.php';
             break;
+            case 'gerai_tambah': 
+                include '../template_organisasi/sidebar.php';
+                include '../vapor/gerai/tambah.php';
+            break;
+            case 'gerai_edit': 
+                include '../template_organisasi/sidebar.php';
+                include '../vapor/gerai/edit.php';
+            break;
+
+            case 'stok_gerai': 
+                include '../template_organisasi/sidebar.php';
+                include '../vapor/stok_gerai/index.php';
+            break;
+            case 'stok_gerai_tambah': 
+                include '../template_organisasi/sidebar.php';
+                include '../vapor/stok_gerai/tambah.php';
+            break;
+            case 'stok_gerai_edit': 
+                include '../template_organisasi/sidebar.php';
+                include '../vapor/stok_gerai/edit.php';
+            break;
+
+            case 'pesanan_stok_gerai': 
+                include '../template_organisasi/sidebar.php';
+                include '../vapor/pesanan_stok_gerai/index.php';
+            break;
+            case 'pesanan_stok_gerai_tambah': 
+                include '../template_organisasi/sidebar.php';
+                include '../vapor/pesanan_stok_gerai/tambah.php';
+            break;
+            case 'pesanan_stok_gerai_edit': 
+                include '../template_organisasi/sidebar.php';
+                include '../vapor/pesanan_stok_gerai/edit.php';
+            break;
+
+            case 'pesanan_stok': 
+                include '../template_organisasi/sidebar.php';
+                include '../vapor/pesanan_stok/index.php';
+            break;
+
             case 'pembayaran': 
                 include '../template_organisasi/sidebar.php';
                 include '../vapor/pembayaran/index.php';

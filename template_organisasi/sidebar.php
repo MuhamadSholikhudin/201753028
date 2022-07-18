@@ -55,9 +55,27 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=bank') ?>">
+                <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=gerai') ?>">
                   <i class="material-icons">vertical_split</i>
-                  <span>Transaksi</span>
+                  <span>Gerai</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=stok_gerai') ?>">
+                  <i class="material-icons">vertical_split</i>
+                  <span>Stok Gerai</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=pesanan_stok_gerai') ?>">
+                  <i class="material-icons">vertical_split</i>
+                  <span>Pesan Stok Gerai</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=pesanan_stok') ?>">
+                  <i class="material-icons">vertical_split</i>
+                  <span>Pesan Stok</span>
                 </a>
               </li>
               <li class="nav-item">
