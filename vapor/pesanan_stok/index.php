@@ -41,6 +41,7 @@
               <?php $no = 1;
               $stok_gerai = querybanyak("SELECT * FROM pesanan_stok_gerai WHERE status_pesanan_stok = 'pesan' ORDER BY status_pesanan_stok, id_user DESC ");
               foreach ($stok_gerai as $ger) : ?>
+               <form action="<?= base_url('vapor/pesanan_stok/aksi.php') ?>" method="post">
                 <tr>
                   <td> <?= $no++ ?></td>
                   <td>
@@ -61,31 +62,27 @@
                     <?php
                       $maxtersedia = querysatudata("SELECT stok_produk FROM produk  WHERE id_produk =" . $ger['id_produk'] . " ");
                     ?>
-                    <input type="number" name="stok_tersedia" min="1" max="<?= $maxtersedia['stok_produk'] ?>" id=""></td>
+                    <input type="hidden" name="id_pesanan_stok_gerai" value="<?= $ger['id_pesanan_stok_gerai'] ?>" id="">
+                    <input type="hidden" name="id_produk" value="<?= $ger['id_produk'] ?>" id="">
+                    <input type="number" name="stok_tersedia" min="1" max="<?= $maxtersedia['stok_produk'] ?>" value="<?= $get['stok_tersedia'] ?>" id=""></td>
                   <td>
                     <?php
-                    if ($ger['status_pesanan_stok'] == 'sudah di proses') {
-
-                    } elseif ($ger['status_pesanan_stok'] == 'pesan') { ?>
-
-                      <form action="<?= base_url('vapor/pesanan_stok_gerai/aksi.php') ?>" method="post">
-                        <input type="hidden" name="id_pesanan_stok_gerai" value="<?= $ger['id_pesanan_stok_gerai'] ?>" id="">
-                        <button type="submit" name="btnBATALPESAN" class="btn btn-wheat">Tersedia</button>
-                      </form>
+                    if ($ger['status_pesanan_stok'] == 'tersedia') { ?>
+                    <button type="submit" name="btnBATALTERSEDIA" class="btn btn-wheat">Tersedia</button>
+                    <?php
+                    } elseif ($ger['status_pesanan_stok'] == 'pesan') { ?>          
+                        <button type="submit" name="btnTERSEDIA" class="btn btn-wheat">Tersedia</button>
+                      
                     <?php
                     } else { ?>
-
-                      <form action="<?= base_url('vapor/pesanan_stok_gerai/aksi.php') ?>" method="post">
-                        <input type="hidden" name="id_pesanan_stok_gerai" value="<?= $ger['id_pesanan_stok_gerai'] ?>" id="">
-                        <button type="submit" name="btnPESAN" class="btn btn-info"> pesan</button>
-                      </form>
+                                 
                     <?php
                     }
                     ?>
-
-                    <a href="<?= base_url('vapor/index.php?halaman=pesanan_stok_gerai_edit&id_pesanan_stok_gerai=' . $ger['id_pesanan_stok_gerai']) ?>" type="button" class="btn btn-success"> Edit</a>
                   </td>
                 </tr>
+
+               </form>
               <?php endforeach; ?>
 
             </tbody>
