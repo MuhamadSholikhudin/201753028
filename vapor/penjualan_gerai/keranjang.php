@@ -20,7 +20,7 @@
                     <h6 class="m-0">
                         <form action="<?= base_url('vapor/penjualan_gerai/aksi.php') ?>" method="post" enctype="multipart/form-data">
                         
-                            <input type="text" id="search" class="form-control" name="nomer_penjualan" placeholder="KETIKKAN NAMA BARANG UNTUK MENALPILKAN BARANG"  style="width:400px;">
+                            <input type="text" id="searchkeranjang" class="form-control" name="nomer_penjualan" placeholder="KETIKKAN NAMA BARANG UNTUK MENALPILKAN BARANG"  style="width:400px;">
                         </form>
                         <button onclick="keluar();">keluar</button>
                     </h6>

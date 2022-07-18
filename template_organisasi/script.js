@@ -4,6 +4,13 @@ function keluar() {
   console.log(search);
 }
 
+$("#searchkeranjang").keydown(function() {
+    // var keyword = $(this).val();
+    var searchkeranjang = document.getElementById("searchkeranjang").value;
+    console.log(searchkeranjang)
+
+}
+
 /*
     $("#btn_bayar").on('click', function() {
       var total = document.getElementById("total_belanja").value;
@@ -140,7 +147,7 @@ function keluar() {
 			// }
 		}
 	}
-    
+
     $("#cari").keydown(function() {
       var keyword = $(this).val();
       var pembeli = document.getElementById("id_pembeli").value;
