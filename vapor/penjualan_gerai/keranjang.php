@@ -1,3 +1,8 @@
+<?php
+if (isset($_GET['id_penjualan_gerai'])) {
+  $penjualan_gerai = querysatudata("SELECT * FROM penjualan_gerai WHERE id_penjualan_gerai =" . $_GET['id_penjualan_gerai'] . " ");
+}
+?>
 <div class="main-content-container container-fluid px-4">
     <!-- Page Header -->
     <div class="page-header row no-gutters py-4">
@@ -15,18 +20,27 @@
     <!-- End Small Stats Blocks -->
     <div class="row">
         <div class="col">
-        <div class="card card-small mb-4">
+            <div class="card card-small mb-4">
                 <div class="card-header border-bottom">
                     <h6 class="m-0">
                         <form action="<?= base_url('vapor/penjualan_gerai/aksi.php') ?>" method="post" enctype="multipart/form-data">
-                        
-                            <input type="text" id="searchkeranjang" class="form-control" name="nomer_penjualan" placeholder="KETIKKAN NAMA BARANG UNTUK MENALPILKAN BARANG"  style="width:400px;">
+
+                            <input type="text" id="searchkeranjang" class="form-control" name="nomer_penjualan" placeholder="KETIKKAN NAMA BARANG UNTUK MENALPILKAN BARANG" style="width:400px;">
+                            <input type="text" id="id_penjualan_gerai" class="form-control" name="" value="'<?= $_GET['id_penjualan_gerai'] ?>" style="width:400px;">
                         </form>
                         <button onclick="keluar();">keluar</button>
                     </h6>
                 </div>
                 <div class="card-body  pb-3 text-center">
                     <h1 id="keluar"></h1>
+                    <div>
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    <table id="hasil_cari" class="table" border="1">
+
+                    </table>
 
                 </div>
             </div>
@@ -40,7 +54,7 @@
             <div class="card card-small mb-4">
                 <div class="card-header text-center border-bottom ">
                     <h6 style="margin:auto;">
-                       DAFTAR KERANJANG PENJUALAN
+                        DAFTAR KERANJANG PENJUALAN
                     </h6>
                 </div>
                 <div class="card-body  pb-3 text-center">

@@ -7,9 +7,30 @@ function keluar() {
 $("#searchkeranjang").keydown(function() {
     // var keyword = $(this).val();
     var searchkeranjang = document.getElementById("searchkeranjang").value;
-    console.log(searchkeranjang)
+    // alert(searchkeranjang);
 
-}
+	$.ajax({
+		type: "POST",
+        url: "http://localhost/201753028/vapor/penjualan_gerai/ajax.php",
+        data: {
+			searchkeranjang : searchkeranjang,
+			id_penjualan_gerai : id_penjualan_gerai
+		},
+		dataType: 'json',
+		beforeSend: function() {
+			$("#hasil_cari").hide();
+			// alert('1');
+		},
+		success: function(data) {
+		//   console.log(data);
+		$("#hasil_cari").show();
+		  $("#hasil_cari").html(data);
+        }
+	});
+
+});
+
+
 
 /*
     $("#btn_bayar").on('click', function() {
