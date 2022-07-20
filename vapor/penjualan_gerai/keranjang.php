@@ -72,12 +72,12 @@ if (isset($_GET['id_penjualan_gerai'])) {
                         </thead>
                         <tbody>
                             <?php $no = 1;
-                            $keranjang_gerai = querybanyak('SELECT * FROM keranjang_gerai');
+                            $keranjang_gerai = querybanyak("SELECT * FROM keranjang_gerai WHERE id_penjualan_gerai =".$_GET['id_penjualan_gerai']."");
                             foreach ($keranjang_gerai as $penj) : ?>
                                 <tr>
                                     <td> <?= $no++ ?></td>
-                                    <td><?= $penj['nomor_penjualan'] ?></td>
-                                    <td><?= $penj['id_stok_gerai'] ?></td>
+                                    <td><?= $penj['banyak'] ?></td>
+                                    <td><?= $penj['jumlah_harga'] ?></td>
                                     <td><?= $penj['jumlah_harga'] ?></td>
                                     <td> <a href="<?= base_url('vapor/index.php?halaman=keranjang_gerai_edit&id_keranjang_gerai=' .  $penj['id_keranjang_gerai']) ?>" type="button" class="btn btn-success"> Edit</a>
                                         <a href="<?= base_url('pemilik/keranjang_gerai/hapus/' .  $penj['id_keranjang_gerai']) ?>" type="button" class="btn btn-danger"> Hapus</a>

@@ -4,7 +4,7 @@ include '../../function.php';
 
 if (isset($_POST['searchkeranjang']) AND isset($_POST['id_penjualan_gerai'])) {
 
-    $sql = "SELECT * FROM stok_gerai JOIN produk ON stok_gerai.id_produk = produk.id_produk  WHERE produk.nama_produk  LIKE '%" . $_POST['searchkeranjang'] . "%' LIMIT 5";
+    $sql = "SELECT * FROM stok_gerai LEFT JOIN produk ON stok_gerai.id_produk = produk.id_produk  WHERE produk.nama_produk  LIKE '%" . $_POST['searchkeranjang'] . "%' LIMIT 5";
 
     $cari = mysqli_query($koneksi, $sql);
 
@@ -19,13 +19,13 @@ if (isset($_POST['searchkeranjang']) AND isset($_POST['id_penjualan_gerai'])) {
         foreach ($produk as $brg) {
 
              $barang_loop .= '
-                <tr>
-                    <form action="' . base_url("vapor/penjualan_gerai/aksi.php/") . '" method="POST" >
-
-                        <td>' . $brg['nama_produk'] . '</td>
-                        
-                        <td> <input type="number" id="qty'.$brg['id_produk'].'" class="form-control banyak" data-id="' . $brg['id_produk'] . '" name="jumlah_beli"  value="1" min="1" max="'.$brg['stok_gerai'].'"> 
-                        <input type="number" id="hrg'.$brg['id_produk'].'" class="form-control d-none" data-id="' . $brg['id_produk'] . '" name="harga_produk"  value="'.$brg['harga_produk'].'" min="1">
+                
+                    <tr>
+                    
+                        <td>'.$brg['nama_produk'].'</td>
+                        <td> 
+                            <input type="number" id="qty'.$brg['id_produk'].'" class="form-control banyak" data-id="' . $brg['id_produk'] . '" name="jumlah_beli"  value="1" min="1" max="'.$brg['stok_gerai'].'"> 
+                            <input type="number" id="hrg'.$brg['id_produk'].'" class="form-control d-none" data-id="' . $brg['id_produk'] . '" name="harga_produk"  value="'.$brg['harga_produk'].'" min="1">
                             <script>
                                 $("#qty'.$brg['id_produk'].'").on("change", function() {
                                     var nilai = document.getElementById("qty'.$brg['id_produk'].'").value; 
@@ -37,19 +37,28 @@ if (isset($_POST['searchkeranjang']) AND isset($_POST['id_penjualan_gerai'])) {
                                        var harga =  hrgambil;
                                     }
                                     $("#opt'. $brg['id_produk'] .'").html(harga);	
-                                    console.log(hrgambil);
+                                    $("#banyak'. $brg['id_produk'] .'").val(nilai);	
+                                    // console.log(hrgambil);
                                 });
                              </script>
                         </td>
-                        <td id="opt'. $brg['id_produk'] .'">' . $brg['harga_produk'] . '</td>							
+                        <td id="opt'. $brg['id_produk'] .'">' . $brg['harga_produk'] . '
+                            
+                            
+                        </td>							
                         <td>
-                            <input type="hidden" class="form-control" name="id_penjualan_gerai" value="' . $_POST['id_penjualan_gerai'] . '">
-                            <input type="hidden" class="form-control" name="id_produk" value="' . $brg['id_produk'] . '">
-                            <button type="submit" name="btnINPUTKERANJANGGERAI" class="btn btn-primary"><i class="fa fa-plus"> </i></button>
+                            <form action="' . base_url("vapor/penjualan_gerai/aksi.php/") . '" method="POST">
+                                <input type="number" id="banyak'.$brg['id_produk'].'" class="form-control" data-id="' . $brg['id_produk'] . '" name="qty" value="1" min="1">
+                                <input type="number"  class="form-control" data-id="' . $brg['id_produk'] . '" name="harga_produk"  value="'.$brg['harga_produk'].'" min="1">
+
+                                <input type="number" class="form-control" name="id_penjualan_gerai" value="' . $_POST['id_penjualan_gerai'] . '">
+                                <input type="number" class="form-control" name="id_produk" value="' . $brg['id_produk'] . '">
+                                <button type="submit" name="btnINPUTKERANJANGGERAI" class="btn btn-primary"><i class="fa fa-plus"> </i></button>
+                            </form>
                         </td>
-                    </form>
+                        
+                    </tr>
                 
-                </tr>
             ';
         }
 
