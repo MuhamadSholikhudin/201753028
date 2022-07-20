@@ -4,7 +4,7 @@ include '../../function.php';
 
 if (isset($_POST['searchkeranjang']) AND isset($_POST['id_penjualan_gerai'])) {
 
-    $sql = "SELECT * FROM produk WHERE nama_produk LIKE '%" . $_POST['searchkeranjang'] . "%' LIMIT 5";
+    $sql = "SELECT * FROM stok_gerai JOIN produk ON stok_gerai.id_produk = produk.id_produk  WHERE produk.nama_produk  LIKE '%" . $_POST['searchkeranjang'] . "%' LIMIT 5";
 
     $cari = mysqli_query($koneksi, $sql);
 
@@ -18,13 +18,14 @@ if (isset($_POST['searchkeranjang']) AND isset($_POST['id_penjualan_gerai'])) {
 
         foreach ($produk as $brg) {
 
-            $barang_loop .= '
+             $barang_loop .= '
                 <tr>
-                    <form action="' . base_url("pemilik/transaksi/aksi_tambah_cari/") . '" method="POST" >
+                    <form action="' . base_url("vapor/penjualan_gerai/aksi.php/") . '" method="POST" >
 
                         <td>' . $brg['nama_produk'] . '</td>
-                        <td> <input type="number" id="qty'.$brg['id_produk'].'" class="form-control banyak" data-id="' . $brg['id_produk'] . '" name="jumlah_beli"  value="1" min="1"> 
-                        <input type="number" id="hrg'.$brg['id_produk'].'" class="form-control banyak" data-id="' . $brg['id_produk'] . '"   value="'.$brg['harga_produk'].'" min="1">
+                        
+                        <td> <input type="number" id="qty'.$brg['id_produk'].'" class="form-control banyak" data-id="' . $brg['id_produk'] . '" name="jumlah_beli"  value="1" min="1" max="'.$brg['stok_gerai'].'"> 
+                        <input type="number" id="hrg'.$brg['id_produk'].'" class="form-control d-none" data-id="' . $brg['id_produk'] . '" name="harga_produk"  value="'.$brg['harga_produk'].'" min="1">
                             <script>
                                 $("#qty'.$brg['id_produk'].'").on("change", function() {
                                     var nilai = document.getElementById("qty'.$brg['id_produk'].'").value; 
@@ -44,7 +45,7 @@ if (isset($_POST['searchkeranjang']) AND isset($_POST['id_penjualan_gerai'])) {
                         <td>
                             <input type="hidden" class="form-control" name="id_penjualan_gerai" value="' . $_POST['id_penjualan_gerai'] . '">
                             <input type="hidden" class="form-control" name="id_produk" value="' . $brg['id_produk'] . '">
-                            <button type="submit" id="klik' . $brg['id_produk'] . '" class="btn btn-primary"><i class="fa fa-plus"> </i></button>
+                            <button type="submit" name="btnINPUTKERANJANGGERAI" class="btn btn-primary"><i class="fa fa-plus"> </i></button>
                         </td>
                     </form>
                 
@@ -52,12 +53,12 @@ if (isset($_POST['searchkeranjang']) AND isset($_POST['id_penjualan_gerai'])) {
             ';
         }
 
-        $data = [4];
+
         echo json_encode($barang_loop);
     } else {
 
-        $data = '<tr>nothing</tr>';
-        echo json_encode($data);
+        $barang_loop = '<tr>nothing</tr>';
+        echo json_encode($barang_loop);
     }
 } else {
 

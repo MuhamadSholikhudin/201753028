@@ -1,5 +1,6 @@
 <?php
 if (isset($_GET['id_penjualan_gerai'])) {
+    echo $id_penjualan_gerai = $_GET['id_penjualan_gerai'];
   $penjualan_gerai = querysatudata("SELECT * FROM penjualan_gerai WHERE id_penjualan_gerai =" . $_GET['id_penjualan_gerai'] . " ");
 }
 ?>
@@ -26,9 +27,9 @@ if (isset($_GET['id_penjualan_gerai'])) {
                         <form action="<?= base_url('vapor/penjualan_gerai/aksi.php') ?>" method="post" enctype="multipart/form-data">
 
                             <input type="text" id="searchkeranjang" class="form-control" name="nomer_penjualan" placeholder="KETIKKAN NAMA BARANG UNTUK MENALPILKAN BARANG" style="width:400px;">
-                            <input type="text" id="id_penjualan_gerai" class="form-control" name="" value="'<?= $_GET['id_penjualan_gerai'] ?>" style="width:400px;">
+                            <input type="text" id="id_penjualan_gerai" class="form-control d-none" name="" value="<?= $id_penjualan_gerai; ?>" style="width:400px;">
                         </form>
-                        <button onclick="keluar();">keluar</button>
+                        <!-- <button onclick="keluar();">keluar</button> -->
                     </h6>
                 </div>
                 <div class="card-body  pb-3 text-center">
