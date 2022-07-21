@@ -48,11 +48,11 @@ if (isset($_POST['searchkeranjang']) AND isset($_POST['id_penjualan_gerai'])) {
                         </td>							
                         <td>
                             <form action="' . base_url("vapor/penjualan_gerai/aksi.php/") . '" method="POST">
-                                <input type="number" id="banyak'.$brg['id_produk'].'" class="form-control" data-id="' . $brg['id_produk'] . '" name="qty" value="1" min="1">
-                                <input type="number"  class="form-control" data-id="' . $brg['id_produk'] . '" name="harga_produk"  value="'.$brg['harga_produk'].'" min="1">
+                                <input type="hidden" id="banyak'.$brg['id_produk'].'" class="form-control" data-id="' . $brg['id_produk'] . '" name="qty" value="1" min="1">
+                                <input type="hidden"  class="form-control" data-id="' . $brg['id_produk'] . '" name="harga_produk"  value="'.$brg['harga_produk'].'" min="1">
 
-                                <input type="number" class="form-control" name="id_penjualan_gerai" value="' . $_POST['id_penjualan_gerai'] . '">
-                                <input type="number" class="form-control" name="id_produk" value="' . $brg['id_produk'] . '">
+                                <input type="hidden" class="form-control" name="id_penjualan_gerai" value="' . $_POST['id_penjualan_gerai'] . '">
+                                <input type="hidden" class="form-control" name="id_produk" value="' . $brg['id_produk'] . '">
                                 <button type="submit" name="btnINPUTKERANJANGGERAI" class="btn btn-primary"><i class="fa fa-plus"> </i></button>
                             </form>
                         </td>
@@ -75,7 +75,24 @@ if (isset($_POST['searchkeranjang']) AND isset($_POST['id_penjualan_gerai'])) {
     echo json_encode($data);
 }
 
+if (isset($_POST['nilai']) AND isset($_POST['hrgambil'])) {
 
+    $nilai = $_POST['nilai'];
+    $hrgambil = $_POST['hrgambil'];
+
+    if ($nilai >= 3) {
+        $harga = $hrgambil * 0.1;
+        $banyakjumlah = $harga * $nilai;
+    } else {
+        $harga = $hrgambil;
+        $banyakjumlah = $harga * $nilai;
+    }
+
+    $data = [$banyakjumlah];
+
+    echo json_encode($data);
+
+}
 
 
 

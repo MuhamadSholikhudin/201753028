@@ -58,6 +58,42 @@ $("#searchkeranjang").keyup(function() {
 });
 
 
+// aotomatis hitung bayar
+$("#bayar").keydown(function() {
+	$("#kembali").css("background-color", "yellow");
+	$("#bayar").css("background-color", "yellow");
+	var bayar = $(this).val();
+	var total = $("#total_belanja").val();
+	var kembali = bayar - total;
+	$("#kembali").val(kembali);
+	// if(bayar < total){
+	// 	$("#proses_bayar").attr("disabled", true);
+	// }else{
+	// 	$("#proses_bayar").attr("disabled", false);
+	// }
+});
+
+$("#bayar").keyup(function() {
+	$("#kembali").css("background-color", "white");
+	$("#bayar").css("background-color", "white");
+	var bayar = $(this).val();
+	var total = $("#total_belanja").val();
+	var kembali = bayar - total;
+	$("#kembali").val(kembali);
+
+});
+
+$("#bayar").on('change', function(){
+	$("#kembali").css("background-color", "white");
+	$("#bayar").css("background-color", "white");
+	var bayar = $(this).val();
+	var total = $("#total_belanja").val();
+	var kembali = bayar - total;
+	$("#kembali").val(kembali);
+
+});
+
+
 
 /*
     $("#btn_bayar").on('click', function() {

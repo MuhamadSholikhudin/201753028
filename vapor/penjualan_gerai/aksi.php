@@ -29,7 +29,6 @@
 
     }elseif(isset($_POST['btnINPUTKERANJANGGERAI'])){
 
-        var_dump($_POST);
 
         $qty = $_POST['qty'];
         $harga_produk = $_POST['harga_produk'];
