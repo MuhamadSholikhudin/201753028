@@ -31,6 +31,11 @@ if (isset($_GET['id_penjualan_gerai'])) {
                         </form>
                         <!-- <button onclick="keluar();">keluar</button> -->
                     </h6>
+                    <h6 class="pt-2 align-content-lg-end">
+                        &nbsp;&nbsp;&nbsp;
+                        MOMOR PENJUALAN : <?= $penjualan_gerai['nomor_penjualan'] ?>
+
+                    </h6>
                 </div>
                 <div class="card-body  pb-3 text-center">
                     <h1 id="keluar"></h1>
@@ -93,48 +98,10 @@ if (isset($_GET['id_penjualan_gerai'])) {
                                         $max_stok = $qtykeranjang + $stok_gerai_sekarang;
 
                                         ?>
-                                        <input type="number" name="" value="<?= $penj['banyak'] ?>" id="qty<?= $penj['id_produk'] ?>" min="1" max="<?= $max_stok ?>">
-                                        <input type="hidden" id="hrg<?= $penj['id_produk'] ?>" class="form-control d-none" name="harga_produk" value="<?= $produk['harga_produk'] ?>" min="1">
-
-                                        <script>
-                                            $("#qty<?= $penj['id_produk'] ?>").on("change", function() {
-                                                var nilai = document.getElementById("qty<?= $penj['id_produk'] ?>").value;
-                                                var hrgambil = document.getElementById("hrg<?= $penj['id_produk'] ?>").value;
-
-                                                if (nilai >= 3) {
-                                                    var harga = hrgambil * 0.1;
-                                                    var banyakjumlah = harga * nilai;
-                                                } else {
-                                                    var harga = hrgambil;
-                                                    var banyakjumlah = harga * nilai;
-                                                }
-                                                $("#opt<?= $penj['id_produk'] ?>").html(harga);
-                                                $("#banyak_jumlah<?= $penj['id_produk'] ?>").html(banyakjumlah);
-                                                
-                                                
-                                                //total belanja
-                                                var total_belanja = document.getElementById("total_belanja").value;
-                                                
-                                                document.getElementById("total_belanja").value = 1;
-
-                                                // $.ajax({
-                                                //     type: "POST",
-                                                //     url: "http://localhost/201753028/vapor/penjualan_gerai/ajax.php",
-                                                //     data: {
-                                                //         nilai: nilai,
-                                                //         hrgambil: hrgambil
-                                                //     },
-                                                //     dataType: 'json',
-                                                //     success: function(data) {
-                                                //         // $('#total_belanjahtml').html(data[0]);
-                                                //         alert("OK");
-                                                //     }
-                                                // });
-                                            });
-                                        </script>
+                                        <input type="number" name="qty" class="form-control qty" value="<?= $penj['banyak'] ?>" id="qty<?= $penj['id_keranjang_gerai'] ?>" data-id="<?= $penj['id_keranjang_gerai'] ?>" min="1" max="<?= $max_stok ?>">
                                     </td>
-                                    <td id="opt<?= $penj['id_produk'] ?>"><?= $penj['jumlah_harga'] ?></td>
-                                    <td id="banyak_jumlah<?= $penj['id_produk'] ?>"><?= $penj['jumlah_harga'] *  $penj['banyak']  ?></td>
+                                    <td id="harga<?= $penj['id_keranjang_gerai'] ?>"><?= $penj['jumlah_harga'] ?></td>
+                                    <td id="jumlah_harga<?= $penj['id_keranjang_gerai'] ?>"><?= $penj['jumlah_harga'] *  $penj['banyak']  ?></td>
                                     <td>
                                         <a href="<?= base_url('pemilik/keranjang_gerai/hapus/' .  $penj['id_keranjang_gerai']) ?>"> <i class="fa fa-trash"></i></a>
                                     </td>
@@ -142,40 +109,41 @@ if (isset($_GET['id_penjualan_gerai'])) {
                             <?php endforeach; ?>
 
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th scope="col" class="border-0"></th>
-                                <th scope="col" class="border-0"></th>
-                                <th scope="col" class="border-0"></th>
-                                <th scope="col" class="border-0"> </th>
-                                <th scope="col" class="border-0" id="total_belanjahtml">
-                                        <?php
-                                        $jumlah_total = 0;
-                                        foreach ($keranjang_gerai as $penj) {
-                                            $jumlah_total += $penj['jumlah_harga'] *  $penj['banyak'];
-                                        }
-                                        echo $jumlah_total;
-                                        ?>                                                                   
-                                <input type="number" name="" value="<?= $jumlah_total ?>" id="total_belanja">
-                                </th>
-                                <th scope="col" class="border-0">
-                                    <a href="<?= base_url('vapor/index.php?halaman=keranjang_gerai_edit&id_keranjang_gerai=' .  $penj['id_keranjang_gerai']) ?>" type="button" class="btn btn-success"> Edit</a>
-                                </th>
-                            </tr>
-                            <tr>
-                                <th scope="col" class="border-0">Bayar</th>
-                                <th scope="col" class="border-0"><input type="number" name="" id="bayar"></th>
-                                <th scope="col" class="border-0">Kembalian</th>
-                                <th scope="col" class="border-0"><input type="number" name="" id="kembali" readonly></th>
-                                <th scope="col" class="border-0">
-
-                                </th>
-                                <th scope="col" class="border-0">
-                                    <button class="btn btn-primary" id="proses_bayar">Prosess</button>
-                                </th>
-                            </tr>
-
-                        </tfoot>
+                        <form action="<?= base_url('vapor/penjualan_gerai/aksi.php') ?>" method="POST" enctype="multipart/form-data">
+                            <tfoot>
+                                <?php
+                                $jumlah_total = 0;
+                                foreach ($keranjang_gerai as $penj) {
+                                    $jumlah_total += $penj['jumlah_harga'] *  $penj['banyak'];
+                                }
+                                ?>
+                                <tr>
+                                    <th scope="col" class="border-0"></th>
+                                    <th scope="col" class="border-0"></th>
+                                    <th scope="col" class="border-0">
+                                        <input type="hidden" name="total_penjualan" value="<?= $jumlah_total ?>" id="total_belanja">
+                                    </th>
+                                    <th scope="col" class="border-0">
+                                    </th>
+                                    <th scope="col" id="total_belanjahtml">
+                                        <?= $jumlah_total ?>
+                                    </th>
+                                    <th scope="col" class="border-0"> </th>
+                                </tr>
+                                <tr>
+                                    <th scope="col" class="border-0">Tunai</th>
+                                    <th scope="col" class="border-0"><input type="number" name="bayar_tunai" id="bayar"></th>
+                                    <th scope="col" class="border-0">Kembalian</th>
+                                    <th scope="col" class="border-0"><input type="number" name="kembalian" id="kembali" ></th>
+                                    <th scope="col" class="border-0">
+                                    </th>
+                                    <th scope="col" class="border-0">
+                                        <input type="number" name="id_pejualan_gerai" value="<?= $_GET['id_penjualan_gerai'] ?>" id="">
+                                        <button class="btn btn-primary" name="btnBAYARPENJUALAN" id="proses_bayar">Bayars</button>
+                                    </th>
+                                </tr>
+                            </tfoot>
+                        </form>
                     </table>
                 </div>
             </div>

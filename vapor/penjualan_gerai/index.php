@@ -22,7 +22,7 @@
           <h6 class="m-0">
             <form action="<?= base_url('vapor/penjualan_gerai/aksi.php') ?>" method="post" enctype="multipart/form-data">
               <?php  $nomer_penjualan = strtotime(date('Y-m-d H:i:s')); ?>
-              <input type="text" name="nomer_penjualan" value="<?= $nomer_penjualan ?>" id="">
+              <input type="hidden" name="nomer_penjualan" value="<?= $nomer_penjualan ?>" id="">
               <button name="btnTAMBAHPENJUALAN" type="submit" class="btn btn-primary"> + Tambah</button>
             </form>
           </h6>
@@ -48,8 +48,10 @@
                   <td><?=  $penj['nomor_penjualan'] ?></td>
                   <td><?=  $penj['total_penjualan'] ?></td>
                   <td><?=  $penj['status_penjualan_gerai'] ?></td>
-                  <td> <a href="<?= base_url('vapor/index.php?halaman=penjualan_gerai_edit&id_penjualan_gerai=' .  $penj['id_penjualan_gerai']) ?>" type="button" class="btn btn-success"> Edit</a>
-                    <a href="<?= base_url('pemilik/penjualan_gerai/hapus/' .  $penj['id_penjualan_gerai']) ?>" type="button" class="btn btn-danger"> Hapus</a>
+                  <td> 
+                    <a href="<?= base_url('vapor/index.php?halaman=penjualan_gerai_keranjang&id_penjualan_gerai=' .  $penj['id_penjualan_gerai']) ?>" type="button" class="btn btn-success"> Edit</a>
+                    <a href="<?= base_url('vapor/index.php?halaman=penjualan_gerai_hapus&id_penjualan_gerai=' .  $penj['id_penjualan_gerai']) ?>" type="button" class="btn btn-danger"> Hapus</a>
+                    <a href="<?= base_url('vapor/index.php?halaman=penjualan_gerai_cetak&id_penjualan_gerai=' .  $penj['id_penjualan_gerai']) ?>" type="button" class="btn btn-warning"> Cetak</a>
                   </td>
                 </tr>
               <?php endforeach; ?>

@@ -4,13 +4,13 @@
 
     $explode_id_keranjang = explode(",",$_POST['implode_id_keranjang']);
 
-    // foreach ($explode_id_keranjang as $id_keranjang) {
-    //     // echo "$id_keranjang <br>";
-    //     $sql_ubah_keranjang = "UPDATE keranjang SET
-    //         status_keranjang = 2
-    //         WHERE id_keranjang = ".$id_keranjang."";
-    //     $query_ubah_keranjang = mysqli_query($koneksi, $sql_ubah_keranjang);
-    // }
+    foreach ($explode_id_keranjang as $id_keranjang) {
+        // echo "$id_keranjang <br>";
+        $sql_ubah_keranjang = "UPDATE keranjang SET
+            status_keranjang = 2
+            WHERE id_keranjang = ".$id_keranjang."";
+        $query_ubah_keranjang = mysqli_query($koneksi, $sql_ubah_keranjang);
+    }
 
     //  simpan checkout 
         $date_now = date('Y-m-d');
@@ -36,7 +36,7 @@
         $data_checkout = mysqli_fetch_array($cari_checkout,MYSQLI_BOTH);
 
         echo "<script>alert('Berhasil Menambahkan Checkout')</script>";
-        echo "<meta http-equiv='refresh' content='0; url=http://localhost/201753028/index.php?halaman=checkout&id_checkout=".$data_checkout['id_checkout']."'>";
+        echo "<meta http-equiv='refresh' content='0; url=http://localhost/201753028/checkout/index.php?halaman=checkout&id_checkout=".$data_checkout['id_checkout']."'>";
     }else{
         echo "<script>alert('gagal Menambahkan Checkout')</script>";
         echo "<meta http-equiv='refresh' content='0; url=http://localhost/201753028/cart/index.php'>";

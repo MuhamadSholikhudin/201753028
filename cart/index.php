@@ -1,27 +1,8 @@
 <?php
     session_start();
 
-    $url_assets = "http://localhost/201753028/assets/";
-    $url = "http://localhost/201753028/";
-
-    function base_url($urlparam){
-        $url = "http://localhost/201753028/".$urlparam;
-        return $url;
-    }
-
-    function hello(){
-        $hello = "Hello";
-        return $hello;
-    }
-
-    function rupiah($angka)
-    {
-        $hasil_rupiah = "Rp " . number_format($angka, 2, ',', '.');
-        return $hasil_rupiah;
-    }
-
-
     include '../koneksi.php';
+    include '../function.php';
 
     include '../templates/header.php';
 ?>

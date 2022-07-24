@@ -27,6 +27,7 @@
             echo "<meta http-equiv='refresh' content='0; url=http://localhost/201753028/vapor/index.php?halaman=penjualan_gerai'>";
         } //proses simpan selesai
 
+        //Tambah keranjang
     }elseif(isset($_POST['btnINPUTKERANJANGGERAI'])){
 
 
@@ -52,8 +53,6 @@
 
         $query_update_stok_gerai = mysqli_query($koneksi, $sql_stok_gerai);
 
-        //  id_keranjang_gerai	id_stok_gerai	banyak	jumlah_harga	status_keranjang_gerai	id_penjualan_gerai
-
         $sql_simpan_keranjang_gerai = "INSERT INTO `keranjang_gerai`
         (`id_stok_gerai`,`banyak`,`jumlah_harga`,`id_penjualan_gerai`,`status_keranjang_gerai`) 
             VALUES (
@@ -72,6 +71,13 @@
             echo "<script>alert('Simpan Gagal')</script>";
             echo "<meta http-equiv='refresh' content='0; url=http://localhost/201753028/vapor/index.php?halaman=penjualan_gerai_keranjang&id_penjualan_gerai=".$_POST['id_penjualan_gerai']."'>";
         } //proses simpan selesai
+
+    }
+
+    // Proses bayar penjualan
+    elseif(isset($_POST['btnBAYARPENJUALAN'])){
+
+        
 
     }
 

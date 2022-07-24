@@ -1,15 +1,15 @@
 <?php
 session_start();
 
-include 'koneksi.php';
+include '../koneksi.php';
 
-include 'function.php';
+include '../function.php';
 
 ?>
 
 
 <?php
-include 'templates/header.php';
+include '../templates/header.php';
 ?>
 <!-- Slider Area -->
 <!-- Product Style -->
@@ -23,36 +23,14 @@ include 'templates/header.php';
             if (isset($_GET['halaman'])) {
                 $hal = $_GET['halaman'];
                 switch ($hal) {
-                    case 'home':
-                        include "home.php";
-                        break;
 
-                        //kategori    
                     case 'kategori':
+                        include '../templates/sidebar.php'; //memanggil file sidebar.php
                         include "kategori.php";
                         break;
 
-                        //user    
-                    case 'profil':
-                        include "profil.php";
-                        break;
-
-                        // hamalan=login
-                    case 'login':
-                        include "login.php";
-                        break;
-
-                        // hamalan=registration
-                    case 'registration':
-                        include "registration.php";
-                        break;
-
-                    case 'cart':
-                        include "cart/index.php";
-                        break;
-
-                    case 'checkout':
-                        include "checkout/index.php";
+                    case 'detail_produk':
+                        include "detail_produk.php";
                         break;
 
                     default: //jika memanggil halaman tidak ada maka..
@@ -60,7 +38,7 @@ include 'templates/header.php';
                         break;
                 }
             } else { //jika tidak memanggil halaman apapun maka..
-                include 'templates/sidebar.php'; //memanggil file sidebar.php
+                include '../../templates/sidebar.php'; //memanggil file sidebar.php
                 include 'home.php'; //memanggil file home.php
             }
 
@@ -72,5 +50,5 @@ include 'templates/header.php';
 <!--/ End Product Style 1  -->
 
 <?php
-include 'templates/footer.php';
+include '../templates/footer.php';
 ?>

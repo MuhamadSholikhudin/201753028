@@ -1,4 +1,5 @@
 
+
 <div class="col-lg-4 col-md-4 col-12">
 
 </div>
@@ -10,7 +11,7 @@
 		
 		<p class="text-center mb-2">Silahkan Masuk terlebih dahulu !</p>
 		<!-- Form -->
-		<form class="form" method="post" action="<?= base_url('/ceklogin.php') ?>" enctype="multipart/form-data">
+		<form class="form" method="POST" action="<?= base_url('ceklogin.php') ?>" enctype="multipart/form-data">
 			<div class="row">
 				<div class="col-lg-12 mb-3">
 					<div class="row">
@@ -48,7 +49,7 @@
 				</div>
 				<div class="col-12">
 					<div class="form-group create-account text-center">
-						<label><a href="<?= base_url('/registration.php') ?>">Belum Punya akun Silahkan Buat akun anda!</a></label>
+						<label><a href="<?= base_url('index.php?halaman=registration') ?>">Belum Punya akun Silahkan Buat akun anda!</a></label>
 					</div>
 				</div>
 
@@ -61,4 +62,57 @@
 <div class="col-lg-4 col-md-4 col-12">
 
 </div>
+
+<?php
+// menghubungkan php dengan koneksi database
+include 'koneksi.php';
+
+if (isset($_POST['cekLogin'])) {
+    // menangkap data yang dikirim dari form login
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+	var_dump($_POST);
+	
+    // menghitung jumlah data yang ditemukan
+    $login = mysqli_query($koneksi, "SELECT * FROM user WHERE username='$username' AND password='$password'");
+    $cek = mysqli_num_rows($login);
+    $data_cek = mysqli_fetch_array($login, MYSQLI_BOTH);
+
+
+    // cek apakah username dan password di temukan pada database
+    if ($cek > 0) {
+        // mengaktifkan session pada php
+        session_start();
+
+        // buat session login dan username
+        $_SESSION['username'] = $username;
+        $_SESSION['status'] = "login";
+        $_SESSION['id_user'] = $data_cek['id_user'];
+        $_SESSION['nama_lengkap'] = $data_cek['nama_lengkap'];
+        $_SESSION['hakakses'] = $data_cek['hakakses'];
+        $_SESSION['email'] = $data_cek['email'];
+        $_SESSION['status_user'] = $data_cek['status_user'];
+
+        // alihkan ke halaman dashboard admin
+        // header("location:index.php");
+        // echo 'Berhasil Login';
+
+        if ($data_cek['hakakses'] == 1) {
+            header("Location: http://localhost/201753028/vapor/index.php?halaman=beranda");
+        } elseif ($data_cek['hakakses'] == 2) {
+            header("Location: http://localhost/201753028/vapor/index.php?halaman=beranda");
+        } elseif ($data_cek['hakakses'] == 3) {
+            header("Location: http://localhost/201753028/vapor/index.php?halaman=beranda");
+        } elseif ($data_cek['hakakses'] == 4) {
+            header("Location: http://localhost/201753028/vapor/index.php?halaman=beranda");
+        }
+    } else {
+        // header("location:index.php?pesan=gagal");
+        echo "<script>alert('Gagal Login')</script>";
+        header("location: http://localhost/201753028/?halaman=login");
+        // echo 'Gagal Login';
+    }
+}
+?>
 	

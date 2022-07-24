@@ -4,7 +4,7 @@
             <nav class="navbar align-items-stretch navbar-light bg-white flex-md-nowrap border-bottom p-0">
               <a class="navbar-brand w-100 mr-0" href="#" style="line-height: 25px;">
                 <div class="d-table m-auto">
-                  <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px;" src="<?= base_url('assets/shards/')?>images/shards-dashboards-logo.svg" alt="Shards Dashboard">
+                  <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px;" src="<?= base_url('assets/shards/') ?>images/shards-dashboards-logo.svg" alt="Shards Dashboard">
                   <span class="d-none d-md-inline ml-1">Raja Vapor</span>
                 </div>
               </a>
@@ -20,22 +20,185 @@
                   <i class="fas fa-search"></i>
                 </div>
               </div>
-              <input class="navbar-search form-control" type="text" placeholder="Search for something..." aria-label="Search"> </div>
+              <input class="navbar-search form-control" type="text" placeholder="Search for something..." aria-label="Search">
+            </div>
           </form>
           <div class="nav-wrapper">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" href="index.html">
-                  <i class="material-icons">edit</i>
-                  <span>Blog Dashboard</span>
+                <a class="nav-link active" href="<?= base_url_halaman('index.php?halaman=beranda') ?>">
+                  <i class="material-icons">speed</i>
+                  <span>Beranda</span>
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link " href="components-blog-posts.html">
-                  <i class="material-icons">vertical_split</i>
-                  <span>Blog Posts</span>
-                </a>
-              </li>
+
+              <?php
+              if ($_SESSION['hakakses'] == 1) { ?>
+                <li class="nav-item">
+                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=gerai') ?>">
+                    <i class="material-icons">store</i>
+                    <span>Gerai</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=kategori') ?>">
+                    <i class="material-icons">category</i>
+                    <span>Kategori</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="<?= base_url_halaman('index.php?halaman=produk') ?>">
+                    <i class="material-icons">inventory</i>
+                    <span>produk</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=bank') ?>">
+                    <i class="material-icons">payment</i>
+                    <span>Pembayaran</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=bank') ?>">
+                    <i class="material-icons">airport_shuttle</i>
+                    <span>Pengiriman</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=bank') ?>">
+                    <i class="material-icons">badge</i>
+                    <span>Karyawan</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=stok_gerai') ?>">
+                    <i class="material-icons">vertical_split</i>
+                    <span>Stok Gerai</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=pesanan_stok_gerai') ?>">
+                    <i class="material-icons">speaker_notes</i>
+                    <span>Pesan Stok Gerai</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=pesanan_stok') ?>">
+                    <i class="material-icons">speaker_notes</i>
+                    <span>Pesan Stok</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=penjualan_gerai') ?>">
+                    <i class="material-icons">receipt_long</i>
+                    <span>Penjualan Gerai</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=laporan') ?>">
+                    <i class="material-icons">assessment</i>
+                    <span>Laporan</span>
+                  </a>
+                </li>
+
+              <?php
+              } elseif ($_SESSION['hakakses'] == 2) { ?>
+                <li class="nav-item">
+                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=gerai') ?>">
+                    <i class="material-icons">vertical_split</i>
+                    <span>Gerai</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=kategori') ?>">
+                    <i class="material-icons">vertical_split</i>
+                    <span>Kategori</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=produk') ?>">
+                    <i class="material-icons">vertical_split</i>
+                    <span>produk</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=bank') ?>">
+                    <i class="material-icons">vertical_split</i>
+                    <span>Pembayaran</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=bank') ?>">
+                    <i class="material-icons">vertical_split</i>
+                    <span>Pengiriman</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=bank') ?>">
+                    <i class="material-icons">vertical_split</i>
+                    <span>Karyawan</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=stok_gerai') ?>">
+                    <i class="material-icons">vertical_split</i>
+                    <span>Stok Gerai</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=pesanan_stok_gerai') ?>">
+                    <i class="material-icons">vertical_split</i>
+                    <span>Pesan Stok Gerai</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=pesanan_stok') ?>">
+                    <i class="material-icons">vertical_split</i>
+                    <span>Pesan Stok</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=penjualan_gerai') ?>">
+                    <i class="material-icons">vertical_split</i>
+                    <span>Penjualan Gerai</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=laporan') ?>">
+                    <i class="material-icons">vertical_split</i>
+                    <span>Laporan</span>
+                  </a>
+                </li>
+
+              <?php
+              } elseif ($_SESSION['hakakses'] == 3) { ?>
+                <li class="nav-item">
+                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=stok_gerai') ?>">
+                    <i class="material-icons">vertical_split</i>
+                    <span>Stok Gerai</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=pesanan_stok_gerai') ?>">
+                    <i class="material-icons">vertical_split</i>
+                    <span>Pesan Stok Gerai</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=penjualan_gerai') ?>">
+                    <i class="material-icons">vertical_split</i>
+                    <span>Penjualan Gerai</span>
+                  </a>
+                </li>
+
+              <?php
+              } elseif ($_SESSION['hakakses'] == 4) { ?>
+
+
+              <?php
+              }
+              ?>
+              <!-- 
               <li class="nav-item">
                 <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=produk') ?>">
                   <i class="material-icons">vertical_split</i>
@@ -102,7 +265,7 @@
                   <span>Karyawan</span>
                 </a>
               </li>
-<!--               
+                          
               <li class="nav-item">
                 <a class="nav-link " href="add-new-post.html">
                   <i class="material-icons">note_add</i>
@@ -149,7 +312,8 @@
                       <i class="fas fa-search"></i>
                     </div>
                   </div>
-                  <input class="navbar-search form-control" type="text" placeholder="Search for something..." aria-label="Search"> </div>
+                  <input class="navbar-search form-control" type="text" placeholder="Search for something..." aria-label="Search">
+                </div>
               </form>
               <ul class="navbar-nav border-left flex-row ">
                 <li class="nav-item border-right dropdown notifications">
@@ -167,9 +331,10 @@
                         </div>
                       </div>
                       <div class="notification__content">
-                        <span class="notification__category">Analytics</span>
+                        <span class="notification__category">Pesanan Gerai</span>
                         <p>Your website’s active users count increased by
-                          <span class="text-success text-semibold">28%</span> in the last week. Great job!</p>
+                          <span class="text-success text-semibold">28%</span> in the last week. Great job!
+                        </p>
                       </div>
                     </a>
                     <a class="dropdown-item" href="#">
@@ -179,29 +344,25 @@
                         </div>
                       </div>
                       <div class="notification__content">
-                        <span class="notification__category">Sales</span>
+                        <span class="notification__category">Pembayaran</span>
                         <p>Last week your store’s sales count decreased by
-                          <span class="text-danger text-semibold">5.52%</span>. It could have been worse!</p>
+                          <span class="text-danger text-semibold">5.52%</span>. It could have been worse!
+                        </p>
                       </div>
                     </a>
-                    <a class="dropdown-item notification__all text-center" href="#"> View all Notifications </a>
+                    <a class="dropdown-item notification__all text-center" href="#">Tampil semua pesanan</a>
                   </div>
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                    <img class="user-avatar rounded-circle mr-2" src="<?= base_url('assets/shards/')?>images/avatars/0.jpg" alt="User Avatar">
-                    <span class="d-none d-md-inline-block">Sierra Brooks</span>
+                    <img class="user-avatar rounded-circle mr-2" src="<?= base_url('assets/shards/') ?>images/avatars/1.jpg" alt="User Avatar">
+                    <span class="d-none d-md-inline-block"><?= $_SESSION['nama_lengkap'] ?></span>
                   </a>
                   <div class="dropdown-menu dropdown-menu-small">
-                    <a class="dropdown-item" href="user-profile-lite.html">
-                      <i class="material-icons">&#xE7FD;</i> Profile</a>
-                    <a class="dropdown-item" href="components-blog-posts.html">
-                      <i class="material-icons">vertical_split</i> Blog Posts</a>
-                    <a class="dropdown-item" href="add-new-post.html">
-                      <i class="material-icons">note_add</i> Add New Post</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" href="#">
-                      <i class="material-icons text-danger">&#xE879;</i> Logout </a>
+                    <a class="dropdown-item text-danger" href="http://localhost/201753028/logout.php">
+                      <i class="material-icons text-danger">&#xE879;</i> Logout 
+                    </a>
                   </div>
                 </li>
               </ul>

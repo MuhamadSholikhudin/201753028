@@ -6,32 +6,32 @@
             <h3 class="title">Kategori</h3>
             <ul class="categor-list">
 
-            <?php 
+                <?php
                 // perulangan data kategoori  
                 $sql_kategories = "SELECT * FROM kategori";
                 $query_kategories = mysqli_query($koneksi, $sql_kategories);
-                $no=1; //nilai awal nomer
-                while ($data_kategori = mysqli_fetch_array($query_kategories,MYSQLI_BOTH)){
+                $no = 1; //nilai awal nomer
+                while ($data_kategori = mysqli_fetch_array($query_kategories, MYSQLI_BOTH)) {
 
-            ?>
-                <li><a href="http://localhost/index/kategori/') . $kategori->kategori ?>"><?= $data_kategori['kategori'] ?></a></li>
-            <?php 
+                ?>
+                    <li><a href="<?= base_url('shop/index.php?halaman=kategori&kategori=') ?><?= $data_kategori['kategori'] ?>"><?= $data_kategori['kategori'] ?></a></li>
+                <?php
                     //auto increment nomer
                     $no++;
                 }
-            ?>	
+                ?>
             </ul>
         </div>
-        <!--/ End Single Widget -->
-        <!-- Shop By Price -->
-        <div class="single-widget range">
+
+        <!-- Berdasarkan Harga -->
+        <!-- <div class="single-widget range">
             <h3 class="title">Berdasarkan Harga</h3>
             <div class="price-filter">
                 <div class="price-filter-inner">
                     <div id="slider-range"></div>
-                        <div class="price_slider_amount">
+                    <div class="price_slider_amount">
                         <div class="label-input">
-                            <span>Range:</span><input type="text" id="amount" name="price" placeholder="Add Your Price"/>
+                            <span>Range:</span><input type="text" id="amount" name="price" placeholder="Add Your Price" />
                         </div>
                     </div>
                 </div>
@@ -48,40 +48,40 @@
                     <label class="checkbox-inline" for="3"><input name="news" id="3" type="checkbox">1000K - 10000K<span class="count">(8)</span></label>
                 </li>
             </ul>
-        </div>
-        <!--/ End Shop By Price -->
-        <!-- Single Widget -->
+        </div> -->
+
+
+
         <div class="single-widget recent-post">
             <h3 class="title">Product Baru</h3>
 
             <!-- Single Post -->
-            <?php 
-                $sql_tampil_produk = "SELECT * FROM produk ORDER BY id_produk DESC LIMIT 3";
-                $query_tampil_produk = mysqli_query($koneksi, $sql_tampil_produk);
-                $no=1; //nilai awal nomer
-                while ($bar_bar = mysqli_fetch_array($query_tampil_produk,MYSQLI_BOTH)){
+            <?php
+            $sql_tampil_produk = "SELECT * FROM produk ORDER BY id_produk DESC LIMIT 3";
+            $query_tampil_produk = mysqli_query($koneksi, $sql_tampil_produk);
+            $no = 1; //nilai awal nomer
+            while ($bar_bar = mysqli_fetch_array($query_tampil_produk, MYSQLI_BOTH)) {
             ?>
-            <div class="single-post first">
-                <div class="image">
-                    <img src="https://via.placeholder.com/75x75" alt="#">
+                <div class="single-post first">
+                    <div class="image">
+                        <img src="https://source.unsplash.com/75x75?<?= $bar_bar['nama_produk']; ?>" alt="#">
+                    </div>
+                    <div class="content">
+                        <h5><a href="<?= $bar_bar['id_produk']; ?>"><?= $bar_bar['nama_produk']; ?></a></h5>
+                        <p class="price"><?= rupiah($bar_bar['harga_produk']); ?></p>
+                        <ul class="reviews">
+                            <a href="<?= base_url('shop/index.php?halaman=detail_produk&id_produk=') ?><?= $bar_bar['id_produk']; ?>">
+                                <li class="yellow"><i class="ti-eye"></i> Lihat</li>
+                            </a>
+
+                        </ul>
+                    </div>
                 </div>
-                <div class="content">
-                    <h5><a href="<?= $bar_bar['id_produk']; ?>"><?= $bar_bar['nama_produk']; ?></a></h5>
-                    <p class="price"><?= rupiah($bar_bar['harga_produk']); ?></p>
-                    <ul class="reviews">
-                        <li class="yellow"><i class="ti-star"></i></li>
-                        <li class="yellow"><i class="ti-star"></i></li>
-                        <li class="yellow"><i class="ti-star"></i></li>
-                        <li><i class="ti-star"></i></li>
-                        <li><i class="ti-star"></i></li>
-                    </ul>
-                </div>
-            </div>
 
             <?php
                 //auto increment nomer
                 $no++;
-                }
+            }
             ?>
         </div>
     </div>
