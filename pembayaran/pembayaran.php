@@ -61,12 +61,9 @@
 							<?php } elseif ($pembayaran['status_pembayaran'] == 2) { ?>
 								Data Pembayaran Tidak Valid
 							<?php } elseif ($pembayaran['status_pembayaran'] == 3) { ?>
-								Pembayaran di Upload
+								<a href="<?= base_url('pembayaran/index.php?halaman=pembayaran_upload&id_pembayaran=') ?><?=$pembayaran['id_pembayaran']?>" target="_blank" class="single-icon badge btn-success text-white"><i class="ti-pencil"></i> <span class="total-count">edit bukti</span></a>
 							<?php } elseif ($pembayaran['status_pembayaran'] == 4) { ?>
-								<a class="btn" href="<?= base_url('pembayaran/cetak.php?id_pembayaran=') ?><?=$pembayaran['id_pembayaran']?>" target="_blank" rel="noopener noreferrer">
-
-							 Cetak	
-							</a>
+							<a href="<?= base_url('pembayaran/cetak.php?id_pembayaran=') ?><?=$pembayaran['id_pembayaran']?>" target="_blank" class="single-icon badge btn-warning text-white"><i class="ti-printer"></i> <span class="total-count">Cetak</span></a>
 							<?php } ?>
 						</td>
 					</tr>

@@ -12,6 +12,8 @@
   <div class="row">
     
 
+  
+
   </div>
   <!-- End Small Stats Blocks -->
 
@@ -59,8 +61,11 @@
 						<td><?= rupiah($pembayaran['total_pembayaran']) ?></td>
 						<td>
 							<?php if ($pembayaran['bukti_pembayaran'] !== null) { ?> 
+								<a href="<?= base_url('vapor/pembayaran/lihat.php?id_pembayaran=').$pembayaran['id_pembayaran'] ?>">
+
 							<img src="<?= 'http://localhost/201753028/gambar/butkipembayaran/' .
            $pembayaran['bukti_pembayaran'] ?>" width="40px" style="" alt="logo">
+								</a>
 								
 							<?php } else { ?> 
 								
@@ -100,11 +105,15 @@
      ?>
 				</tbody>
 			</table>
+
+
         </div>
       </div>
     </div>
   </div>
   <!-- End Small Stats Blocks -->
+
+
 
 
 </div>
