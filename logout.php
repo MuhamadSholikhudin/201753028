@@ -9,4 +9,4 @@ session_destroy();
 // header("location:index.php");
 // Kembali ke halaman login
 echo "<script>alert('Berhasil Logout')</script>";
-header("location: http://localhost/201753028/?halaman=login");
+echo "<meta http-equiv='refresh' content='0; url=http://localhost/201753028/?halaman=login'>";

@@ -72,6 +72,7 @@
 										<i class="ti-user"></i>
 										<a href="#">My account <?= $_SESSION['username']; ?> </a>
 									</li>
+									<li><i class="ti-power-off"></i><a href="<?= base_url('logout.php') ?>">Logout</a></li>
 
 								<?php } else { ?>
 
@@ -157,8 +158,9 @@
 
 							<?php } else { ?>
 								<div class="sinlge-bar">
-									<a href="http://localhost/201753028/login" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
-								</div>
+									<a href="<?= base_url('?halaman=login') ?>" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>								
+								</div>							
+								
 							<?php } ?>
 
 							<div class="sinlge-bar shopping">

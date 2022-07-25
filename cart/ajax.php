@@ -13,8 +13,9 @@ if (isset($_POST['qty']) and isset($_POST['id_keranjang']) and isset($_POST['id_
 
     //jika produk lebbih dari 3
     if ($_POST['qty'] >= 3) {
-        $harga = $produk['harga_produk'] * 0.1;
-        $harga_keranjang = $harga * $_POST['qty'];
+        $harga = $produk['harga_produk'] * 0.05;
+        $diskon = ($produk['harga_produk'] * $_POST['qty']) * 0.05;
+        $harga_keranjang = ($produk['harga_produk'] * $_POST['qty']) - $diskon;
     } else {
         $harga = $produk['harga_produk'];
         $harga_keranjang = $harga * $_POST['qty'];

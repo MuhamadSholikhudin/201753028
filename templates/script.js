@@ -4,7 +4,8 @@ function atur_jumlah() {
   var harga_produk = document.getElementById("harga_produk").value;
 
   if (jumlah >= 3) {
-    var total_harga = jumlah * harga_produk * 0.1;
+    var diskon = (jumlah * harga_produk) * 0.05;
+    var total_harga = (jumlah * harga_produk) - diskon;
   } else {
     var total_harga = jumlah * harga_produk;
   }

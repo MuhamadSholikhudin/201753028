@@ -53,7 +53,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=bank') ?>">
+                  <a class="nav-link " href="<?= base_url_halaman('vapor/index.php?halaman=pembayaran') ?>">
                     <i class="material-icons">payment</i>
                     <span>Pembayaran</span>
                   </a>
@@ -105,31 +105,31 @@
               } elseif ($_SESSION['hakakses'] == 2) { ?>
                 <li class="nav-item">
                   <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=gerai') ?>">
-                    <i class="material-icons">vertical_split</i>
+                    <i class="material-icons">store</i>
                     <span>Gerai</span>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=kategori') ?>">
-                    <i class="material-icons">vertical_split</i>
+                    <i class="material-icons">category</i>
                     <span>Kategori</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=produk') ?>">
-                    <i class="material-icons">vertical_split</i>
+                  <a class="nav-link" href="<?= base_url_halaman('index.php?halaman=produk') ?>">
+                    <i class="material-icons">inventory</i>
                     <span>produk</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=bank') ?>">
-                    <i class="material-icons">vertical_split</i>
+                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=pembayaran') ?>">
+                    <i class="material-icons">payment</i>
                     <span>Pembayaran</span>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=bank') ?>">
-                    <i class="material-icons">vertical_split</i>
+                    <i class="material-icons">airport_shuttle</i>
                     <span>Pengiriman</span>
                   </a>
                 </li>
@@ -147,25 +147,25 @@
                 </li>
                 <li class="nav-item">
                   <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=pesanan_stok_gerai') ?>">
-                    <i class="material-icons">vertical_split</i>
+                    <i class="material-icons">speaker_notes</i>
                     <span>Pesan Stok Gerai</span>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=pesanan_stok') ?>">
-                    <i class="material-icons">vertical_split</i>
+                    <i class="material-icons">speaker_notes</i>
                     <span>Pesan Stok</span>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=penjualan_gerai') ?>">
-                    <i class="material-icons">vertical_split</i>
+                    <i class="material-icons">receipt_long</i>
                     <span>Penjualan Gerai</span>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=laporan') ?>">
-                    <i class="material-icons">vertical_split</i>
+                    <i class="material-icons">assessment</i>
                     <span>Laporan</span>
                   </a>
                 </li>

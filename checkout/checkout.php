@@ -148,14 +148,12 @@ if (isset($_GET['id_checkout'])) {
 														</div>
 													</div>
 
-
 												</div>
 											</div>
 										</li>
 									</ul>
 								</div>
 						</div>
-
 					</div>
 				</div>
 
@@ -234,16 +232,16 @@ if (isset($_GET['id_checkout'])) {
 								?>
 
 								<!-- Menampung hasil implode ke input html -->
-								<input type="text" name="implode_id_keranjang" value="<?= $checkout['id_keranjang'] ?>" id="">
+								<input type="text" class="d-none" name="implode_id_keranjang" value="<?= $checkout['id_keranjang'] ?>" id="">
 
 								<!-- Menampung id_checkout sebagai orang yang membeli checkout -->
-								<input type="number" name="id_checkout" value="<?= $_GET['id_checkout'] ?>" id="">
+								<input type="number" class="d-none" name="id_checkout" value="<?= $_GET['id_checkout'] ?>" id="">
 
 								<!-- Menampung id_user sebagai orang yang membeli produk -->
-								<input type="number" name="id_user" value="<?= $_SESSION['id_user'] ?>" id="">
+								<input type="number" class="d-none" name="id_user" value="<?= $_SESSION['id_user'] ?>" id="">
 
 								<!-- Menampung total checkout atau total pembayaran sebagai orang yang membeli produk -->
-								<input type="number" name="total_pembayaran" value="<?= $checkout['jumlah_checkout'] ?>" id="">
+								<input type="number" class="d-none" name="total_pembayaran" value="<?= $checkout['jumlah_checkout'] ?>" id="">
 
 									<button type="submit" name="btnPROSESPEMBAYARAN" class="btn">Proses Pembayaran</button>
 								</div>

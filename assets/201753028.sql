@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 19, 2022 at 11:24 PM
+-- Generation Time: Jul 25, 2022 at 05:27 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -42,9 +42,12 @@ CREATE TABLE `bank` (
 --
 
 INSERT INTO `bank` (`id_bank`, `nama_bank`, `no_rekening`, `tutorial_pembayaran`, `atas_nama`, `status_bank`, `gambar_logo`) VALUES
-(1, 'BRI', 12345678, 'sdfsedfewrferfgerferferf', 'Ervan', 1, 'ss3.JPG'),
-(2, 'BCA', 7040342, 'MASUKKAN PIN      ', 'Ervan', 1, 'photo_2022-04-19_17-59-49.jpg'),
-(3, '1', 1, '1', '1', 1, '2022-07-17WhatsApp Image 2022-02-19 at 05.43.58.jpeg');
+(1, 'BANK RAKYAT INDONESIA', 2147483647, '', 'RAJA VAPOR', 1, ''),
+(2, 'BANK MANDIRI', 52997777, '', 'RAJA VAPOR', 1, ''),
+(3, 'BANK NEGARA INDONESIA', 5709506, '', 'RAJA VAPOR', 1, ''),
+(4, 'BANK TABUNGAN NEGARA', 26533555, '', 'RAJA VAPOR', 1, ''),
+(5, 'BANK CENTRAL ASIA', 23588000, '', 'RAJA VAPOR', 1, ''),
+(6, 'BANK SYARIAH INDONESIA', 3450227, '', 'RAJA VAPOR', 1, '');
 
 -- --------------------------------------------------------
 
@@ -67,7 +70,7 @@ CREATE TABLE `checkout` (
 --
 
 INSERT INTO `checkout` (`id_checkout`, `tanggal_transaksi`, `tanggal_kadaluarsa`, `status_transaksi`, `jumlah_checkout`, `id_keranjang`, `id_user`) VALUES
-(1, '2022-07-11', '2022-07-12', 1, 350000, '16,17', 2);
+(3, '2022-07-23', '2022-07-24', 2, 70000, '19,20', 31);
 
 -- --------------------------------------------------------
 
@@ -87,8 +90,11 @@ CREATE TABLE `gerai` (
 --
 
 INSERT INTO `gerai` (`id_gerai`, `nama_gerai`, `cabang`, `alamat_gerai`) VALUES
-(1, 'raja vapor kalinyamatan', 'kalinyamatan', 'Jl. kalinyamatan'),
-(2, '1', '2', '3');
+(1, 'RAJA VAPOR gebog', 'gebog', 'Jl. Raya Jurang, Krasak, Jurang, Kec. Gebog, Kabupaten Kudus, Jawa Tengah 59333'),
+(2, 'RAJA VAPOR kaliwungu', 'KALIWUNGU', 'bangjo RS.yakis / RS.islam, Jl. Raya Kudus - Jepara meter barat No.200, Garung Lor, Kec. Kaliwungu, Kabupaten Kudus, Jawa Tengah 59333'),
+(3, 'RAJA VAPOR Kudus', 'KUDUS KOTA', 'Jl. Tanjung No.14-16, Nganguk, Kramat, Kec. Kota Kudus, Kabupaten Kudus, Jawa Tengah 59312'),
+(4, 'RAJA VAPOR PURWOGONDO', 'PURWOGONDO', 'Sendang, Kec. Kalinyamatan, Kabupaten Jepara, Jawa Tengah 59462'),
+(5, 'RAJA VAPOR LORAM', 'WERGU LORAM WETAN', 'Jl. Patimura, Loram Wetan Krajan, Loram Wetan, Kec. Jati, Kabupaten Kudus, Jawa Tengah 59344');
 
 -- --------------------------------------------------------
 
@@ -116,13 +122,6 @@ CREATE TABLE `karyawan` (
   `id_gerai` int(11) NOT NULL,
   `bagian` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `karyawan`
---
-
-INSERT INTO `karyawan` (`id_karyawan`, `foto`, `id_user`, `id_gerai`, `bagian`) VALUES
-(1, 'x.png', 2, 1, 'kasir');
 
 -- --------------------------------------------------------
 
@@ -168,8 +167,8 @@ CREATE TABLE `keranjang` (
 --
 
 INSERT INTO `keranjang` (`id_keranjang`, `id_user`, `id_produk`, `jumlah_keranjang`, `harga_keranjang`, `status_keranjang`) VALUES
-(16, 2, 2, 13, 260000, 1),
-(17, 2, 3, 3, 90000, 1);
+(19, 31, 2, 1, 20000, 3),
+(20, 31, 5, 1, 50000, 3);
 
 -- --------------------------------------------------------
 
@@ -185,6 +184,41 @@ CREATE TABLE `keranjang_gerai` (
   `status_keranjang_gerai` int(11) NOT NULL,
   `id_penjualan_gerai` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `keranjang_gerai`
+--
+
+INSERT INTO `keranjang_gerai` (`id_keranjang_gerai`, `id_stok_gerai`, `banyak`, `jumlah_harga`, `status_keranjang_gerai`, `id_penjualan_gerai`) VALUES
+(1, 3, 6, 24000, 0, 1),
+(2, 4, 5, 25000, 0, 1),
+(3, 48, 11, 528000, 0, 1),
+(4, 34, 1, 350000, 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pembayaran`
+--
+
+CREATE TABLE `pembayaran` (
+  `id_pembayaran` int(11) NOT NULL,
+  `id_checkout` int(11) NOT NULL,
+  `nomor_pembayaran` varchar(50) NOT NULL,
+  `total_pembayaran` int(11) NOT NULL,
+  `bukti_pembayaran` text NOT NULL,
+  `status_pembayaran` int(11) NOT NULL,
+  `tanggal_pembayaran` date NOT NULL,
+  `id_bank` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pembayaran`
+--
+
+INSERT INTO `pembayaran` (`id_pembayaran`, `id_checkout`, `nomor_pembayaran`, `total_pembayaran`, `bukti_pembayaran`, `status_pembayaran`, `tanggal_pembayaran`, `id_bank`, `id_user`) VALUES
+(3, 3, '122333322', 70000, '1658630232Asus-Logo-HD-Wallpaper-Background.jpg', 3, '2022-07-24', 1, 31);
 
 -- --------------------------------------------------------
 
@@ -349,6 +383,62 @@ CREATE TABLE `stok_gerai` (
   `stok_gerai` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `stok_gerai`
+--
+
+INSERT INTO `stok_gerai` (`id_stok_gerai`, `id_gerai`, `id_produk`, `stok_gerai`) VALUES
+(1, 3, 2, 10),
+(2, 3, 3, 10),
+(3, 3, 4, 10),
+(4, 3, 5, 7),
+(5, 3, 6, 10),
+(6, 3, 7, 10),
+(7, 3, 8, 10),
+(8, 3, 9, 10),
+(9, 3, 10, 10),
+(10, 3, 11, 10),
+(11, 3, 12, 10),
+(12, 3, 13, 10),
+(13, 3, 14, 10),
+(14, 3, 15, 10),
+(15, 3, 16, 10),
+(16, 3, 17, 10),
+(17, 3, 18, 10),
+(18, 3, 19, 10),
+(19, 3, 20, 10),
+(20, 3, 21, 10),
+(21, 3, 22, 10),
+(22, 3, 23, 10),
+(23, 3, 24, 10),
+(24, 3, 25, 10),
+(25, 3, 26, 10),
+(26, 3, 27, 10),
+(27, 3, 28, 10),
+(28, 3, 29, 10),
+(29, 3, 30, 10),
+(30, 3, 31, 10),
+(31, 3, 32, 10),
+(32, 3, 33, 10),
+(33, 3, 34, 10),
+(34, 3, 35, 9),
+(35, 3, 36, 10),
+(36, 3, 37, 10),
+(37, 3, 38, 10),
+(38, 3, 39, 10),
+(39, 3, 40, 10),
+(40, 3, 41, 10),
+(41, 3, 42, 10),
+(42, 3, 43, 10),
+(43, 3, 44, 10),
+(44, 3, 45, 10),
+(45, 3, 46, 10),
+(46, 3, 47, 10),
+(47, 3, 48, 10),
+(48, 3, 49, 9),
+(49, 3, 50, 10),
+(50, 3, 51, 10);
+
 -- --------------------------------------------------------
 
 --
@@ -372,7 +462,37 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `nama_lengkap`, `username`, `password`, `email`, `hakakses`, `nomer_hp`, `date_created`, `status_user`) VALUES
-(2, 'Muhamad Sholikhudin', 'muhamad_sholikhudin', '$2y$10$nv2T15kceSffGR0ZjztcE.fIBk76wcoy9aZL4OavB7Ko9XjqpSeXm', 'muhammadsholihudin18@gmail.com', 3, '62895433553643', '0000-00-00 00:00:00', 1);
+(1, 'ERVAN PANGESTU', 'ERVAN_PANGESTU', '1234', 'ervanpangestu@gmail.com', 1, '62895433553670', '0000-00-00 00:00:00', 1),
+(2, 'YUS PRIYADI', 'YUS_PRIYADI', '1234', 'yuspriyadi@gmail.com', 2, '62895433553643', '0000-00-00 00:00:00', 1),
+(3, 'YUSSINTHA AMRULLAH SUGIARTO', 'YUSSINTHA_AMRULLAH_SUGIARTO', '1234', 'yussinthaamrullahsugiarto@gmail.com', 3, '62895433553644', '0000-00-00 00:00:00', 1),
+(4, 'MUHAMMADUN', 'MUHAMMADUN', '1234', 'muhammadun@gmail.com', 3, '62895433553645', '0000-00-00 00:00:00', 1),
+(5, 'HERU SETIAWAN', 'HERU_SETIAWAN', '1234', 'herusetiawan@gmail.com', 3, '62895433553646', '0000-00-00 00:00:00', 1),
+(6, 'HARYANTO', 'HARYANTO', '1234', 'haryanto@gmail.com', 3, '62895433553647', '0000-00-00 00:00:00', 1),
+(7, 'BETTA ARISANDI', 'BETTA_ARISANDI', '1234', 'bettaarisandi@gmail.com', 3, '62895433553648', '0000-00-00 00:00:00', 1),
+(8, 'AHMAD SETIONO', 'AHMAD_SETIONO', '1234', 'ahmadsetiono@gmail.com', 4, '62895433553649', '0000-00-00 00:00:00', 1),
+(9, 'FERRY ANJAR PRIYANTO', 'FERRY_ANJAR_PRIYANTO', '1234', 'ferryanjarpriyanto@gmail.com', 4, '62895433553650', '0000-00-00 00:00:00', 1),
+(10, 'SUPRIYANTO', 'SUPRIYANTO', '1234', 'supriyanto@gmail.com', 4, '62895433553651', '0000-00-00 00:00:00', 1),
+(11, 'MUHAMMAD NAFIUDIN', 'MUHAMMAD_NAFIUDIN', '1234', 'muhammadnafiudin@gmail.com', 4, '62895433553652', '0000-00-00 00:00:00', 1),
+(12, 'RIDWAN NAWAWI EKO PRASETYO', 'RIDWAN_NAWAWI_EKO_PRASETYO', '1234', 'ridwannawawiekoprasetyo@gmail.com', 4, '62895433553653', '0000-00-00 00:00:00', 1),
+(13, 'ROZIKAN', 'ROZIKAN', '1234', 'rozikan@gmail.com', 4, '62895433553654', '0000-00-00 00:00:00', 1),
+(14, 'EDI PRASETYA', 'EDI_PRASETYA', '1234', 'ediprasetya@gmail.com', 4, '62895433553655', '0000-00-00 00:00:00', 1),
+(15, 'AMPRI ISROKHA', 'AMPRI_ISROKHA', '1234', 'ampriisrokha@gmail.com', 4, '62895433553656', '0000-00-00 00:00:00', 1),
+(16, 'ALI MURTADHO', 'ALI_MURTADHO', '1234', 'alimurtadho@gmail.com', 4, '62895433553657', '0000-00-00 00:00:00', 1),
+(17, 'HENI LUSIANA', 'HENI_LUSIANA', '1234', 'henilusiana@gmail.com', 4, '62895433553658', '0000-00-00 00:00:00', 1),
+(18, 'NITA MARIA NINGSIH', 'NITA_MARIA_NINGSIH', '1234', 'nitamarianingsih@gmail.com', 4, '62895433553659', '0000-00-00 00:00:00', 1),
+(19, 'PUJIATI', 'PUJIATI', '1234', 'pujiati@gmail.com', 4, '62895433553660', '0000-00-00 00:00:00', 1),
+(20, 'ATMOJO EKO WIBOWO', 'ATMOJO_EKO_WIBOWO', '1234', 'atmojoekowibowo@gmail.com', 4, '62895433553661', '0000-00-00 00:00:00', 1),
+(21, 'SYAIFUL ROKHMAN', 'SYAIFUL_ROKHMAN', '1234', 'syaifulrokhman@gmail.com', 4, '62895433553662', '0000-00-00 00:00:00', 1),
+(22, 'ANIS SETYANINGSIH', 'ANIS_SETYANINGSIH', '1234', 'anissetyaningsih@gmail.com', 4, '62895433553663', '0000-00-00 00:00:00', 1),
+(23, 'SULASTRI', 'SULASTRI', '1234', 'sulastri@gmail.com', 4, '62895433553664', '0000-00-00 00:00:00', 1),
+(24, 'ARI ARDIANSYAH', 'ARI_ARDIANSYAH', '1234', 'ariardiansyah@gmail.com', 4, '62895433553665', '0000-00-00 00:00:00', 1),
+(25, 'MUSTAJIB RIYADI', 'MUSTAJIB_RIYADI', '1234', 'mustajibriyadi@gmail.com', 4, '62895433553666', '0000-00-00 00:00:00', 1),
+(26, 'SUKO CAHYONO', 'SUKO_CAHYONO', '1234', 'sukocahyono@gmail.com', 4, '62895433553667', '0000-00-00 00:00:00', 1),
+(27, 'MUHAMMAD RIFAI', 'MUHAMMAD_RIFAI', '1234', 'muhammadrifai@gmail.com', 4, '62895433553668', '0000-00-00 00:00:00', 1),
+(28, 'SUMIJAN', 'SUMIJAN', '1234', 'sumijan@gmail.com', 4, '62895433553669', '0000-00-00 00:00:00', 1),
+(29, 'ABDULLAH', 'ABDULLAH', '1234', 'abdullah@gmail.com', 4, '62895433553670', '0000-00-00 00:00:00', 1),
+(30, 'Muhamad Sholikhudin', 'Muhamad_Sholikhudin', '1234', 'muhamadsholikhudin@gmail.com', 1, '62895433553641', '0000-00-00 00:00:00', 1),
+(31, 'Yusuf Hidayat', 'yusuf_hidayat', '2', 'yusuf_hidayat@gmail.com', 4, '62895433553643', '0000-00-00 00:00:00', 1);
 
 --
 -- Indexes for dumped tables
@@ -431,6 +551,12 @@ ALTER TABLE `keranjang_gerai`
   ADD PRIMARY KEY (`id_keranjang_gerai`);
 
 --
+-- Indexes for table `pembayaran`
+--
+ALTER TABLE `pembayaran`
+  ADD PRIMARY KEY (`id_pembayaran`);
+
+--
 -- Indexes for table `pembeli`
 --
 ALTER TABLE `pembeli`
@@ -482,19 +608,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `bank`
 --
 ALTER TABLE `bank`
-  MODIFY `id_bank` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_bank` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `checkout`
 --
 ALTER TABLE `checkout`
-  MODIFY `id_checkout` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_checkout` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `gerai`
 --
 ALTER TABLE `gerai`
-  MODIFY `id_gerai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_gerai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `harga_produk`
@@ -518,13 +644,19 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_keranjang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `keranjang_gerai`
 --
 ALTER TABLE `keranjang_gerai`
-  MODIFY `id_keranjang_gerai` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_keranjang_gerai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `pembayaran`
+--
+ALTER TABLE `pembayaran`
+  MODIFY `id_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pembeli`
@@ -560,13 +692,13 @@ ALTER TABLE `produk`
 -- AUTO_INCREMENT for table `stok_gerai`
 --
 ALTER TABLE `stok_gerai`
-  MODIFY `id_stok_gerai` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_stok_gerai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- Constraints for dumped tables

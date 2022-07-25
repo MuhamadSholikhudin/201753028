@@ -1,6 +1,6 @@
 <footer class="main-footer d-flex p-2 px-3 bg-white border-top">
   <ul class="nav">
-    <li class="nav-item">
+    <!-- <li class="nav-item">
       <a class="nav-link" href="#">Home</a>
     </li>
     <li class="nav-item">
@@ -14,10 +14,10 @@
     </li>
     <li class="nav-item">
       <a class="nav-link" href="#">Blog</a>
-    </li>
+    </li> -->
   </ul>
-  <span class="copyright ml-auto my-auto mr-2">Copyright © 2018
-    <a href="https://designrevision.com" rel="nofollow">DesignRevision</a>
+  <span class="copyright ml-auto my-auto mr-2">Copyright © <?= date('Y') ?>
+    <a href="<?= base_url('') ?>" rel="nofollow">Raja Vapor</a>
   </span>
 </footer>
 </main>

@@ -24,12 +24,13 @@ if (isset($_POST['btnPROSESPEMBAYARAN'])) {
 
     //insert data pembayaran
 
-    $query_insert = "INSERT INTO `pembayaran`( `id_checkout`, `total_pembayaran`, `status_pembayaran`, `id_bank`) VALUES 
+    $query_insert = "INSERT INTO `pembayaran`( `id_checkout`, `total_pembayaran`, `status_pembayaran`, `id_bank`,`id_user`) VALUES 
     (
         " . $_POST['id_checkout'] . ",
         " . $_POST['total_pembayaran'] . ",
         1,
-        " . $_POST['id_bank'] . "
+        " . $_POST['id_bank'] . ",
+        ". $_SESSION['id_user'] ."
         )";
 
     $query_insert_pembayaran = mysqli_query($koneksi, $query_insert);
