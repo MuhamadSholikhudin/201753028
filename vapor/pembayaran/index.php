@@ -59,7 +59,8 @@
 						<td><?= rupiah($pembayaran['total_pembayaran']) ?></td>
 						<td>
 							<?php if ($pembayaran['bukti_pembayaran'] !== null) { ?> 
-							<img src="<?= "http://localhost/201753028/gambar/butkipembayaran/". $pembayaran['bukti_pembayaran'] ?>" width="40px" style="" alt="logo">
+							<img src="<?= 'http://localhost/201753028/gambar/butkipembayaran/' .
+           $pembayaran['bukti_pembayaran'] ?>" width="40px" style="" alt="logo">
 								
 							<?php } else { ?> 
 								
@@ -68,17 +69,31 @@
 						<td><?= $pembayaran['tanggal_pembayaran'] ?></td>
 						<td>
 							<?php if ($pembayaran['status_pembayaran'] == 1) { ?>
-
+								Belum Bayar
 							<?php } elseif ($pembayaran['status_pembayaran'] == 2) { ?>
-
+								Data Pembayaran Tidak Valid
 							<?php } elseif ($pembayaran['status_pembayaran'] == 3) { ?>
-
+								Pembayaran di Upload
 							<?php } elseif ($pembayaran['status_pembayaran'] == 4) { ?>
-
+								Pembayaran di konfirmasi
 							<?php } ?>
 						</td>
 						<td>
-
+							<?php if ($pembayaran['status_pembayaran'] == 2) { ?>
+								<a href="<?=base_url('vapor/pembayaran/aksi.php')?>" class="btn btn-primary"> Konfirmasi</a>
+							<?php } elseif ($pembayaran['status_pembayaran'] == 3) { ?>
+								<a href="<?=base_url('vapor/pembayaran/aksi.php?id_pembayaran=')?><?=$pembayaran['id_pembayaran']?>&status_pembayaran=4" type="button" class="btn btn-white">
+									<span class="text-success"><i class="material-icons">check</i></span> Konfirmasi 
+								</a>
+								<a href="<?=base_url('vapor/pembayaran/aksi.php?id_pembayaran=')?><?=$pembayaran['id_pembayaran']?>&status_pembayaran=2" type="button" class="btn btn-white">
+									<span class="text-success"><i class="material-icons">keyboard_return</i></span> Bukti Tidak Valid 
+								</a>
+							<?php } elseif ($pembayaran['status_pembayaran'] == 4) { ?>
+								<a href="<?=base_url('vapor/pembayaran/aksi.php?id_pembayaran=')?><?=$pembayaran['id_pembayaran']?>&status_pembayaran=3" type="button" class="btn btn-white">
+									<span class="text-success"><i class="material-icons">clear</i></span> Batalkan Konfirmasi
+								</a>
+							<?php } ?>
+							
 						</td>
 					</tr>
 					<?php $no++;}

@@ -46,17 +46,28 @@
 						<td><?= $pembayaran['tanggal_pembayaran'] ?></td>
 						<td>
 							<?php if ($pembayaran['status_pembayaran'] == 1) { ?>
-
+								Belum Bayar
 							<?php } elseif ($pembayaran['status_pembayaran'] == 2) { ?>
-
+								Data Pembayaran Tidak Valid
 							<?php } elseif ($pembayaran['status_pembayaran'] == 3) { ?>
-
+								Pembayaran di Upload
 							<?php } elseif ($pembayaran['status_pembayaran'] == 4) { ?>
-
+								Pembayaran di konfirmasi
 							<?php } ?>
 						</td>
 						<td>
+							<?php if ($pembayaran['status_pembayaran'] == 1) { ?>
+								Belum Bayar
+							<?php } elseif ($pembayaran['status_pembayaran'] == 2) { ?>
+								Data Pembayaran Tidak Valid
+							<?php } elseif ($pembayaran['status_pembayaran'] == 3) { ?>
+								Pembayaran di Upload
+							<?php } elseif ($pembayaran['status_pembayaran'] == 4) { ?>
+								<a class="btn" href="<?= base_url('pembayaran/cetak.php?id_pembayaran=') ?><?=$pembayaran['id_pembayaran']?>" target="_blank" rel="noopener noreferrer">
 
+							 Cetak	
+							</a>
+							<?php } ?>
 						</td>
 					</tr>
 					<?php $no++;}
