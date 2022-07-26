@@ -24,16 +24,40 @@ if (isset($_POST['btnPROSESPEMBAYARAN'])) {
 
     //insert data pembayaran
 
-    $query_insert = "INSERT INTO `pembayaran`( `id_checkout`, `total_pembayaran`, `status_pembayaran`, `id_bank`,`id_user`) VALUES 
+    $nomor_penjualan = strtotime("now");
+    $sql_insert_pembayaran = "INSERT INTO `pembayaran`( `id_checkout`, `nomor_pembayaran`, `total_pembayaran`, `status_pembayaran`, `id_bank`,`id_user`) VALUES 
     (
         " . $_POST['id_checkout'] . ",
+        'RV".$nomor_penjualan."',
         " . $_POST['total_pembayaran'] . ",
         1,
         " . $_POST['id_bank'] . ",
         ". $_SESSION['id_user'] ."
-        )";
+    )";
 
-    $query_insert_pembayaran = mysqli_query($koneksi, $query_insert);
+        //eksekusi simpan data pembayaran
+    $query_insert_pembayaran = mysqli_query($koneksi, $sql_insert_pembayaran);
+
+    // cari pembayaran yang di simpan
+    $cari_pembayaran = querysatudata("SELECT * FROM pembayaran WHERE id_checkout = ".$_POST['id_checkout']."");
+    
+    // simpan data pengiriman
+    $sql_insert_pengiriman = "INSERT INTO `pengiriman`( `id_user`, `id_pembayaran`, `nama_penerima`, `nomor_penerima` , `provinsi`, `kota`, `kecamatan`, `kode_pos`, `alamat_lengkap`, `status_pengiriman`) VALUES 
+    (
+    ".$_POST['id_user'].",
+    ".$cari_pembayaran['id_pembayaran'].",
+    '".$_POST['nama_penerima']."',
+    '".$_POST['nomor_penerima']."',
+    '".$_POST['provinsi']."',
+    '".$_POST['kota']."',
+    '".$_POST['kecamatan']."',
+    '".$_POST['kode_pos']."',
+    '".$_POST['alamat_lengkap']."',
+    1
+    )";
+
+    $query_insert_pengiriman = mysqli_query($koneksi, $sql_insert_pengiriman);
+
     if ($query_insert_pembayaran) {
         // Mencari pembayaran yang sudah di insert
         $cari_pembayaran = querysatudata("SELECT * FROM pembayaran WHERE id_checkout =" . $_POST['id_checkout'] . " ");

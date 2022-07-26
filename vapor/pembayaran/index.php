@@ -53,7 +53,7 @@
 				<tbody>
 					<?php
      $no = 1;
-     $pembayarans = querybanyak('SELECT * FROM pembayaran');
+     $pembayarans = querybanyak('SELECT * FROM pembayaran WHERE status_pembayaran > 1');
 
      foreach ($pembayarans as $pembayaran) { ?>
 					<tr >
@@ -64,7 +64,7 @@
 								<a href="<?= base_url('vapor/pembayaran/lihat.php?id_pembayaran=').$pembayaran['id_pembayaran'] ?>">
 
 							<img src="<?= 'http://localhost/201753028/gambar/butkipembayaran/' .
-           $pembayaran['bukti_pembayaran'] ?>" width="40px" style="" alt="logo">
+           $pembayaran['bukti_pembayaran'] ?>" width="40px" height="40px" style="" alt="logo">
 								</a>
 								
 							<?php } else { ?> 

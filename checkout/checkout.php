@@ -84,7 +84,7 @@ if (isset($_GET['id_checkout'])) {
 																<span>*</span>
 															</label>
 															<br>
-															<input type="number" name="nomer_hp" placeholder="" required="required" style="width:100%;">
+															<input type="number" name="nomor_penerima" placeholder="" required="required" style="width:100%;">
 														</div>
 													</div>
 													<div class="col-lg-12 col-md-6 col-12">
@@ -127,7 +127,7 @@ if (isset($_GET['id_checkout'])) {
 																<span>*</span>
 															</label>
 															<br>
-															<input type="kode_pos" name="address" placeholder="" required="required" style="width:100%;">
+															<input type="text" name="kode_pos" placeholder="" required="required" style="width:100%;">
 														</div>
 													</div>
 
@@ -144,7 +144,7 @@ if (isset($_GET['id_checkout'])) {
 															<label>Alamat Lengkap
 																<span>*</span>
 															</label>
-															<textarea name="alamat_lengkat" rows="5" placeholder="Contoh : Rumah bapak Johan, RT.2/RW 56 Mlati Mejobo Kudus Jawa Tengah" required="required">Rumah bapak Johan, RT.2/RW 56 Mlati Mejobo Kudus Jawa Tengah</textarea>
+															<textarea name="alamat_lengkap" rows="5" placeholder="Contoh : Rumah bapak Johan, RT.2/RW 56 Mlati Mejobo Kudus Jawa Tengah" required="required">Rumah bapak Johan, RT.2/RW 56 Mlati Mejobo Kudus Jawa Tengah</textarea>
 														</div>
 													</div>
 

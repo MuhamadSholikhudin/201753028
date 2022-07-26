@@ -108,7 +108,7 @@
 												echo rupiah($total_belanja);
 											} ?>
 										</span>
-										<input type="number" id="total_belanja" value="<?= $total_belanja ?>">
+										<input type="number" class="d-none" id="total_belanja" value="<?= $total_belanja ?>">
 									</li>
 								</ul>
 								<div class="button5">
@@ -116,9 +116,9 @@
 										<?php
 										$implode_id_keranjang = implode(",", $dataset);
 										?>
-										<input type="text" class="" name="id_user" value="<?= $_SESSION['id_user'] ?>" id="">
-										<input type="text" name="implode_id_keranjang" value="<?= $implode_id_keranjang ?>" id="">
-										<input type="number" name="jumlah_checkout" value="<?= $data_total_produk['total'] ?>" id="jumlah_checkout">
+										<input type="text" class="d-none" name="id_user" value="<?= $_SESSION['id_user'] ?>" id="">
+										<input type="text" class="d-none" name="implode_id_keranjang" value="<?= $implode_id_keranjang ?>" id="">
+										<input type="number" class="d-none" name="jumlah_checkout" value="<?= $data_total_produk['total'] ?>" id="jumlah_checkout">
 
 										<button type="submit" class="btn">Checkout</button>
 									</form>

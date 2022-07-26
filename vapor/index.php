@@ -125,6 +125,10 @@ if (isset($_GET['halaman'])) {
             case 'pengiriman': 
                 include '../template_organisasi/sidebar.php';
                 include '../vapor/pengiriman/index.php';
+            break;            
+            case 'pengiriman_upload': 
+                include '../template_organisasi/sidebar.php';
+                include '../vapor/pengiriman/pengiriman_upload.php';
             break;
 
         default: //jika memanggil halaman tidak ada maka..
