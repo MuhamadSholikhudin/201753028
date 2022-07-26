@@ -122,10 +122,10 @@ if (isset($_GET['halaman'])) {
             include '../vapor/pembayaran/index.php';
             break;
 
-            // case 'penjualan_gerai': 
-            //     include '../template_organisasi/sidebar.php';
-            //     include '../vapor/penjualan_gerai/index.php';
-            // break;
+            case 'pengiriman': 
+                include '../template_organisasi/sidebar.php';
+                include '../vapor/pengiriman/index.php';
+            break;
 
         default: //jika memanggil halaman tidak ada maka..
             include '../template_organisasi/sidebar.php';

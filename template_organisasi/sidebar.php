@@ -50,7 +50,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=bank') ?>">
+                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=pengiriman') ?>">
                     <i class="material-icons">airport_shuttle</i>
                     <span>Pengiriman</span>
                   </a>
@@ -119,7 +119,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=bank') ?>">
+                  <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=pengiriman') ?>">
                     <i class="material-icons">airport_shuttle</i>
                     <span>Pengiriman</span>
                   </a>
