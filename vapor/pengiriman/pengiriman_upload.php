@@ -35,7 +35,8 @@ if (isset($_GET['id_pengiriman'])) {
                         <div class="row">
                             <div class="col-md-12">
                                 <form action="<?= base_url('vapor/pengiriman/aksi.php') ?>" enctype="multipart/form-data" method="POST">
-                                    <div class="form-row">
+                                <input type="hidden" name="id_pengiriman" value="<?= $_GET['id_pengiriman'] ?>">   
+                                <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <label for="feDescription">Keterangan</label>
                                             <textarea class="form-control" name="keterangan"></textarea>
@@ -56,10 +57,7 @@ if (isset($_GET['id_pengiriman'])) {
                                                 }
                                             };
                                         </script>
-                                        <!-- </div> -->
                                     </div>
-
-                                    <!-- <button type="submit" class="btn btn-accent">Update Account</button>  -->
                                     <button type="submit" name="btnSIMPANBUKTIPENGIRIMAN" class="btn btn-accent">Submit</button>
                                 </form>
                             </div>
