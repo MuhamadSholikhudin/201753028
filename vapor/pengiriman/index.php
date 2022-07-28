@@ -65,22 +65,29 @@
 										<td><?= $pengiriman['nomor_pembayaran'] ?></td>
 										<td>
 											<?php if ($pengiriman['bukti_pengiriman'] !== NULL) { ?>
-												<img src="<?= base_url("vapor/pengiriman/index.php?halaman=pengiriman_upload").$pengiriman['id_pengiriman'] ?>" width="40px" height="40px" style="" alt="logo">
+												<img src="<?= base_url("gambar/buktipengiriman/").$pengiriman['bukti_pengiriman'] ?>" width="40px" height="40px" style="" alt="logo">
 											<?php } else { ?>
 
 											<?php } ?>
 										</td>
 										<td>
-
+<?= $pengiriman['keterangan'] ?>
 
 										</td>
 										<td>
+										<?php if ($pengiriman['status_pengiriman'] == 1) { ?>
+											Belum dikirim
+											<?php } elseif ($pengiriman['status_pengiriman'] == 2) { ?>
+Sudah Upload Bukti
+											<?php } elseif ($pengiriman['status_pengiriman'] == 3) { ?>
 
+											<?php } ?>
 										</td>
 										<td>
 											<?php if ($pengiriman['status_pengiriman'] == 1) { ?>
-<a href="<?= base_url("vapor/pengiriman/index.php?halaman=pengiriman_upload&id_pengiriman=").$pengiriman['id_pengiriman'] ?>">Upload Pengiriman</a>
+<a href="<?= base_url("vapor/index.php?halaman=pengiriman_upload&id_pengiriman=").$pengiriman['id_pengiriman'] ?>">Upload Pengiriman</a>
 											<?php } elseif ($pengiriman['status_pengiriman'] == 2) { ?>
+												<a href="<?= base_url("vapor/index.php?halaman=pengiriman_upload_edit&id_pengiriman=").$pengiriman['id_pengiriman'] ?>">Edit Pengiriman</a>
 
 											<?php } elseif ($pengiriman['status_pengiriman'] == 3) { ?>
 

@@ -16,7 +16,7 @@ if (isset($_GET['id_produk'])) {
                             <div class="blog-detail">
                                 <h2 class="blog-title"><?= $produk['nama_produk'] ?></h2>
                                 <div class="blog-meta">
-                                    <span class="author"><a href="#"><i class="fa fa-user"></i>By Admin</a><a href="#"><i class="fa fa-calendar"></i>Dec 24, 2018</a><a href="#"><i class="fa fa-comments"></i>Comment (15)</a></span>
+                                    <!-- <span class="author"><a href="#"><i class="fa fa-user"></i>By Admin</a><a href="#"><i class="fa fa-calendar"></i>Dec 24, 2018</a><a href="#"><i class="fa fa-comments"></i>Comment (15)</a></span> -->
                                 </div>
                                 <div class="content">
                                     <p>What a crazy time. I have five children in colleghigh school graduates.jpge or pursing post graduate studies Each of my children attends college far from home, the closest of which is more than 800 miles away. While I miss being with my older children, I know that a college experience can be the source of great growth and experience can be the source of source of great growth and can provide them with even greater in future.</p>
@@ -31,6 +31,47 @@ if (isset($_GET['id_produk'])) {
 
                                     <div class="col-12">
                                         <div class="row">
+                                            <?php
+
+                                            /* 
+                                                Terdapat ada 6 Transaksi
+                                                Dengan jenis barang berjumlah 5
+                                            */
+
+                                            $barang = ['onion', 'potato', 'burger', 'milk', 'tea'];
+
+                                            $a1 = ['onion', 'potato', 'burger'];
+                                            $a2    = ['potato', 'burger', 'milk'];
+                                            $a3    = ['milk', 'tea'];
+                                            $a4    = ['onion', 'potato', 'milk'];
+                                            $a5    = ['onion', 'potato', 'burger', 'tea'];
+                                            $a6    = ['onion', 'potato', 'burger', 'milk'];
+
+                                            /*
+                                                Tentukan minim nilai support
+                                                Contoh
+                                                Minim nilai support 50%
+                                                Minim support = 3 (mengambil item sejumlah)
+
+                                                - Item set-1	
+                                                Pattern	Support count
+                                                onion	4
+                                                potato	5
+                                                burger	4
+                                                milk	4
+                                                tea	2
+
+                                                Menentukan peluang item sering muncul
+                                                Item Tea dieliminasi karena tidak memenuhi nilai minimal support 3
+
+
+
+                                            */
+
+
+
+
+                                            ?>
                                             <?php
                                             //Menampilkan data produk banyak dalam arrray
                                             $sql_produks = "SELECT * FROM produk LIMIT 4";
@@ -126,8 +167,8 @@ if (isset($_GET['id_produk'])) {
                             <form action="<?= base_url('cart/add_to_cart.php') ?>" method="post">
 
                                 <input type="number" class="d-none" name="id_produk" value="<?= $produk['id_produk'] ?>" id="">
-                                <input type="number"  class="d-none" name="jumlah_keranjang" id="jumlah_keranjang" value="1">
-                                <input type="number"  class="d-none" name="harga_keranjang" id="harga_keranjang" value="<?= $produk['harga_produk'] ?>">
+                                <input type="number" class="d-none" name="jumlah_keranjang" id="jumlah_keranjang" value="1">
+                                <input type="number" class="d-none" name="harga_keranjang" id="harga_keranjang" value="<?= $produk['harga_produk'] ?>">
                                 <h5 class="card-title" id="total_harga">Total : <?= rupiah($produk['harga_produk']) ?></h5>
 
                                 <button type="submit" name="btnTAMBAHKERANJANGPRODUK" class="btn btn-primary btn-badge text-white" style="width:100%;">+ keranjang</button>

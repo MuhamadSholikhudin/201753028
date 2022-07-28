@@ -98,7 +98,7 @@
 											// Jika Sudah Login
 											if (isset($_SESSION['id_user'])) {
 												$id_user = $_SESSION['id_user'];
-												$sql_total_produk = "SELECT SUM(harga_keranjang) as total FROM keranjang WHERE id_user = $id_user";
+												$sql_total_produk = "SELECT SUM(harga_keranjang) as total FROM keranjang WHERE id_user = $id_user AND status_keranjang = 1";
 												$query_total_produk = mysqli_query($koneksi, $sql_total_produk);
 												$data_total_produk = mysqli_fetch_array($query_total_produk, MYSQLI_BOTH);
 												$total_belanja = $data_total_produk['total'];
@@ -119,8 +119,14 @@
 										<input type="text" class="d-none" name="id_user" value="<?= $_SESSION['id_user'] ?>" id="">
 										<input type="text" class="d-none" name="implode_id_keranjang" value="<?= $implode_id_keranjang ?>" id="">
 										<input type="number" class="d-none" name="jumlah_checkout" value="<?= $data_total_produk['total'] ?>" id="jumlah_checkout">
-
+<?php
+$count_keranjang = querysatudata("SELECT COUNT(id_keranjang) as keranjang FROM keranjang WHERE id_user = ".$_SESSION['id_user']." AND status_keranjang = 1");
+if($count_keranjang['keranjang'] > 0){ ?>
 										<button type="submit" class="btn">Checkout</button>
+
+<?php }else{
+
+}?>
 									</form>
 									<!-- <a href="<?= base_url('raja_vapor/checkout') ?>#" class="btn">Checkout</a> -->
 									<a href="<?= base_url('index.php') ?>" class="btn">Continue shopping</a>

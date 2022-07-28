@@ -7,41 +7,42 @@ include '../function.php';
 include '../templates/header.php';
 
 $col_atas = '
-        <section class=" shop-sidebar shop " style="margin-top:10px; margin-bottom:50px;">
-            <div class="container">
-                <div class="row">
-        ';
+<section class=" shop-sidebar shop " style="margin-top:10px; margin-bottom:50px;">
+    <div class="container">
+        <div class="row">
+';
 
 $col_bawah = '</div></div></section>';
-?>
-<!-- Batas Konten -->
-<?php
 
 if (isset($_GET['halaman'])) {
     $hal = $_GET['halaman'];
     switch ($hal) {
-        case 'checkout':
+
+        case 'pengiriman':
             echo $col_atas;
             include "../shop/user/sidebar.php";
-            include "checkout.php";
+            include "pengiriman.php";
             echo $col_bawah;
             break;
-        case 'checkout_prosess':
-            include "checkout_prosess.php";
-            break;
+
         default: //jika memanggil halaman tidak ada maka..
             echo $col_atas;
             include "../shop/user/sidebar.php";
-            include "checkout.php";
+            include "pengiriman.php";
             echo $col_bawah;
             break;
     }
 } else { //jika tidak memanggil halaman apapun maka..
     echo $col_atas;
     include "../shop/user/sidebar.php";
-    include "checkout.php";
-    echo $col_bawah;}
+    include "pengiriman.php";
+    echo $col_bawah;
+}
 ?>
+<!-- Batas Konten Bawah -->
+
+
+<!--/ End Product Style 1  -->
 <?php
 include '../templates/footer.php';
 ?>

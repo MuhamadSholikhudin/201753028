@@ -5,6 +5,8 @@
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item"><a href="<?= base_url('shop/user/index.php?halaman=profile') ?>">Profile</a></li>
+            <li class="list-group-item"><a href="<?= base_url('cart') ?>">Keranjang</a></li>
+            <li class="list-group-item"><a href="<?= base_url('checkout') ?>">Checkout</a></li>
             <li class="list-group-item"><a href="<?= base_url('pembayaran') ?>">Pembayaran</a></li>
             <li class="list-group-item"><a href="<?= base_url('pengiriman') ?>">Pengiriman</a></li>
         </ul>
