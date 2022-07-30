@@ -32,47 +32,6 @@ if (isset($_GET['id_produk'])) {
                                     <div class="col-12">
                                         <div class="row">
                                             <?php
-
-                                            /* 
-                                                Terdapat ada 6 Transaksi
-                                                Dengan jenis barang berjumlah 5
-                                            */
-
-                                            $barang = ['onion', 'potato', 'burger', 'milk', 'tea'];
-
-                                            $a1 = ['onion', 'potato', 'burger'];
-                                            $a2    = ['potato', 'burger', 'milk'];
-                                            $a3    = ['milk', 'tea'];
-                                            $a4    = ['onion', 'potato', 'milk'];
-                                            $a5    = ['onion', 'potato', 'burger', 'tea'];
-                                            $a6    = ['onion', 'potato', 'burger', 'milk'];
-
-                                            /*
-                                                Tentukan minim nilai support
-                                                Contoh
-                                                Minim nilai support 50%
-                                                Minim support = 3 (mengambil item sejumlah)
-
-                                                - Item set-1	
-                                                Pattern	Support count
-                                                onion	4
-                                                potato	5
-                                                burger	4
-                                                milk	4
-                                                tea	2
-
-                                                Menentukan peluang item sering muncul
-                                                Item Tea dieliminasi karena tidak memenuhi nilai minimal support 3
-
-
-
-                                            */
-
-
-
-
-                                            ?>
-                                            <?php
                                             //Menampilkan data produk banyak dalam arrray
                                             $sql_produks = "SELECT * FROM produk LIMIT 4";
                                             $query_produks = mysqli_query($koneksi, $sql_produks);
