@@ -28,12 +28,14 @@
 
 					<div class="card-body bg-white">
 						<?php
-						//Membuat varialbel username dari session login username
-						$username = $_SESSION['username'];
+      //Membuat varialbel username dari session login username
+      $username = $_SESSION['username'];
 
-						//Mencari data profile dari tabel user
-						$profile = querysatudata("SELECT * FROM user WHERE username = '$username' ");
-						?>
+      //Mencari data profile dari tabel user
+      $profile = querysatudata(
+          "SELECT * FROM user WHERE username = '$username' "
+      );
+      ?>
 						<table id="table_id" class="table mb-0 row-border">
 							<thead>
 								<tr>
@@ -48,39 +50,53 @@
 							</thead>
 							<tbody>
 								<?php
-								$no = 1;
-								$pengirimans = querybanyak('SELECT * FROM pengiriman JOIN pembayaran 
+        $no = 1;
+        $pengirimans = querybanyak('SELECT * FROM pengiriman JOIN pembayaran 
 	 ON  pengiriman.id_pembayaran = pembayaran.id_pembayaran 
 	 WHERE pembayaran.status_pembayaran > 3');
 
-								foreach ($pengirimans as $pengiriman) { ?>
+        foreach ($pengirimans as $pengiriman) { ?>
 
 									<?php
-									//  $count_pengiriman = querysatudata(
-									//     'SELECT COUNT(id_pengiriman) as pengiriman FROM pengiriman  WHERE id_pembayaran = '.$pembayaran['id_pembayaran'].''
-									//  );
-									?>
+            //  $count_pengiriman = querysatudata(
+            //     'SELECT COUNT(id_pengiriman) as pengiriman FROM pengiriman  WHERE id_pembayaran = '.$pembayaran['id_pembayaran'].''
+            //  );
+            ?>
 									<tr>
 										<td><?= $no ?></td>
 										<td><?= $pengiriman['nomor_pembayaran'] ?></td>
 										<td>
-											<?php if ($pengiriman['bukti_pengiriman'] !== NULL) { ?>
-												<img src="<?= base_url("vapor/pengiriman/index.php?halaman=pengiriman_upload").$pengiriman['id_pengiriman'] ?>" width="40px" height="40px" style="" alt="logo">
+											<?php if ($pengiriman['bukti_pengiriman'] !== null) { ?>
+												<img src="<?= base_url('gambar/buktipengiriman/') .
+												$pengiriman[
+													'bukti_pengiriman'
+												] ?>" width="40px" height="40px" style="" alt="logo">
 											<?php } else { ?>
 
 											<?php } ?>
 										</td>
 										<td>
-
+											<?= $pengiriman['keterangan'] ?>
 
 										</td>
 										<td>
+										<?php if ($pengiriman['status_pengiriman'] == 1) { ?>
+											Belum dikirim
+											<?php } elseif ($pengiriman['status_pengiriman'] == 2) { ?>
+												Sudah Upload Bukti
+											<?php } elseif ($pengiriman['status_pengiriman'] == 3) { ?>
 
+											<?php } ?>
 										</td>
 										<td>
 											<?php if ($pengiriman['status_pengiriman'] == 1) { ?>
-<a href="<?= base_url("vapor/pengiriman/index.php?halaman=pengiriman_upload&id_pengiriman=").$pengiriman['id_pengiriman'] ?>">Upload Pengiriman</a>
+												<a href="<?= base_url(
+													'vapor/index.php?halaman=pengiriman_upload&id_pengiriman='
+												) . $pengiriman['id_pengiriman'] ?>">Upload Pengiriman</a>
 											<?php } elseif ($pengiriman['status_pengiriman'] == 2) { ?>
+												<a href="<?= base_url(
+												'vapor/index.php?halaman=pengiriman_upload_edit&id_pengiriman='
+												) . $pengiriman['id_pengiriman'] ?>">Edit Pengiriman</a>
 
 											<?php } elseif ($pengiriman['status_pengiriman'] == 3) { ?>
 
@@ -88,9 +104,8 @@
 
 										</td>
 									</tr>
-								<?php $no++;
-								}
-								?>
+								<?php $no++;}
+        ?>
 							</tbody>
 						</table>
 

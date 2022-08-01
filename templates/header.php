@@ -252,7 +252,7 @@
 												// Jika Sudah Login
 												if (isset($_SESSION['id_user'])) {
 
-													$sql_total_produk = "SELECT SUM(harga_keranjang) as total FROM keranjang WHERE id_user = $id_user";
+													$sql_total_produk = "SELECT SUM(harga_keranjang) as total FROM keranjang WHERE id_user = $id_user AND status_keranjang = 1";
 													$query_total_produk = mysqli_query($koneksi, $sql_total_produk);
 													$data_total_produk = mysqli_fetch_array($query_total_produk, MYSQLI_BOTH);
 													
@@ -262,7 +262,7 @@
 												} ?>
 											</span>
 										</div>
-										<a href="checkout.html" class="btn animate">Checkout</a>
+										<!-- <a href="checkout.html" class="btn animate">Checkout</a> -->
 									</div>
 								</div>
 								<!--/ End Shopping Item -->

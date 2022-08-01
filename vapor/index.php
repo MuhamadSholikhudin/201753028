@@ -122,13 +122,17 @@ if (isset($_GET['halaman'])) {
             include '../vapor/pembayaran/index.php';
             break;
 
-            case 'pengiriman': 
-                include '../template_organisasi/sidebar.php';
-                include '../vapor/pengiriman/index.php';
-            break;            
-            case 'pengiriman_upload': 
-                include '../template_organisasi/sidebar.php';
-                include '../vapor/pengiriman/pengiriman_upload.php';
+        case 'pengiriman':
+            include '../template_organisasi/sidebar.php';
+            include '../vapor/pengiriman/index.php';
+            break;
+        case 'pengiriman_upload':
+            include '../template_organisasi/sidebar.php';
+            include '../vapor/pengiriman/pengiriman_upload.php';
+            break;
+        case 'pengiriman_upload_edit':
+            include '../template_organisasi/sidebar.php';
+            include '../vapor/pengiriman/pengiriman_upload_edit.php';
             break;
 
         default: //jika memanggil halaman tidak ada maka..

@@ -36,16 +36,17 @@ if (isset($_GET['id_pengiriman'])) {
                             <div class="col-md-12">
                                 <form action="<?= base_url('vapor/pengiriman/aksi.php') ?>" enctype="multipart/form-data" method="POST">
                                 <input type="hidden" class="form-control" name="id_pengiriman" value="<?= $_GET['id_pengiriman'] ?>">
+                                    
                                 <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <label for="feDescription">Keterangan</label>
-                                            <textarea class="form-control" name="keterangan" require></textarea>
+                                            <textarea class="form-control" name="keterangan" require><?= $pengiriman['keterangan'] ?></textarea>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group ">
                                             <label for="gambar">Bukti Pengiriman</label>
-                                            <img id="output" />
+                                            <img id="output" src="<?= base_url("gambar/buktipengiriman/").$pengiriman['bukti_pengiriman'] ?>" />
                                             <input type="file" class="form-control" id="gambar" name="bukti_pengiriman" accept="image/png, image/jpeg, image/jpg, image/img" onchange="loadFile(event)" require>
                                         </div>
                                         <script>
@@ -57,7 +58,10 @@ if (isset($_GET['id_pengiriman'])) {
                                                 }
                                             };
                                         </script>
+                                        <!-- </div> -->
                                     </div>
+
+                                    <!-- <button type="submit" class="btn btn-accent">Update Account</button>  -->
                                     <button type="submit" name="btnSIMPANBUKTIPENGIRIMAN" class="btn btn-accent">Submit</button>
                                 </form>
                             </div>
