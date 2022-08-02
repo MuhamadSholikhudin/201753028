@@ -108,7 +108,6 @@
     }
 
 
-    var_dump($itemset1);
     echo "</br>";
     $patern1 = $barang1;
     $supportcount1 = Search($patern1, $tr1) + Search($patern1, $tr2) + Search($patern1, $tr3) + Search($patern1, $tr4) + Search($patern1, $tr5) + Search($patern1, $tr6);
@@ -220,9 +219,6 @@
 
         </div>
 
-
-
-
         <div class="col-9">
             <br>
             <p>Item set-1</p>
@@ -234,6 +230,8 @@
                 <?php
                 //menampung Item set-1
                 $itemset1 = [];
+                $itemset1_values = [];
+
 
                 foreach ($barang as $bar) {
                     if ($bar !== "") {
@@ -254,20 +252,24 @@
                                 ?>
 
                             </td>
-                            </tr>
-                            <?php
+                        </tr>
+                        <?php
 
-                            $nilai_minimal_support = 3;
-                            if($supportcount > 2){
-                            //membuat array assosiative pattern
+                        $nilai_minimal_support = 3;
+                        if ($supportcount > 2) {
+                            //membuat array multidimensi assosiative pattern
                             $pattern = [$bar => $supportcount];
 
                             // menggabungkan pattern pada item set 1
                             array_push($itemset1, $pattern);
-                            }
 
-                            ?>
-                        
+                            //membuat array assosiative pattern
+                            $pattern_value = [$bar];
+                            array_push($itemset1_values, $pattern_value);
+                        }
+
+                        ?>
+
                 <?php
                     }
                 }
@@ -295,7 +297,7 @@
     <div class="col-md-9">
         <br>
         <p>
-        Item set-2
+            Item set-2
         </p>
         <table>
             <tr>
@@ -305,8 +307,109 @@
 
             <tr>
                 <td>
-                    <?php 
-var_dump($itemset1);
+                    <?php
+
+                    var_dump($itemset1_values);
+                    echo "<br>";
+                    var_dump($itemset1);
+                    echo "<br>";
+
+                    echo $itemset1[0]["onion"];
+                    echo "<br>";
+
+                    $tampung_item_set = [];
+                    foreach ($itemset1_values as $x => $x_value) {
+                        echo " index = " . $x;
+                        foreach ($x_value as $barang => $barang_value) {
+                            echo " Key= " . $barang . " value " . $barang_value;
+                            echo "<br>";
+
+                            //menambahkan value item set
+                            array_push($tampung_item_set, $barang_value);
+                        }
+                    }
+
+
+                    //menghi'itung jumlah array item set
+                    $count_item_set = count($tampung_item_set);
+
+                    $slice_tampung_item_set = $tampung_item_set;
+
+                    // $itemset_kebawah = $tampung_item_set;
+                    // // membuat item set ke bawah
+                    $item_set_kebawah = array_shift($slice_tampung_item_set);
+
+                    // // jumlah item set ke bawah
+                    // $count_item_set_kebawah = $count_item_set - 1;
+
+                    echo "<br>";
+
+                    //mencari data item set2 berdasarkan transaksi
+                    function searchitemset2($value1, $value2, $array)
+                    {
+                        $search1 = (array_search($value1, $array));
+                        $search2 = (array_search($value2, $array));
+
+                        if ($search1 == false and $search2 == false) {
+                            $val = 0;
+                        } elseif ($search1 == false and $search2 == true) {
+                            $val = 0;
+                        } elseif ($search1 == true and $search2 == false) {
+                            $val = 0;
+                        } elseif ($search1 == true and $search2 == true) {
+                            $val = 1;
+                        } else {
+                            $val = 1;
+                        }
+                        return  $val;
+                    }
+
+
+                    foreach ($slice_tampung_item_set as $key => $value) {
+                        echo $tampung_item_set[$key] . " ";
+                        echo "<br>";
+
+                        $mulai = $key + 1;
+                        for ($v = $mulai; $v < $count_item_set; $v++) { 
+                            echo $tampung_item_set[$key]. " ".$tampung_item_set[$v];
+
+                            ?>
+                                <ul>
+                                    <li><?= $tampung_item_set[$v]; ?></li>
+                                </ul>
+                            
+                            <?php
+                            
+                            $count_tampung_3 = [];
+                            for ($row = 0; $row < $count_transaksi; $row++) {
+                                // $count_index_transaksi = count($transaksi[$row]);
+                                echo searchitemset2($tampung_item_set[$key], $tampung_item_set[$v], $transaksi[$row]);
+                                $count_tampung_3 += searchitemset2($tampung_item_set[$key], $tampung_item_set[$v], $transaksi[$row]);
+                                // for ($col = 0; $col < $count_index_transaksi; $col++) {
+                                //     // echo $transaksi[$row][$col] . ",";
+                                //     echo searchitemset2($tampung_item_set[$key], $tampung_item_set[$v], $transaksi[$row]);
+                                // }
+                            }
+                            echo $count_tampung_3;
+
+                            // $count_tampung_3 += searchitemset2searchitemset2($value1, $value2, $array)($bar, $transaksi[$row])
+                        }
+                        echo "<br>";
+                    }
+
+                    echo "<br>";
+
+                    foreach ($itemset1 as $x => $x_value) {
+                        print_r($x);
+                        foreach ($x_value as $barang => $barang_value) {
+                            echo " Key= " . $barang . " value " . $barang_value;
+                            echo "<br>";
+                        }
+                    }
+
+                    // array_splice($input, 0, 4);
+                    // var_dump($input);
+
                     ?>
                 </td>
                 <td>Support Count</td>
@@ -315,7 +418,7 @@ var_dump($itemset1);
         </table>
 
     </div>
-    <div class="col-md-3">  </div>
+    <div class="col-md-3"> </div>
 
 
 
