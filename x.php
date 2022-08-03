@@ -447,6 +447,45 @@
                     $count_item_set = count($tampung_item_set);
 
                     $slice_tampung_item_set = $tampung_item_set;
+                    echo "<br>";
+                    echo "<br>";
+
+
+
+
+
+                    // fungsi untuk menghasilkan kombinasi
+function getCombinations(...$arrays) {
+	$result = [[]];
+	foreach ($arrays as $property => $property_values) {
+		$temp = [];
+		foreach ($result as $result_item) {
+			foreach ($property_values as $property_value) {
+				$temp[] = array_merge($result_item, [$property => $property_value]);
+			}
+		}
+		$result = $temp;
+	}
+	return $result;
+}
+
+
+$arrayA = array('onion', 'potato','burger', 'milk');
+$arrayB = array('potato','burger', 'milk', 'onion');
+$arrayC = array( 'milk', 'onion', 'potato','burger');
+
+$hasil = getCombinations($arrayA, $arrayB, $arrayC);
+
+var_dump($hasil);
+
+for ($row = 0; $row < 4; $row++) {
+    echo "<p><b>Row number $row</b></p>";
+    echo "<ul>";
+    for ($col = 0; $col < 3; $col++) {
+      echo "<li>".var_dump($hasil[$row][$col])."</li>";
+    }
+    echo "</ul>";
+  }
 
                     ?>
 
