@@ -223,10 +223,10 @@
             <br>
             <p>Item set-1</p>
             <table class="table table-bordered">
-                <tr>
-                    <td>Pattern</td>
-                    <td>Support count</td>
-                </tr>
+            <tr>
+                            <th>Pattern Itern set 1</th>
+                            <th>Super Count</th>
+                        </tr>
                 <?php
                 //menampung Item set-1
                 $itemset1 = [];
@@ -289,24 +289,17 @@
             Contoh
             Minim nilai support 50%
             Minim support = 3 (mengambil item sejumlah)
-        </div>
 
     </div>
 
 
     <div class="col-md-9">
-        <br>
+
+    <br>
         <p>
             Item set-2
         </p>
-        <table>
-            <tr>
-                <td>Pattern</td>
-                <td>Support Count</td>
-            </tr>
 
-            <tr>
-                <td>
                     <?php
 
                     var_dump($itemset1_values);
@@ -330,7 +323,7 @@
                     }
 
 
-                    //menghi'itung jumlah array item set
+                    //menghihitung jumlah array item set
                     $count_item_set = count($tampung_item_set);
 
                     $slice_tampung_item_set = $tampung_item_set;
@@ -363,68 +356,107 @@
                         }
                         return  $val;
                     }
+                    ?>
 
+                    <table class="table border">
+                        <tr>
+                            <th>Pattern Itern set 2</th>
+                            <th>Super Count</th>
+                        </tr>
+                    <?php
+                        $tampung_itemset3 = [];
+                        $index_itemset = 0;
+                        foreach ($slice_tampung_item_set as $key => $value) {
+                            echo $tampung_item_set[$key] . " ";
+                            // echo "<br>";
 
-                    foreach ($slice_tampung_item_set as $key => $value) {
-                        echo $tampung_item_set[$key] . " ";
-                        echo "<br>";
+                            $mulai = $key + 1;
+                            for ($v = $mulai; $v < $count_item_set; $v++) { 
+                                // echo $tampung_item_set[$key]. " ".$tampung_item_set[$v];
+                                
+                                $count_tampung_3 = 0;
+                                for ($row = 0; $row < $count_transaksi; $row++) {
+                                    // $count_index_transaksi = count($transaksi[$row]);
+                                    // echo searchitemset2($tampung_item_set[$key], $tampung_item_set[$v], $transaksi[$row]);
+                                    $count_tampung_3 += searchitemset2($tampung_item_set[$key], $tampung_item_set[$v], $transaksi[$row]);
+                                    // for ($col = 0; $col < $count_index_transaksi; $col++) {
+                                    //     // echo $transaksi[$row][$col] . ",";
+                                    //     echo searchitemset2($tampung_item_set[$key], $tampung_item_set[$v], $transaksi[$row]);
+                                    // }
+                                }
+                                // $count_tampung_3 += searchitemset2searchitemset2($value1, $value2, $array)($bar, $transaksi[$row])
+                                ?>
+                                    <tr>
+                                        <td><?= $tampung_item_set[$key]. ", ". $tampung_item_set[$v] ?> </td> <td> <?= $count_tampung_3; ?> </td>
+                                    </tr>
+                                
+                                <?php
+                                $index_itemset += 1;
+                                if ($count_tampung_3 > 2) {
+                                    //membuat array multidimensi assosiative pattern
+                                    // $pattern_3 = [$bar => $supportcount];
 
-                        $mulai = $key + 1;
-                        for ($v = $mulai; $v < $count_item_set; $v++) { 
-                            echo $tampung_item_set[$key]. " ".$tampung_item_set[$v];
+                                    // menggabungkan pattern pada item set 1
+                                    // array_push($itemset1, $pattern_3);
 
-                            ?>
-                                <ul>
-                                    <li><?= $tampung_item_set[$v]; ?></li>
-                                </ul>
-                            
-                            <?php
-                            
-                            $count_tampung_3 = [];
-                            for ($row = 0; $row < $count_transaksi; $row++) {
-                                // $count_index_transaksi = count($transaksi[$row]);
-                                echo searchitemset2($tampung_item_set[$key], $tampung_item_set[$v], $transaksi[$row]);
-                                $count_tampung_3 += searchitemset2($tampung_item_set[$key], $tampung_item_set[$v], $transaksi[$row]);
-                                // for ($col = 0; $col < $count_index_transaksi; $col++) {
-                                //     // echo $transaksi[$row][$col] . ",";
-                                //     echo searchitemset2($tampung_item_set[$key], $tampung_item_set[$v], $transaksi[$row]);
-                                // }
+                                    //membuat array assosiative pattern
+                                    $pattern_value1 = [$index_itemset => $tampung_item_set[$key]];
+                                    $pattern_value2 = [$index_itemset => $tampung_item_set[$v]];
+                                    array_push($tampung_itemset3, $pattern_value1);
+                                    array_push($tampung_itemset3, $pattern_value2);
+                                }
+
                             }
-                            echo $count_tampung_3;
 
-                            // $count_tampung_3 += searchitemset2searchitemset2($value1, $value2, $array)($bar, $transaksi[$row])
+                            // echo "<br>";
                         }
-                        echo "<br>";
-                    }
+                    ?>
+                    </table>
+
+
+                    <?php
+                    var_dump($tampung_itemset3);
+                    echo "<br>";
+                    echo "<br>";
+                    // print_r(array_unique($tampung_itemset3));
+                    $tampung_itemset3single = call_user_func_array('array_merge', $tampung_itemset3);
+                    var_dump($tampung_itemset3single);
+
+                    echo "<br>";
+                    echo "<br>";
+
+                    // $input = array(4, "4", "3", 4, 3, "3");
+                    $tampung_itemset3unique = array_unique($tampung_itemset3single);
+                    var_dump($tampung_itemset3unique);
 
                     echo "<br>";
 
-                    foreach ($itemset1 as $x => $x_value) {
-                        print_r($x);
-                        foreach ($x_value as $barang => $barang_value) {
-                            echo " Key= " . $barang . " value " . $barang_value;
-                            echo "<br>";
-                        }
-                    }
+                    // foreach ($itemset1 as $x => $x_value) {
+                    //     print_r($x);
+                    //     foreach ($x_value as $barang => $barang_value) {
+                    //         echo " Key= " . $barang . " value " . $barang_value;
+                    //         echo "<br>";
+                    //     }
+                    // }
 
                     // array_splice($input, 0, 4);
                     // var_dump($input);
 
-                    ?>
-                </td>
-                <td>Support Count</td>
-            </tr>
 
-        </table>
+                    //menghihitung jumlah array item set
+                    $count_item_set = count($tampung_item_set);
+
+                    $slice_tampung_item_set = $tampung_item_set;
+
+                    ?>
 
     </div>
-    <div class="col-md-3"> </div>
+    <div class="col-md-3"> 
+        Mengambil berjumlah 3 item yang memiliki peuang paling sering
+            <br>
+        Dan, mengeliminasi peluang support kurang dari 3
 
-
-
-
-
-
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>
 
