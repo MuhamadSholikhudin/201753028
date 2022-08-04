@@ -451,9 +451,6 @@
                     echo "<br>";
 
 
-
-
-
                     // fungsi untuk menghasilkan kombinasi
 function getCombinations(...$arrays) {
 	$result = [[]];
@@ -478,16 +475,81 @@ $hasil = getCombinations($arrayA, $arrayB, $arrayC);
 
 var_dump($hasil);
 
-for ($row = 0; $row < 4; $row++) {
-    echo "<p><b>Row number $row</b></p>";
-    echo "<ul>";
-    for ($col = 0; $col < 3; $col++) {
-      echo "<li>".var_dump($hasil[$row][$col])."</li>";
-    }
-    echo "</ul>";
-  }
+// for ($row = 0; $row < 4; $row++) {
+//     echo "<p><b>Row number $row</b></p>";
+//     echo "<ul>";
+//     for ($col = 0; $col < 3; $col++) {
+//       echo "<li>".var_dump($hasil[$row][$col])."</li>";
+//     }
+//     echo "</ul>";
+//   }
 
                     ?>
+
+<?php
+                    echo "<br>";
+                    echo "<br>";
+                    function computePermutations($array) {
+                        $result = [];
+                    
+                        $recurse = function($array, $start_i = 0) use (&$result, &$recurse) {
+                            if ($start_i === count($array)-1) {
+                                array_push($result, $array);
+                            }
+                    
+                            for ($i = $start_i; $i < count($array); $i++) {
+                                //Swap array value at $i and $start_i
+                                $t = $array[$i]; $array[$i] = $array[$start_i]; $array[$start_i] = $t;
+                    
+                                //Recurse
+                                $recurse($array, $start_i + 1);
+                    
+                                //Restore old order
+                                $t = $array[$i]; $array[$i] = $array[$start_i]; $array[$start_i] = $t;
+                            }
+                        };
+                    
+                        $recurse($array);
+                    
+                        return $result;
+                    }
+                    
+                    
+                    $results = computePermutations(array('onion', 'potato','burger', 'milk'));
+                    var_dump($results);
+
+                    for ($row = 0; $row < 4; $row++) {
+                        echo "<p><b>Row number $row</b></p>";
+                        echo "<ul>";
+                        for ($col = 0; $col < 3; $col++) {
+                          echo "<li>".var_dump($results[$row][$col])."</li>";
+                        }
+                        echo "</ul>";
+                      }
+?>
+<table class="table" border="1">
+    <tr>
+        <th>Item set-3</th>
+        <th>Super Count</th>
+    </tr>
+<?php 
+                    for ($row = 0; $row < 4; $row++) {
+?>
+    <tr>
+        <td>
+            <?php 
+                                    for ($col = 0; $col < 3; $col++) {
+                                        echo $results[$row][$col] .",";
+                                      }
+            ?>
+        </td>
+        <td></td>
+    </tr>
+<?php 
+                      }
+                      ?>
+
+</table>
 
     </div>
     <div class="col-md-3"> 
