@@ -22,12 +22,15 @@
     foreach ($result as $row) {
         printf("%s (%s)\n", $row["nama_produk"], $row["harga_produk"]);
     }
-*/
+    */
 
     /* 
         Terdapat ada 6 Transaksi
         Dengan jenis barang berjumlah 5
-*/
+    */
+
+
+    // buat 5 barang yang di beli pembeli
 
     $barang0 = '';
     $barang1 = 'onion';
@@ -36,7 +39,11 @@
     $barang4 = 'milk';
     $barang5 = 'tea';
 
+    // buat array barang yang di beli pembeli
+
     $barang = [$barang0, $barang1, $barang2, $barang3, $barang4, $barang5];
+
+    // buat data transaksi pembeli
 
     $tr1    = [$barang0, $barang1, $barang2, $barang3];
     $tr2    = [$barang0, $barang2, $barang3, $barang4];
@@ -44,6 +51,9 @@
     $tr4    = [$barang0, $barang1, $barang2, $barang4];
     $tr5    = [$barang0, $barang1, $barang2, $barang3, $barang5];
     $tr6    = [$barang0, $barang1, $barang2, $barang3, $barang4];
+
+
+    //  Gabungkan data transaksi pembelian
 
     $transaksi_kosong = [];
 
@@ -521,7 +531,7 @@
             }
 
 
-            
+
             function s3($array, $transaksi)
             {
 
@@ -573,7 +583,7 @@
                             <?php
                             $dataset = [];
                             for ($col = 0; $col < 3; $col++) {
-                                
+
                                 echo $results[$row][$col] . ",";
 
                                 $dataset[] = $results[$row][$col];
@@ -581,11 +591,10 @@
                             // var_dump($dataset) ;
                             $setdat = s3($dataset, $transaksi);
 
-                            if ($setdat > $bs)
-                     {
-                        $bs = $setdat;
-                        $bc = array_diff_key($dataset);
-                    }
+                            if ($setdat > $bs) {
+                                $bs = $setdat;
+                                $bc = array_diff_key($dataset);
+                            }
 
                             // array_push
                             ?>
@@ -596,7 +605,7 @@
                 }
 
 
-            
+
 
                 ?>
 
@@ -605,34 +614,31 @@
             <?php
 
 
-                var_dump($bs);
-                var_dump($bc);
-    foreach($bc as $bf){
-                    echo $bf;
-                }
+            var_dump($bs);
+            var_dump($bc);
+            foreach ($bc as $bf) {
+                echo $bf;
+            }
 
             $trxs = $transaksi;
             $count_trxs = count($transaksi);
             $s3 = ["onion", "potato", "burger"];
             // echo s3($s3, $trxs);
-echo "<br>";
-            $arr= array(
+            echo "<br>";
+            $arr = array(
                 array(110, 20, 52),
                 array(1105, 56, 89, 96),
-                array( 556, 89, 96)
+                array(556, 89, 96)
             );
 
             $b = 0;
-            foreach ($arr as $val)
-            {
-                foreach($val as $key => $val1)
-                {
-                    if ($val1 > $b)
-                     {
+            foreach ($arr as $val) {
+                foreach ($val as $key => $val1) {
+                    if ($val1 > $b) {
                         $b = $val1;
                         $c = array_diff_key($val);
                     }
-                }   	
+                }
             }
             var_dump($c);
             var_dump($b);

@@ -119,14 +119,12 @@
 										<input type="text" class="d-none" name="id_user" value="<?= $_SESSION['id_user'] ?>" id="">
 										<input type="text" class="d-none" name="implode_id_keranjang" value="<?= $implode_id_keranjang ?>" id="">
 										<input type="number" class="d-none" name="jumlah_checkout" value="<?= $data_total_produk['total'] ?>" id="jumlah_checkout">
-<?php
-$count_keranjang = querysatudata("SELECT COUNT(id_keranjang) as keranjang FROM keranjang WHERE id_user = ".$_SESSION['id_user']." AND status_keranjang = 1");
-if($count_keranjang['keranjang'] > 0){ ?>
-										<button type="submit" class="btn">Checkout</button>
-
-<?php }else{
-
-}?>
+										<?php
+										$count_keranjang = querysatudata("SELECT COUNT(id_keranjang) as keranjang FROM keranjang WHERE id_user = ".$_SESSION['id_user']." AND status_keranjang = 1");
+										if($count_keranjang['keranjang'] > 0){ ?>
+											<button type="submit" class="btn">Checkout</button>
+										<?php }else{
+										}?>
 									</form>
 									<!-- <a href="<?= base_url('raja_vapor/checkout') ?>#" class="btn">Checkout</a> -->
 									<a href="<?= base_url('index.php') ?>" class="btn">Continue shopping</a>
