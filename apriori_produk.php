@@ -12,17 +12,41 @@
     <h1>Hello, world!</h1>
     <?php
 
-    /* 
+include 'function.php';
+    
     $mysqli = new mysqli("localhost","root","","201753028");
 
-    $query = 'SELECT * FROM produk';
+    $query = 'SELECT * FROM checkout';
 
     // Using iterators
     $result = $mysqli->query($query);
+
+    $arraytransaksicheckout = [];
     foreach ($result as $row) {
-        printf("%s (%s)\n", $row["nama_produk"], $row["harga_produk"]);
+        $trxc =  explode(",",$row["id_keranjang"]) ;
+
+        $push_produk =[];
+        array_push($push_produk, "");
+        foreach($trxc as $trkp){
+            $produk = querysatudata("SELECT * FROM keranjang JOIN produk ON keranjang.id_produk = produk.id_produk WHERE keranjang.id_keranjang =".$trkp." ");
+            
+            echo $produk['id_produk'];
+            array_push($push_produk, $produk['id_produk']);
+        }
+
+        array_push($arraytransaksicheckout, $push_produk);
+    
+
     }
-    */
+    echo "</br>";
+    var_dump($arraytransaksicheckout);
+    // echo "</br>";
+
+    $array_unique = call_user_func_array('array_merge', $arraytransaksicheckout);
+    echo "</br>";
+
+    $barang = array_unique($array_unique);
+    
 
     /* 
         Terdapat ada 6 Transaksi
@@ -41,7 +65,7 @@
 
     // buat array barang yang di beli pembeli
 
-    $barang = [$barang0, $barang1, $barang2, $barang3, $barang4, $barang5];
+    // $barang = [$barang0, $barang1, $barang2, $barang3, $barang4, $barang5];
 
     // buat data transaksi pembeli
 
@@ -64,7 +88,7 @@
     array_push($transaksi_kosong, $tr5);
     array_push($transaksi_kosong, $tr6);
 
-    $transaksi = $transaksi_kosong;
+    $transaksi = $arraytransaksicheckout;
 
     $count_transaksi = count($transaksi);
 
@@ -118,51 +142,6 @@
     }
 
 
-    echo "</br>";
-    $patern1 = $barang1;
-    $supportcount1 = Search($patern1, $tr1) + Search($patern1, $tr2) + Search($patern1, $tr3) + Search($patern1, $tr4) + Search($patern1, $tr5) + Search($patern1, $tr6);
-
-    echo  $supportcount1;
-    echo "</br>";
-
-    $patern2 = $barang2;
-    $supportcount2 = Search($patern2, $tr1) + Search($patern2, $tr2) + Search($patern2, $tr3) + Search($patern2, $tr4) + Search($patern2, $tr5) + Search($patern2, $tr6);
-    echo  $supportcount2;
-    echo "</br>";
-
-    $patern3 = $barang3;
-    $supportcount3 = Search($patern3, $tr1) + Search($patern3, $tr2) + Search($patern3, $tr3) + Search($patern3, $tr4) + Search($patern3, $tr5) + Search($patern3, $tr6);
-    echo  $supportcount3;
-    echo "</br>";
-
-    $patern4 = $barang4;
-    $supportcount4 = Search($patern4, $tr1) + Search($patern4, $tr2) + Search($patern4, $tr3) + Search($patern4, $tr4) + Search($patern4, $tr5) + Search($patern4, $tr6);
-    echo  $supportcount4;
-    echo "</br>";
-
-    $patern5 = $barang5;
-    $supportcount5 = Search($patern5, $tr1) + Search($patern5, $tr2) + Search($patern5, $tr3) + Search($patern5, $tr4) + Search($patern5, $tr5) + Search($patern5, $tr6);
-    echo  $supportcount5;
-    echo "</br>";
-
-    var_dump($transaksi);
-    echo "</br>";
-
-    $trx1 = [$barang0, "onion", "potato", "burger"];
-    $xvalue = "onion";
-
-    echo array_search($xvalue, $trx1);
-
-    echo "</br>";
-
-    $array = ["ram", "aakash", "saran", "mohan", "saran", "onion", "potato", "burger"];
-
-    $value = "aakash";
-
-    var_dump(Search($value, $array));
-
-    $bj = 2;
-    var_dump($bj);
     ?>
 
     <div class="row">
@@ -302,8 +281,7 @@
             var_dump($itemset1);
             echo "<br>";
 
-            echo $itemset1[0]["onion"];
-            echo "<br>";
+            
 
             $tampung_item_set = [];
             foreach ($itemset1_values as $x => $x_value) {
@@ -363,23 +341,15 @@
                 $index_itemset = 0;
                 foreach ($slice_tampung_item_set as $key => $value) {
                     echo $tampung_item_set[$key] . " ";
-                    // echo "<br>";
 
                     $mulai = $key + 1;
                     for ($v = $mulai; $v < $count_item_set; $v++) {
-                        // echo $tampung_item_set[$key]. " ".$tampung_item_set[$v];
 
                         $count_tampung_3 = 0;
                         for ($row = 0; $row < $count_transaksi; $row++) {
-                            // $count_index_transaksi = count($transaksi[$row]);
-                            // echo searchitemset2($tampung_item_set[$key], $tampung_item_set[$v], $transaksi[$row]);
                             $count_tampung_3 += searchitemset2($tampung_item_set[$key], $tampung_item_set[$v], $transaksi[$row]);
-                            // for ($col = 0; $col < $count_index_transaksi; $col++) {
-                            //     // echo $transaksi[$row][$col] . ",";
-                            //     echo searchitemset2($tampung_item_set[$key], $tampung_item_set[$v], $transaksi[$row]);
-                            // }
+                            
                         }
-                        // $count_tampung_3 += searchitemset2searchitemset2($value1, $value2, $array)($bar, $transaksi[$row])
                 ?>
                         <tr>
                             <td><?= $tampung_item_set[$key] . ", " . $tampung_item_set[$v] ?> </td>
@@ -389,13 +359,7 @@
                 <?php
                         $index_itemset += 1;
                         if ($count_tampung_3 > 2) {
-                            //membuat array multidimensi assosiative pattern
-                            // $pattern_3 = [$bar => $supportcount];
-
-                            // menggabungkan pattern pada item set 1
-                            // array_push($itemset1, $pattern_3);
-
-                            //membuat array assosiative pattern
+                     
                             $pattern_value1 = [$index_itemset => $tampung_item_set[$key]];
                             $pattern_value2 = [$index_itemset => $tampung_item_set[$v]];
                             array_push($tampung_itemset3, $pattern_value1);
@@ -415,44 +379,29 @@
             echo "<br>";
             // print_r(array_unique($tampung_itemset3));
             $tampung_itemset3single = call_user_func_array('array_merge', $tampung_itemset3);
-            // var_dump($tampung_itemset3single);
+            var_dump($tampung_itemset3single);
 
             echo "<br>";
             echo "<br>";
 
             // $input = array(4, "4", "3", 4, 3, "3");
             $tampung_itemset3unique = array_unique($tampung_itemset3single);
-            // var_dump($tampung_itemset3unique);
+            var_dump($tampung_itemset3unique);
 
             echo "<br>";
-
-            // foreach ($itemset1 as $x => $x_value) {
-            //     print_r($x);
-            //     foreach ($x_value as $barang => $barang_value) {
-            //         echo " Key= " . $barang . " value " . $barang_value;
-            //         echo "<br>";
-            //     }
-            // }
-
-            // array_splice($input, 0, 4);
-            // var_dump($input);
-
+            echo "<br>";
 
             //menghihitung jumlah array item set
             $count_item_set = count($tampung_item_set);
 
             $slice_tampung_item_set = $tampung_item_set;
+
+ 
+            var_dump($slice_tampung_item_set);
             echo "<br>";
             echo "<br>";
 
-            // for ($row = 0; $row < 4; $row++) {
-            //     echo "<p><b>Row number $row</b></p>";
-            //     echo "<ul>";
-            //     for ($col = 0; $col < 3; $col++) {
-            //       echo "<li>".var_dump($hasil[$row][$col])."</li>";
-            //     }
-            //     echo "</ul>";
-            //   }
+            var_dump(['2', '3', '4', '5']);
 
             ?>
 
@@ -490,10 +439,10 @@
             }
 
 
-            $results = computePermutations(array('onion', 'potato', 'burger', 'milk'));
+            $results = computePermutations($slice_tampung_item_set);
             // var_dump($results);
 
-            $count_result = count(array('onion', 'potato', 'burger', 'milk'));
+            $count_result = count($slice_tampung_item_set);
 
             for ($row = 0; $row < 4; $row++) {
                 echo "<p><b>Row number $row</b></p>";
@@ -535,7 +484,6 @@
             function s3($array, $transaksi)
             {
 
-                // $trxs = $transaksi;
                 $count_trxs = count($transaksi);
 
                 $ino = 0;
@@ -599,13 +547,10 @@
                             // array_push
                             ?>
                         </td>
-                        <td></td>
+                        <td><?= $setdat ?></td>
                     </tr>
                 <?php
                 }
-
-
-
 
                 ?>
 
@@ -613,12 +558,13 @@
 
             <?php
 
-
-            var_dump($bs);
+            // var_dump($bs);
             var_dump($bc);
             foreach ($bc as $bf) {
                 echo $bf;
             }
+
+            echo "<br>";
 
             $trxs = $transaksi;
             $count_trxs = count($transaksi);
@@ -640,11 +586,11 @@
                     }
                 }
             }
-            var_dump($c);
-            var_dump($b);
+            // var_dump($c);
+            // var_dump($b);
+
 
             ?>
-
         </div>
         <div class="col-md-3">
             Mengambil berjumlah 3 item yang memiliki peuang paling sering
