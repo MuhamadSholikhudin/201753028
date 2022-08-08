@@ -3,10 +3,10 @@
 
 include '../koneksi.php';
 
-if (isset($_GET['id'])){
+if (isset($_GET['id_keranjang'])){
 
     //mulai proses hapus
-    $sql_hapus = "DELETE FROM keranjang WHERE id_keranjang = ".$_GET['id']."";
+    $sql_hapus = "DELETE FROM keranjang WHERE id_keranjang = ".$_GET['id_keranjang']."";
     $query_hapus = mysqli_query($koneksi, $sql_hapus);
 
     if($query_hapus){

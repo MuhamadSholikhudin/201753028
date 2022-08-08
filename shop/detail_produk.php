@@ -35,13 +35,14 @@ if (isset($_GET['id_produk'])) {
 
                                             <?php 
                                             //Metode Apriori
-                                            if($_SESSION['id_user']){
+                                            if(isset($_SESSION['id_user'])){
 
                                                 //cari data checkout
                                                  $cari_checkout = querysatudata("SELECT COUNT(id_checkout) as id_checkout FROM checkout WHERE id_user = ".$_SESSION['id_user']."");
 
-                                                //  jika ada checkout lebih dari 3
-                                                if($cari_checkout > 3){
+                                                //  echo $cari_checkout['id_checkout'];
+                                                //  jika ada checkout lebih dari 3 maka jalan algoritma
+                                                if($cari_checkout['id_checkout'] > 3){
 
                                                     //koneksi database
                                                     $mysqli = new mysqli("localhost","root","","201753028");
@@ -96,7 +97,7 @@ if (isset($_GET['id_produk'])) {
                                                     $count_barang = count($c_barang);
 
                                                     // nilai minimum 50%
-                                                    $minimum_support = round($count_barang / 2);
+                                                    $minimum_support = round($count_barang * 0.5);
 
                                                     //membuat variabel transaksi berdasarkan array checkout
                                                     $transaksi = $arraytransaksicheckout;
@@ -118,7 +119,7 @@ if (isset($_GET['id_produk'])) {
                                                         }
                                                         return  $val;
                                                     }
-                                                ?>
+                                                    ?>
                                                 
                                                     <div class="col-md-12">
                                                         <table class="table table-bordered">
@@ -222,7 +223,7 @@ if (isset($_GET['id_produk'])) {
                                                             }
 
 
-                                                            //menghihitung jumlah array item set
+                                                            //menghihitung jumlah array item set 1
                                                             $count_item_set = count($tampung_item_set);
 
                                                             $slice_tampung_item_set = $tampung_item_set;
@@ -254,7 +255,7 @@ if (isset($_GET['id_produk'])) {
 
                                                             <table class="table border">
                                                                 <tr>
-                                                                    <th>Pattern Itern set 2</th>
+                                                                    <th>Pattern Item set 2</th>
                                                                     <th>Super Count</th>
                                                                 </tr>
                                                                 <?php
@@ -299,9 +300,21 @@ if (isset($_GET['id_produk'])) {
                                                         <?php 
                                                         }
                                                         ?>
-
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                    </div>
                                                     <?php
+
+                                                //    var_dump($index_itemset);
+
+                                                   if( $index_itemset == null){
+                                                    echo "INI ADALAH NULL";
+                                                   }
                                                     
+                                                    //jika $tampung_itemset3 !== Kosong
+                                                    if($index_itemset == null){
+                                                        
+                                                    }else{
                                                         // mengubah array multidimensi menjadi array single
                                                         $tampung_itemset3single = call_user_func_array('array_merge', $tampung_itemset3);
 
@@ -314,110 +327,102 @@ if (isset($_GET['id_produk'])) {
                                                         //menghihitung jumlah array item set
                                                         $count_item_set = count($tampung_item_set);
 
-                                                    ?>
+                                                        function computePermutations($array)
+                                                        {
+                                                            $result = [];
 
+                                                            $recurse = function ($array, $start_i = 0) use (&$result, &$recurse) {
+                                                                if ($start_i === count($array) - 1) {
+                                                                    array_push($result, $array);
+                                                                }
 
-                                                    </div>
-                                                    <div class="col-md-12">
+                                                                for ($i = $start_i; $i < count($array); $i++) {
+                                                                    //Swap array value at $i and $start_i
+                                                                    $t = $array[$i];
+                                                                    $array[$i] = $array[$start_i];
+                                                                    $array[$start_i] = $t;
 
-                                                    <?php
-                                                    function computePermutations($array)
-                                                    {
-                                                        $result = [];
+                                                                    //Recurse
+                                                                    $recurse($array, $start_i + 1);
 
-                                                        $recurse = function ($array, $start_i = 0) use (&$result, &$recurse) {
-                                                            if ($start_i === count($array) - 1) {
-                                                                array_push($result, $array);
-                                                            }
+                                                                    //Restore old order
+                                                                    $t = $array[$i];
+                                                                    $array[$i] = $array[$start_i];
+                                                                    $array[$start_i] = $t;
+                                                                }
+                                                            };
 
-                                                            for ($i = $start_i; $i < count($array); $i++) {
-                                                                //Swap array value at $i and $start_i
-                                                                $t = $array[$i];
-                                                                $array[$i] = $array[$start_i];
-                                                                $array[$start_i] = $t;
+                                                            $recurse($array);
 
-                                                                //Recurse
-                                                                $recurse($array, $start_i + 1);
-
-                                                                //Restore old order
-                                                                $t = $array[$i];
-                                                                $array[$i] = $array[$start_i];
-                                                                $array[$start_i] = $t;
-                                                            }
-                                                        };
-
-                                                        $recurse($array);
-
-                                                        return $result;
-                                                    }
-
-                                                    //eksekusi permutasi data berdasarkan id_produk yang unique
-                                                    $results = computePermutations($slice_tampung_item_set);
-    
-                                                    //menghitung jumlah array unique
-                                                    $count_result = count($slice_tampung_item_set);
-
-
-                                                    function searchitemset3($value1, $value2, $array)
-                                                    {
-                                                        $search1 = (array_search($value1, $array));
-                                                        $search2 = (array_search($value2, $array));
-
-                                                        if ($search1 == false and $search2 == false) {
-                                                            $val = 0;
-                                                        } elseif ($search1 == false and $search2 == true) {
-                                                            $val = 0;
-                                                        } elseif ($search1 == true and $search2 == false) {
-                                                            $val = 0;
-                                                        } elseif ($search1 == true and $search2 == true) {
-                                                            $val = 1;
-                                                        } else {
-                                                            $val = 1;
+                                                            return $result;
                                                         }
-                                                        return  $val;
-                                                    }
 
-                                                    function arrayitemset3($arraysearch, $arraytransaksi)
-                                                    {
-                                                        searchitemset3($arraysearch[0], $arraysearch[1], $arraysearch[2], $arraytransaksi);
-                                                    }
+                                                        //eksekusi permutasi data berdasarkan id_produk yang unique
+                                                        $results = computePermutations($slice_tampung_item_set);
+        
+                                                        //menghitung jumlah array unique
+                                                        $count_result = count($slice_tampung_item_set);
 
+                                                        function searchitemset3($value1, $value2, $array)
+                                                        {
+                                                            $search1 = (array_search($value1, $array));
+                                                            $search2 = (array_search($value2, $array));
 
-                                                    function s3($array, $transaksi)
-                                                    {
-                                                        $count_trxs = count($transaksi);
-
-                                                        $ino = 0;
-                                                        for ($row = 0; $row < $count_trxs; $row++) {
-
-                                                            $search1 = (array_search($array[0], $transaksi[$row]));
-                                                            $search2 = (array_search($array[1], $transaksi[$row]));
-                                                            $search3 = (array_search($array[2], $transaksi[$row]));
-
-                                                            if ($search1 == false and $search2 == false and $search3 == false) {
-                                                                $ino += 0;
-                                                            } elseif ($search1 == true and $search2 == false and $search3 == false) {
-                                                                $ino += 0;
-                                                            } elseif ($search1 == true and $search2 == true and $search3 == false) {
-                                                                $ino += 0;
-                                                            } elseif ($search1 == true and $search2 == false and $search3 == true) {
-                                                                $ino += 0;
-                                                            } elseif ($search1 == false and $search2 == true and $search3 == false) {
-                                                                $ino += 0;
-                                                            } elseif ($search1 == false and $search2 == true and $search3 == true) {
-                                                                $ino += 0;
-                                                            } elseif ($search1 == false and $search2 == false and $search3 == true) {
-                                                                $ino += 0;
-                                                            } elseif ($search1 == true and $search2 == true and $search3 == true) {
-                                                                $ino += 1;
+                                                            if ($search1 == false and $search2 == false) {
+                                                                $val = 0;
+                                                            } elseif ($search1 == false and $search2 == true) {
+                                                                $val = 0;
+                                                            } elseif ($search1 == true and $search2 == false) {
+                                                                $val = 0;
+                                                            } elseif ($search1 == true and $search2 == true) {
+                                                                $val = 1;
+                                                            } else {
+                                                                $val = 1;
                                                             }
+                                                            return  $val;
                                                         }
-                                                        return  $ino;
-                                                    }
 
-                                                    ?>
-                                                    </div>
-                                                    <div class="col-xl-12">
+                                                        function arrayitemset3($arraysearch, $arraytransaksi)
+                                                        {
+                                                            searchitemset3($arraysearch[0], $arraysearch[1], $arraysearch[2], $arraytransaksi);
+                                                        }
+
+
+                                                        function s3($array, $transaksi)
+                                                        {
+                                                            $count_trxs = count($transaksi);
+
+                                                            $ino = 0;
+                                                            for ($row = 0; $row < $count_trxs; $row++) {
+
+                                                                $search1 = (array_search($array[0], $transaksi[$row]));
+                                                                $search2 = (array_search($array[1], $transaksi[$row]));
+                                                                $search3 = (array_search($array[2], $transaksi[$row]));
+
+                                                                if ($search1 == false and $search2 == false and $search3 == false) {
+                                                                    $ino += 0;
+                                                                } elseif ($search1 == true and $search2 == false and $search3 == false) {
+                                                                    $ino += 0;
+                                                                } elseif ($search1 == true and $search2 == true and $search3 == false) {
+                                                                    $ino += 0;
+                                                                } elseif ($search1 == true and $search2 == false and $search3 == true) {
+                                                                    $ino += 0;
+                                                                } elseif ($search1 == false and $search2 == true and $search3 == false) {
+                                                                    $ino += 0;
+                                                                } elseif ($search1 == false and $search2 == true and $search3 == true) {
+                                                                    $ino += 0;
+                                                                } elseif ($search1 == false and $search2 == false and $search3 == true) {
+                                                                    $ino += 0;
+                                                                } elseif ($search1 == true and $search2 == true and $search3 == true) {
+                                                                    $ino += 1;
+                                                                }
+                                                            }
+                                                            return  $ino;
+                                                        }
+                                                        ?>
+
+
+                                                        <div class="col-xl-12">
                                                         <table class="table" border="1">
                                                             <tr>
                                                                 <th>Item set-3</th>
@@ -463,13 +468,33 @@ if (isset($_GET['id_produk'])) {
                                                             ?>
 
                                                         </table>
-                                                        <?php
-                                                        var_dump($bc);
-                                                        ?>
-                                                    </div>
-                                                
+
+                                                    </div> 
+                                                    <?php
+
+                                                    }
+                                                    ?>
+
+                                                    <?php
+
+                                                        // echo count($dataset);
+                                                        if($dataset == null ){
+                                                            echo "INI NULL";
+                                                        }elseif(count($tampung_itemset3unique) > 0){
+                                                            $rekomendasi = $tampung_itemset3unique;
+                                                            echo count($tampung_itemset3unique);
+                                                        }elseif(count($barang) > 0){
+                                                            $rekomendasi = $barang;
+                                                            echo "INI 2";
+                                                        }else{
+                                                            $rekomendasi = null;
+                                                        }
+                                                    ?>
                                                         <?php 
-                                                            foreach($bc as $id_produk){ ?>
+                                                            if($rekomendasi == null){
+
+                                                            }else{
+                                                            foreach($rekomendasi as $id_produk){ ?>
                                                                 <div class="col-xl-3 col-lg-4 col-md-4 col-12">
                                                                     <div class="single-product">
                                                                         <div class="product-img">
@@ -503,9 +528,10 @@ if (isset($_GET['id_produk'])) {
                                                                 </div>
 
                                                             <?php }
+                                                            }
 
 
-                                                    }
+                                                }
                                                 ?>
                                                     
 
@@ -517,47 +543,56 @@ if (isset($_GET['id_produk'])) {
 
                                             ?>
 
+           
 
-                                            <?php
-                                            //Menampilkan data produk banyak dalam arrray
-                                            $sql_produks = "SELECT * FROM produk ORDER BY id_produk DESC LIMIT 4 ";
-                                            $query_produks = mysqli_query($koneksi, $sql_produks);
-                                            $no = 1; //nilai awal nomer
-                                            while ($data_produks = mysqli_fetch_array($query_produks, MYSQLI_BOTH)) {
-                                            ?>
-                                                <div class="col-xl-3 col-lg-4 col-md-4 col-12">
-                                                    <div class="single-product">
-                                                        <div class="product-img">
-                                                            <a href="<?= base_url('shop/index.php?halaman=detail_produk&id_produk=') . $data_produks['id_produk'] ?>">
-                                                                <!-- <img class="default-img" src="https://source.unsplash.com/550x750" alt="#"> -->
-                                                                <img class="default-img" src="https://source.unsplash.com/550x750/?<?= $data_produks['nama_produk'] ?>" alt="#">
-                                                                <img class="hover-img" src="https://source.unsplash.com/550x750" alt="#">
-                                                            </a>
-                                                            <div class="button-head">
-                                                                <div class="product-action">
-                                                                    <a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-                                                                    <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
-                                                                    <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
-                                                                </div>
-                                                                <div class="product-action-2">
-                                                                    <a title="Add to cart" href="<?= base_url('cart/add_to_cart.php?id=' . $data_produks['id_produk']) ?>">Add to cart</a>
+                                        </div>
+
+                                        <div class="col-12">
+                                        # Produk Terbaru Kami
+                                    </div>
+
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <?php
+                                                //Menampilkan data produk banyak dalam arrray
+                                                $sql_produks = "SELECT * FROM produk ORDER BY id_produk DESC LIMIT 4 ";
+                                                $query_produks = mysqli_query($koneksi, $sql_produks);
+                                                $no = 1; //nilai awal nomer
+                                                while ($data_produks = mysqli_fetch_array($query_produks, MYSQLI_BOTH)) {
+                                                ?>
+                                                    <div class="col-xl-3 col-lg-4 col-md-4 col-12">
+                                                        <div class="single-product">
+                                                            <div class="product-img">
+                                                                <a href="<?= base_url('shop/index.php?halaman=detail_produk&id_produk=') . $data_produks['id_produk'] ?>">
+                                                                    <!-- <img class="default-img" src="https://source.unsplash.com/550x750" alt="#"> -->
+                                                                    <img class="default-img" src="https://source.unsplash.com/550x750/?<?= $data_produks['nama_produk'] ?>" alt="#">
+                                                                    <img class="hover-img" src="https://source.unsplash.com/550x750" alt="#">
+                                                                </a>
+                                                                <div class="button-head">
+                                                                    <div class="product-action">
+                                                                        <a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
+                                                                        <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
+                                                                        <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
+                                                                    </div>
+                                                                    <div class="product-action-2">
+                                                                        <a title="Add to cart" href="<?= base_url('cart/add_to_cart.php?id=' . $data_produks['id_produk']) ?>">Add to cart</a>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="product-content">
-                                                            <h3><a href="<?= base_url('welcome/detail/') . $data_produks['id_produk'] ?>"><?= $data_produks['nama_produk'] ?></a></h3>
-                                                            <div class="product-price">
-                                                                <span><?= rupiah($data_produks['harga_produk']) ?></span>
+                                                            <div class="product-content">
+                                                                <h3><a href="<?= base_url('welcome/detail/') . $data_produks['id_produk'] ?>"><?= $data_produks['nama_produk'] ?></a></h3>
+                                                                <div class="product-price">
+                                                                    <span><?= rupiah($data_produks['harga_produk']) ?></span>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            <?php
-                                                //auto increment nomer
-                                                $no++;
-                                            }
-                                            ?>
-
+                                                <?php
+                                                    //auto increment nomer
+                                                    $no++;
+                                                }
+                                                ?>
+                                            </div>
                                         </div>
 
                                     </div>

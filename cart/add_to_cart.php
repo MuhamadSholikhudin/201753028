@@ -10,13 +10,12 @@ if (isset($_GET['id'])) {
         $status_keranjang = 1;
         $id_produk = $_GET['id'];
 
-
         // Menampilkan data barang berdasarkan id_produk
-        $print_barang = mysqli_query($koneksi, "SELECT * FROM barang WHERE id_produk = $id_produk ");
+        $print_barang = mysqli_query($koneksi, "SELECT * FROM produk WHERE id_produk = ".$id_produk." ");
         $barang = mysqli_fetch_array($print_barang, MYSQLI_BOTH);
 
         // Mencari jumlah keranjang jika ada barangnya maka akan di update jika tida maka di tambah 1
-        $query_keranjang = mysqli_query($koneksi, "SELECT * FROM keranjang WHERE id_user = $id_user AND id_produk = $id_produk AND status_keranjang = 1  ");
+        $query_keranjang = mysqli_query($koneksi, "SELECT * FROM keranjang WHERE id_user = ".$id_user." AND id_produk = ".$id_produk." AND status_keranjang = 1  ");
         $cari_keranjang = mysqli_num_rows($query_keranjang);
 
         if ($cari_keranjang > 0) {
@@ -29,7 +28,7 @@ if (isset($_GET['id'])) {
             // Penjumlahan jumlah barang dengan harga barang
             $jumlah = $tampil_keranjang['jumlah_keranjang'];
             $jumlah_keranjang = $jumlah + 1;
-            $harga = $barang['harga_barang'];
+            $harga = $barang['harga_produk'];
             $harga_keranjang = $harga * $jumlah_keranjang;
 
             $sql_ubah_keranjang = "UPDATE keranjang SET
@@ -58,7 +57,7 @@ if (isset($_GET['id'])) {
             $sql_simpan = "INSERT INTO keranjang (id_produk, jumlah_keranjang, harga_keranjang, status_keranjang, id_user) VALUES (
                 " . $id_produk . ",
                 1,
-                " . $barang['harga_barang'] . ",
+                " . $barang['harga_produk'] . ",
                 1,
                 " . $id_user . "            
                 )";

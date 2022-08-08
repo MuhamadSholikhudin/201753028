@@ -67,7 +67,7 @@
 									</td>
 
 									<td class="total-amount" data-title="Total"><span id="jumlah_harga<?= $keranjang_user['id_keranjang'] ?>"><?= rupiah($keranjang_user['harga_keranjang']) ?></span></td>
-									<td class="action" data-title="Remove"><a href="<?= base_url('raja_vapor/cart/remove_on_cart/') . $keranjang_user['id_keranjang'] ?>"><i class="ti-trash remove-icon"></i></a></td>
+									<td class="action" data-title="Remove"><a href="<?= base_url('cart/remove_on_cart.php?id_keranjang=') . $keranjang_user['id_keranjang'] ?>"><i class="ti-trash remove-icon"></i></a></td>
 								</tr>
 
 						<?php
