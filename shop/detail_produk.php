@@ -34,14 +34,13 @@ if (isset($_GET['id_produk'])) {
                                             
 
                                             <?php 
-                                            //Metode Apriori
+                                            //Jika dia login 
                                             if(isset($_SESSION['id_user'])){
 
                                                 //cari data checkout
                                                  $cari_checkout = querysatudata("SELECT COUNT(id_checkout) as id_checkout FROM checkout WHERE id_user = ".$_SESSION['id_user']."");
 
-                                                //  echo $cari_checkout['id_checkout'];
-                                                //  jika ada checkout lebih dari 3 maka jalan algoritma
+                                                //  jika ada checkout lebih dari 3 maka jalan algoritma Apriori
                                                 if($cari_checkout['id_checkout'] > 3){
 
                                                     //koneksi database
@@ -87,17 +86,19 @@ if (isset($_GET['id_produk'])) {
                                                     // menghilangkan data id_produk yang duplicat dengan unique
                                                     $barang = array_unique($array_unique);
 
+                                                    
                                                     //membuat variabel count barang
                                                     $c_barang = array_unique($array_unique);
 
                                                     //menghilangkan shitf
                                                     $shift_shift = array_shift($c_barang);
 
+                                                    
                                                     //count barang
                                                     $count_barang = count($c_barang);
 
                                                     // nilai minimum 50%
-                                                    $minimum_support = round($count_barang * 0.5);
+                                                    $minimum_support = $count_barang * 0.1;
 
                                                     //membuat variabel transaksi berdasarkan array checkout
                                                     $transaksi = $arraytransaksicheckout;
@@ -207,7 +208,16 @@ if (isset($_GET['id_produk'])) {
                                                     </div>
                                                     <div class="col-md-12">
                                                         <?php 
+// var_dump($c_barang);
+// var_dump($itemset1_values);
+// echo count($c_barang);
+if(count($itemset1_values) > 1){
+echo 2;
 
+}else{
+echo 1;
+
+}
                                                         if(count($itemset1_values) > 1){
                                                             // membuat tampung data item set
                                                             $tampung_item_set = [];
