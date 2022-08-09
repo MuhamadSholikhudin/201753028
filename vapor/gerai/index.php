@@ -36,7 +36,7 @@
               </tr>
             </thead>
             <tbody>
-              <?php $no = 1;               
+              <?php $no = 1;
               $gerai = querybanyak('SELECT * FROM gerai');
               foreach ($gerai as $ger) : ?>
                 <tr>
@@ -44,11 +44,13 @@
                   <td><?= $ger['nama_gerai'] ?></td>
                   <td><?= $ger['cabang'] ?></td>
                   <td><?= $ger['alamat_gerai'] ?></td>
-                  <td> <a href="<?= base_url('vapor/index.php?halaman=gerai_edit&id_gerai=' . $ger['id_gerai']) ?>" type="button" class="btn btn-success"> Edit</a>
-                    <a href="<?= base_url('pemilik/gerai/hapus/' . $ger['id_gerai']) ?>" type="button" class="btn btn-danger"> Hapus</a>
+                  <td> 
+                    <a href="<?= base_url('vapor/index.php?halaman=gerai_edit&id_gerai=' . $ger['id_gerai']) ?>" type="button" class="btn btn-success"> Edit</a>
+                    <a  href="<?= base_url('vapor/gerai/aksi.php?aksi=hapus&id_gerai=' . $ger['id_gerai']) ?>" class="btn btn-danger btnhapus"> Hapus</a>
                   </td>
                 </tr>
               <?php endforeach; ?>
+
 
             </tbody>
           </table>
