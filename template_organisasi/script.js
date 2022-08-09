@@ -46,10 +46,8 @@ $("#searchkeranjang").keyup(function () {
     dataType: "json",
     beforeSend: function () {
       $("#hasil_cari").hide();
-      // alert('1');
     },
     success: function (data) {
-      //   console.log(data);
       $("#hasil_cari").show();
       $("#hasil_cari").html(data);
     },

@@ -53,7 +53,7 @@
                   <td><?= $bar['kategori'] ?></td>
                   <td>
                     <a href="<?= base_url('vapor/index.php?halaman=kategori_edit&id_kategori=' . $bar['id_kategori']) ?>" type="button" class="btn btn-success"> Edit</a>
-                    <a href="<?= base_url('pemilik/kategori/hapus/' . $bar['id_kategori']) ?>" type="button" class="btn btn-danger"> Hapus</a>
+                    <a href="<?= base_url('vapor/kategori/aksi.php?aksi=hapus&id_kategori=' . $bar['id_kategori']) ?>" type="button" class="btn btn-danger"> Hapus</a>
                   </td>
                 </tr>
               <?php endforeach; ?>

@@ -46,8 +46,19 @@
                 <tr>
                   <td> <?= $no++ ?></td>
                   <td><?=  $penj['nomor_penjualan'] ?></td>
-                  <td><?=  $penj['total_penjualan'] ?></td>
-                  <td><?=  $penj['status_penjualan_gerai'] ?></td>
+                  <td><?=  rupiah($penj['total_penjualan']) ?></td>
+                  <td>
+                    <?php 
+                      if($penj['status_penjualan_gerai'] == 0){
+                        echo "Belum Bayar";
+
+                      }elseif($penj['status_penjualan_gerai'] == 1){
+                        echo "Selesai";
+                      }
+
+                    ?>
+                    <!-- <?=  $penj['status_penjualan_gerai'] ?> -->
+                  </td>
                   <td> 
                     <a href="<?= base_url('vapor/index.php?halaman=penjualan_gerai_keranjang&id_penjualan_gerai=' .  $penj['id_penjualan_gerai']) ?>" type="button" class="btn btn-success"> Edit</a>
                     <a href="<?= base_url('vapor/index.php?halaman=penjualan_gerai_hapus&id_penjualan_gerai=' .  $penj['id_penjualan_gerai']) ?>" type="button" class="btn btn-danger"> Hapus</a>

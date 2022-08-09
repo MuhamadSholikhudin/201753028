@@ -134,7 +134,7 @@ if (isset($_GET['id_penjualan_gerai'])) {
                                     <th scope="col" class="border-0">Tunai</th>
                                     <th scope="col" class="border-0"><input type="number" name="bayar_tunai" id="bayar"></th>
                                     <th scope="col" class="border-0">Kembalian</th>
-                                    <th scope="col" class="border-0"><input type="number" name="kembalian" id="kembali" ></th>
+                                    <th scope="col" class="border-0"><input type="number" name="kembalian" id="kembali"></th>
                                     <th scope="col" class="border-0">
                                     </th>
                                     <th scope="col" class="border-0">

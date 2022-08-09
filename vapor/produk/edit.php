@@ -56,13 +56,6 @@ if (isset($_GET['id_produk'])) {
                     <select id="feInputState" class="form-control" name="id_kategori">
                       <?php
 
-                      // $mysqli = new mysqli("localhost","root","","201753028");
-
-                      // $query = 'SELECT * FROM kategori';
-
-                      // menggunakan foreach
-                      // $result = $mysqli->query($query);
-
                       $result = querybanyak('SELECT * FROM kategori');
 
                       foreach ($result as $row) { ?>
@@ -98,7 +91,7 @@ if (isset($_GET['id_produk'])) {
                   <div class="form-row">
                     <div class="form-group ">
                       <label for="gambar">Gambar produk</label>
-                      <img src="<?= base_url('produk/') . $data_cek['gambar'] ?>" id="output" />
+                      <img src="<?= base_url('gambar/produk/') . $data_cek['gambar'] ?>" id="output" />
                       <input type="file" class="form-control" id="gambar" name="gambar" accept="image/png, image/jpeg, image/jpg, image/img" onchange="loadFile(event)">
 
                     </div>

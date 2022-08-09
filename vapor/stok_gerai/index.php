@@ -29,9 +29,9 @@
             <thead class="bg-light">
               <tr>
                 <th scope="col" class="border-0">#</th>
-                <th scope="col" class="border-0">Nama Gerai</th>
-                <th scope="col" class="border-0">Cabang</th>
-                <th scope="col" class="border-0">Alamat Gerai</th>
+                <th scope="col" class="border-0">Gerai</th>
+                <th scope="col" class="border-0">Produk</th>
+                <th scope="col" class="border-0">Stok Produk</th>
                 <th scope="col" class="border-0">Aksi</th>
               </tr>
             </thead>
@@ -41,9 +41,21 @@
               foreach ($stok_gerai as $ger) : ?>
                 <tr>
                   <td> <?= $no++ ?></td>
-                  <td><?= $ger['id_gerai'] ?></td>
-                  <td><?= $ger['id_produk'] ?></td>
-                  <td><?= $ger['stok_gerai'] ?></td>
+                  <td>
+                    <?php 
+                      $gerai =querysatudata("SELECT * FROM gerai WHERE id_gerai = ". $ger['id_gerai']."");
+                    ?>
+                    <?= $gerai['nama_gerai'] ?>
+                  </td>
+                  <td>
+                  <?php 
+                      $produk =querysatudata("SELECT * FROM produk WHERE id_produk = ". $ger['id_produk']."");
+                    ?>
+                    <?= $produk['nama_produk'] ?>
+                  </td>
+                  <td>
+                    <?= $ger['stok_gerai'] ?>
+                  </td>
                   <td> <a href="<?= base_url('vapor/index.php?halaman=stok_gerai_edit&id_stok_gerai=' . $ger['id_stok_gerai']) ?>" type="button" class="btn btn-success"> Edit</a>
                     <a href="<?= base_url('pemilik/stok_gerai/hapus/' . $ger['id_stok_gerai']) ?>" type="button" class="btn btn-danger"> Hapus</a>
                   </td>

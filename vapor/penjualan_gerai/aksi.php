@@ -65,6 +65,15 @@
         $query_simpan_keranjang_gerai = mysqli_query($koneksi, $sql_simpan_keranjang_gerai);
         
         if($query_simpan_keranjang_gerai){
+
+            $penjualan_gerai = querysatudata("SELECT * FROM penjualan_gerai WHERE id_penjualan_gerai = ".$_POST['id_penjualan_gerai']."");
+
+            $total = $penjualan_gerai['total_penjualan'] + $harga;
+            //Edit Data pada tabel penjulan gerai
+            $sql_penjualan_gerai = "UPDATE penjualan_gerai SET total_penjualan = " . $total  . " WHERE id_penjualan_gerai = " . $_POST['id_penjualan_gerai'] . " ";
+            $query_update_penjualan_gerai = mysqli_query($koneksi, $sql_penjualan_gerai);
+
+            var_dump($query_update_penjualan_gerai);
             echo "<script>alert('Tambah Berhasil')</script>";
             echo "<meta http-equiv='refresh' content='0; url=http://localhost/201753028/vapor/index.php?halaman=penjualan_gerai_keranjang&id_penjualan_gerai=".$_POST['id_penjualan_gerai']."'>";
         }else{

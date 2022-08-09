@@ -135,6 +135,21 @@ if (isset($_GET['halaman'])) {
             include '../vapor/pengiriman/pengiriman_upload_edit.php';
             break;
 
+        case 'pengguna':
+            include '../template_organisasi/sidebar.php';
+            include '../vapor/pengguna/index.php';
+            break;
+            
+        case 'pengguna_tambah':
+            include '../template_organisasi/sidebar.php';
+            include '../vapor/pengguna/tambah.php';
+            break;
+
+        case 'pengguna_edit':
+            include '../template_organisasi/sidebar.php';
+            include '../vapor/pengguna/edit.php';
+            break;
+
         default: //jika memanggil halaman tidak ada maka..
             include '../template_organisasi/sidebar.php';
             include '../vapor/bank/index.php';

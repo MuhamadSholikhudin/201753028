@@ -37,7 +37,7 @@
 
         if (!empty($lokasi)){
 
-            move_uploaded_file($lokasi, "../../gambar/".$gambar);
+            move_uploaded_file($lokasi, "../../gambar/produk/".$gambar);
             
             $sql_ubah = "UPDATE produk SET
                 nama_produk = '".$_POST['nama_produk']."',
@@ -50,7 +50,7 @@
                 WHERE id_produk =".$_POST['id_produk']."";
             $query_ubah = mysqli_query($koneksi, $sql_ubah);
         }else{
-            move_uploaded_file($lokasi, "../../gambar/".$gambar);
+            move_uploaded_file($lokasi, "../../gambar/produk/".$gambar);
 
             $sql_ubah = "UPDATE produk SET
                 nama_produk = '".$_POST['nama_produk']."',

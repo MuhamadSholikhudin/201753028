@@ -10,7 +10,11 @@ if (isset($_POST['searchkeranjang']) and isset($_POST['id_penjualan_gerai'])) {
 
     $cek = mysqli_num_rows($cari);
 
-    if ($cek > 0) {
+    if($_POST['searchkeranjang'] == ""){
+        $barang_loop = '<tr>nothing</tr>';
+        echo json_encode($barang_loop);
+    }
+    elseif ($cek > 0) {
 
         $barang_loop = '';
         $barang_loop .= '<tr><th>Nama Produk</th><th>Jumlah</th><th>Harga</th><th>Add</th></tr>';
@@ -58,7 +62,6 @@ if (isset($_POST['searchkeranjang']) and isset($_POST['id_penjualan_gerai'])) {
                         </td>
                         
                     </tr>
-                
             ';
         }
 
@@ -101,6 +104,11 @@ elseif (isset($_POST['qty']) and isset($_POST['id_keranjang_gerai'])) {
     }
 
     $total = $jumlah_total;
+
+    //Edit Data pada tabel penjulan gerai
+    $sql_penjualan_gerai = "UPDATE penjualan_gerai SET total_penjualan = " . $total  . " WHERE id_penjualan_gerai = " . $keranjang_gerai['id_penjualan_gerai'] . " ";
+    $query_update_penjualan_gerai = mysqli_query($koneksi, $sql_penjualan_gerai);
+
 
     $data = [$harga, $jumlah_harga, $total];
     // $data = [0, 1, 2];
