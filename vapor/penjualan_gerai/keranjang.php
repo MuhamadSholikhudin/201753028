@@ -103,7 +103,7 @@ if (isset($_GET['id_penjualan_gerai'])) {
                                     <td id="harga<?= $penj['id_keranjang_gerai'] ?>"><?= $penj['jumlah_harga'] ?></td>
                                     <td id="jumlah_harga<?= $penj['id_keranjang_gerai'] ?>"><?= $penj['jumlah_harga'] *  $penj['banyak']  ?></td>
                                     <td>
-                                        <a href="<?= base_url('pemilik/keranjang_gerai/hapus/' .  $penj['id_keranjang_gerai']) ?>"> <i class="fa fa-trash"></i></a>
+                                        <a href="<?= base_url('vapor/penjualan_gerai/aksi.php?id_penjualan_gerai='.$penj['id_penjualan_gerai'].'&id_keranjang_gerai=' .  $penj['id_keranjang_gerai']) ?>"> <i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
