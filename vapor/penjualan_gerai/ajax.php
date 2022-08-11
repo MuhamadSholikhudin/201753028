@@ -91,6 +91,19 @@ elseif (isset($_POST['qty']) and isset($_POST['id_keranjang_gerai'])) {
         $jumlah_harga = $harga * $_POST['qty'];
     }
 
+    //menampung data stok gerai lama
+    $stok_gerai_lama = $keranjang_gerai['stok_gerai'];
+
+    //perhitungan data stok gerai baru
+    $stok_gerai_baru = $stok_gerai_lama + $_POST['qty'] - $keranjang_gerai['banyak'];
+
+    //update stok gerai
+    $sql_stok_gerai = "UPDATE stok_gerai SET stok_gerai = ".$stok_gerai_baru." WHERE id_produk = ".$keranjang_gerai['id_produk']." ";
+
+    $query_update_stok_gerai = mysqli_query($koneksi, $sql_stok_gerai);
+
+
+
     //update data keranjang gerai terbaru
     $sql_keranjang_gerai = "UPDATE keranjang_gerai SET banyak = " . $_POST['qty'] . ", jumlah_harga = " . $jumlah_harga . " WHERE id_keranjang_gerai = " . $_POST['id_keranjang_gerai'] . " ";
 
@@ -100,7 +113,7 @@ elseif (isset($_POST['qty']) and isset($_POST['id_keranjang_gerai'])) {
     $keranjang_gerais = querybanyak("SELECT * FROM keranjang_gerai  WHERE id_penjualan_gerai =" . $keranjang_gerai['id_penjualan_gerai'] . "");
     $jumlah_total = 0;
     foreach ($keranjang_gerais as $penj) {
-        $jumlah_total += $penj['jumlah_harga'] *  $penj['banyak'];
+        $jumlah_total += $penj['jumlah_harga'];
     }
 
     $total = $jumlah_total;
@@ -110,7 +123,7 @@ elseif (isset($_POST['qty']) and isset($_POST['id_keranjang_gerai'])) {
     $query_update_penjualan_gerai = mysqli_query($koneksi, $sql_penjualan_gerai);
 
 
-    $data = [$harga, $jumlah_harga, $total];
+    $data = [$produk['harga_produk'], $jumlah_harga, $total];
     // $data = [0, 1, 2];
     echo json_encode($data);
 }

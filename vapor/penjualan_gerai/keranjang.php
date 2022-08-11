@@ -24,12 +24,9 @@ if (isset($_GET['id_penjualan_gerai'])) {
             <div class="card card-small mb-4">
                 <div class="card-header border-bottom">
                     <h6 class="m-0">
-                        <form action="<?= base_url('vapor/penjualan_gerai/aksi.php') ?>" method="post" enctype="multipart/form-data">
 
                             <input type="text" id="searchkeranjang" class="form-control" name="nomer_penjualan" placeholder="KETIKKAN NAMA BARANG UNTUK MENALPILKAN BARANG" style="width:400px;">
                             <input type="text" id="id_penjualan_gerai" class="form-control d-none" name="" value="<?= $id_penjualan_gerai; ?>" style="width:400px;">
-                        </form>
-                        <!-- <button onclick="keluar();">keluar</button> -->
                     </h6>
                     <h6 class="pt-2 align-content-lg-end">
                         &nbsp;&nbsp;&nbsp;
@@ -100,8 +97,8 @@ if (isset($_GET['id_penjualan_gerai'])) {
                                         ?>
                                         <input type="number" name="qty" class="form-control qty" value="<?= $penj['banyak'] ?>" id="qty<?= $penj['id_keranjang_gerai'] ?>" data-id="<?= $penj['id_keranjang_gerai'] ?>" min="1" max="<?= $max_stok ?>">
                                     </td>
-                                    <td id="harga<?= $penj['id_keranjang_gerai'] ?>"><?= $penj['jumlah_harga'] ?></td>
-                                    <td id="jumlah_harga<?= $penj['id_keranjang_gerai'] ?>"><?= $penj['jumlah_harga'] *  $penj['banyak']  ?></td>
+                                    <td id="harga<?= $penj['id_keranjang_gerai'] ?>"><?= $produk['harga_produk'] ?></td>
+                                    <td id="jumlah_harga<?= $penj['id_keranjang_gerai'] ?>"><?= $penj['jumlah_harga']?></td>
                                     <td>
                                         <a href="<?= base_url('vapor/penjualan_gerai/aksi.php?id_penjualan_gerai='.$penj['id_penjualan_gerai'].'&id_keranjang_gerai=' .  $penj['id_keranjang_gerai']) ?>"> <i class="fa fa-trash"></i></a>
                                     </td>
@@ -109,7 +106,6 @@ if (isset($_GET['id_penjualan_gerai'])) {
                             <?php endforeach; ?>
 
                         </tbody>
-                        <form action="<?= base_url('vapor/penjualan_gerai/aksi.php') ?>" method="POST" enctype="multipart/form-data">
                             <tfoot>
                                 <?php
                                 $jumlah_total = 0;
@@ -121,30 +117,44 @@ if (isset($_GET['id_penjualan_gerai'])) {
                                     <th scope="col" class="border-0"></th>
                                     <th scope="col" class="border-0"></th>
                                     <th scope="col" class="border-0">
-                                        <input type="hidden" name="total_penjualan" value="<?= $jumlah_total ?>" id="total_belanja">
+                                        <input type="hidden" name="total_penjualan" value="<?= $penjualan_gerai['total_penjualan'] ?>" class="total_belanja"  id="total_belanja">
                                     </th>
                                     <th scope="col" class="border-0">
                                     </th>
-                                    <th scope="col" id="total_belanjahtml">
-                                        <?= $jumlah_total ?>
+                                    <th scope="col" class="total_belanja" id="total_belanjahtml">
+                                        <?= $penjualan_gerai['total_penjualan'] ?>
                                     </th>
                                     <th scope="col" class="border-0"> </th>
                                 </tr>
                                 <tr>
-                                    <th scope="col" class="border-0">Tunai</th>
-                                    <th scope="col" class="border-0"><input type="number" name="bayar_tunai" id="bayar"></th>
-                                    <th scope="col" class="border-0">Kembalian</th>
-                                    <th scope="col" class="border-0"><input type="number" name="kembalian" id="kembali"></th>
-                                    <th scope="col" class="border-0">
-                                    </th>
-                                    <th scope="col" class="border-0">
-                                        <input type="number" name="id_pejualan_gerai" value="<?= $_GET['id_penjualan_gerai'] ?>" id="">
-                                        <button class="btn btn-primary" name="btnBAYARPENJUALAN" id="proses_bayar">Bayars</button>
-                                    </th>
+
+                                        <th scope="col" class="border-0">Tunai</th>
+                                        <th scope="col" class="border-0"><input type="number" name="bayar_tunai" id="bayar"></th>
+                                        <th scope="col" class="border-0">Kembalian</th>
+                                        <th scope="col" class="border-0"><input type="number" name="kembalian" id="kembali"></th>
+                                        <th scope="col" class="border-0">
+                                        </th>
+                                        <th scope="col" class="border-0">
+                                            <input type="hidden" name="id_pejualan_gerai" value="<?= $_GET['id_penjualan_gerai'] ?>" id="">
+                                            <button class="btn btn-primary"  onClick="klikinput();" id="butonbayar" disabled>Bayar</button>
+                                            <script>
+                                                function klikinput(){
+                                                    var proses_bayar = document.getElementById("proses_bayar");
+                                                    proses_bayar.click(); 
+                                                    // alert("OKE");
+                                                }
+                                            </script>
+                                        </th>
                                 </tr>
                             </tfoot>
-                        </form>
                     </table>
+                    <form action="<?= base_url('vapor/penjualan_gerai/aksi.php') ?>" class="d-none" method="POST" >
+                        <input type="number" name="bayar_tunai" id="bayarinput">
+                        <input type="number" name="kembalian" class="kembali">
+                        <input type="hidden" name="id_pejualan_gerai" value="<?= $_GET['id_penjualan_gerai'] ?>" id="">
+                        <button class="btn btn-primary" type="submit" name="btnBAYARPENJUALAN" id="proses_bayar">Bayar</button>
+                    </form>
+
                 </div>
             </div>
         </div>

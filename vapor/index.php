@@ -117,6 +117,11 @@ if (isset($_GET['halaman'])) {
             include '../vapor/penjualan_gerai/keranjang.php';
             break;
 
+            // case 'penjualan_gerai_cetak':
+            //     include '../template_organisasi/sidebar.php';
+            //     include '../vapor/penjualan_gerai/cetak.php';
+            //     break;
+
         case 'pembayaran':
             include '../template_organisasi/sidebar.php';
             include '../vapor/pembayaran/index.php';
@@ -139,7 +144,7 @@ if (isset($_GET['halaman'])) {
             include '../template_organisasi/sidebar.php';
             include '../vapor/pengguna/index.php';
             break;
-            
+
         case 'pengguna_tambah':
             include '../template_organisasi/sidebar.php';
             include '../vapor/pengguna/tambah.php';
@@ -150,9 +155,14 @@ if (isset($_GET['halaman'])) {
             include '../vapor/pengguna/edit.php';
             break;
 
+        case 'laporan':
+            include '../template_organisasi/sidebar.php';
+            include '../vapor/laporan/index.php';
+            break;
+
         default: //jika memanggil halaman tidak ada maka..
             include '../template_organisasi/sidebar.php';
-            include '../vapor/bank/index.php';
+            include '../vapor/beranda/index.php';
             break;
     }
 } else { //jika tidak memanggil halaman apapun maka..

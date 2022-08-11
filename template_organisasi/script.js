@@ -62,29 +62,42 @@ $("#bayar").keydown(function () {
   var total = $("#total_belanja").val();
   var kembali = bayar - total;
   $("#kembali").val(kembali);
-  // if(bayar < total){
-  // 	$("#proses_bayar").attr("disabled", true);
-  // }else{
-  // 	$("#proses_bayar").attr("disabled", false);
-  // }
+  if(kembali >= 0){
+    butonbayar.disabled = false;
+  }else{
+    butonbayar.disabled = true;
+  }
 });
 
 $("#bayar").keyup(function () {
   $("#kembali").css("background-color", "white");
   $("#bayar").css("background-color", "white");
   var bayar = $(this).val();
-  var total = $("#total_belanja").val();
+  var total = $(".total_belanja").val();
   var kembali = bayar - total;
   $("#kembali").val(kembali);
+  $("#bayarinput").val(bayar);
+  $(".kembali").val(kembali);
+
+  var butonbayar =  document.getElementById('butonbayar');
+
+  if(kembali >= 0){
+    butonbayar.disabled = false;
+  }else{
+    butonbayar.disabled = true;
+  }
 });
 
 $("#bayar").on("change", function () {
   $("#kembali").css("background-color", "white");
   $("#bayar").css("background-color", "white");
   var bayar = $(this).val();
-  var total = $("#total_belanja").val();
+  var total = $(".total_belanja").val();
   var kembali = bayar - total;
+
   $("#kembali").val(kembali);
+  $("#bayarinput").val(bayar);
+  $(".kembali").val(kembali);
 });
 
 $(".qty").on("change", function () {

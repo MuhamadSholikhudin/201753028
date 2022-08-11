@@ -55,14 +55,24 @@
                       }elseif($penj['status_penjualan_gerai'] == 1){
                         echo "Selesai";
                       }
-
                     ?>
-                    <!-- <?=  $penj['status_penjualan_gerai'] ?> -->
                   </td>
                   <td> 
+                    <?php 
+                      if($penj['status_penjualan_gerai'] == 0){
+                    ?>
                     <a href="<?= base_url('vapor/index.php?halaman=penjualan_gerai_keranjang&id_penjualan_gerai=' .  $penj['id_penjualan_gerai']) ?>" type="button" class="btn btn-success"> Edit</a>
-                    <a href="<?= base_url('vapor/index.php?halaman=penjualan_gerai_hapus&id_penjualan_gerai=' .  $penj['id_penjualan_gerai']) ?>" type="button" class="btn btn-danger"> Hapus</a>
-                    <a href="<?= base_url('vapor/index.php?halaman=penjualan_gerai_cetak&id_penjualan_gerai=' .  $penj['id_penjualan_gerai']) ?>" type="button" class="btn btn-warning"> Cetak</a>
+                    <a href="<?= base_url('vapor/penjualan_gerai/aksi.php?hapus=' .  $penj['id_penjualan_gerai']) ?>" type="button" class="btn btn-danger"> Hapus</a>
+
+                    <?php
+                      }elseif($penj['status_penjualan_gerai'] == 1){
+                    ?>
+                      <a target="_blank" href="<?= base_url('vapor/penjualan_gerai/cetak.php?id_penjualan_gerai=' .  $penj['id_penjualan_gerai']) ?>" class="btn btn-warning"> Cetak</a>
+
+                    <?php
+                      }
+                    ?>
+
                   </td>
                 </tr>
               <?php endforeach; ?>
