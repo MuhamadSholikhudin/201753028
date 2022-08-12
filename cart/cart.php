@@ -41,7 +41,11 @@
 								$dataset[] = $keranjang_user['id_keranjang'];
 								?>
 								<tr>
-									<td><img src="https://source.unsplash.com/100x100/?<?= $data_produk_keranjang['nama_produk'] ?>" alt="#"></td>
+									<td>
+										<!-- <img src="https://source.unsplash.com/100x100/?<?= $data_produk_keranjang['nama_produk'] ?>" alt="#"> -->
+										<img src="<?= base_url('gambar/produk/') ?><?= $data_produk_keranjang['gambar'] ?>" style=" width:100px; height:100px;" alt="<?= $data_produk_keranjang['gambar'] ?>">
+									
+									</td>
 									<td class="product-des" data-title="Description">
 										<p class="product-name"><a href="#"><?= $data_produk_keranjang['nama_produk'] ?></a></p>
 										<p class="product-des"></p>

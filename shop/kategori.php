@@ -48,7 +48,7 @@
                     <div class="product-img">
                         <a href="<?= base_url('shop/index.php?halaman=detail_produk&id_produk=') . $data_produks['id_produk'] ?>">
                             <!-- <img class="default-img" src="https://source.unsplash.com/550x750" alt="#"> -->
-                            <img class="default-img" src="https://source.unsplash.com/550x750/?<?= $data_produks['nama_produk'] ?>" alt="#">
+                            <img class="default-img" src="<?= base_url('gambar/produk/') ?><?= $data_produks['gambar'] ?>" alt="#">
                             <img class="hover-img" src="https://source.unsplash.com/550x750" alt="#">
                         </a>
                         <div class="button-head">

@@ -11,7 +11,8 @@ if (isset($_GET['id_produk'])) {
                     <div class="row">
                         <div class="col-12">
                             <div class="image">
-                                <img src="https://source.unsplash.com/950x460" alt="#">
+                                <!-- <img src="https://source.unsplash.com/950x460" alt="#"> -->
+                                <img src="<?= base_url('gambar/produk/') ?><?= $produk['gambar'] ?>" style=" width:950px; height:460px;" alt="<?= $produk['gambar'] ?>">
                             </div>
                             <div class="blog-detail">
                                 <h2 class="blog-title"><?= $produk['nama_produk'] ?></h2>
@@ -19,7 +20,9 @@ if (isset($_GET['id_produk'])) {
                                     <!-- <span class="author"><a href="#"><i class="fa fa-user"></i>By Admin</a><a href="#"><i class="fa fa-calendar"></i>Dec 24, 2018</a><a href="#"><i class="fa fa-comments"></i>Comment (15)</a></span> -->
                                 </div>
                                 <div class="content">
-                                    <p>What a crazy time. I have five children in colleghigh school graduates.jpge or pursing post graduate studies Each of my children attends college far from home, the closest of which is more than 800 miles away. While I miss being with my older children, I know that a college experience can be the source of great growth and experience can be the source of source of great growth and can provide them with even greater in future.</p>
+                                    <p>
+                                    <?= $produk['deskripsi'] ?>
+                                </p>
                                 </div>
                             </div>
                             <div class="share-social mt-4">
@@ -533,7 +536,7 @@ if (isset($_GET['id_produk'])) {
 
 
                                                                             ?>
-                                                                            <img class="default-img" src="https://source.unsplash.com/550x750/?<?= $hasilproduk['nama_produk'] ?>" alt="#">
+                                                                            <img class="default-img" src="<?= base_url('gambar/produk/') ?><?= $hasilproduk['gambar'] ?>" height="200" alt="<?= $hasilproduk['gambar'] ?>" alt="#">
                                                                             <img class="hover-img" src="https://source.unsplash.com/550x750" alt="#">
                                                                         </a>
                                                                         <div class="button-head">
@@ -591,7 +594,7 @@ if (isset($_GET['id_produk'])) {
                                                         <div class="product-img">
                                                             <a href="<?= base_url('shop/index.php?halaman=detail_produk&id_produk=') . $data_produks['id_produk'] ?>">
                                                                 <!-- <img class="default-img" src="https://source.unsplash.com/550x750" alt="#"> -->
-                                                                <img class="default-img" src="https://source.unsplash.com/550x750/?<?= $data_produks['nama_produk'] ?>" alt="#">
+                                                                <img class="default-img" src="<?= base_url('gambar/produk/') ?><?= $data_produks['gambar'] ?>" alt="#">
                                                                 <img class="hover-img" src="https://source.unsplash.com/550x750" alt="#">
                                                             </a>
                                                             <div class="button-head">
