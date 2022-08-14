@@ -56,7 +56,7 @@
 						<!-- Top Left -->
 						<div class="top-left">
 							<ul class="list-main">
-								<li><i class="ti-headphone-alt"></i> +060 (800) 801-582</li>
+								<li><i class="ti-headphone-alt"></i> 0812 3667 8888</li>
 								<li><i class="ti-email"></i> rajavapor@gmail.com</li>
 							</ul>
 						</div>
@@ -97,7 +97,7 @@
 					<div class="col-lg-2 col-md-2 col-12">
 						<!-- Logo -->
 						<div class="logo">
-							<a href="/201753028/"><img src="<?= $url_assets . "eshop/eshop/" ?>images/rajavapor.jpg" width="40px" style="" alt="logo"></a>
+							<a href="/201753028/"><img src="<?= $url_assets . "eshop/eshop/" ?>images/rajavapor.png" width="60px" style="" alt="logo"></a>
 						</div>
 						<!--/ End Logo -->
 						<!-- Search Form -->
