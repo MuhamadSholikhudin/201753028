@@ -64,12 +64,12 @@ include '../../function.php';
                                 $total_penjualan = 0;
                                 $pembayarans = querybanyak("SELECT * FROM pembayaran WHERE tanggal_pembayaran  BETWEEN '".$_GET['tanggal_awal']."' AND '".$_GET['tanggal_akhir']."'");
                                 foreach($pembayarans as $pembayaran){
-                                    $total_penjualan += $pembayaran['total_penjualan'];
+                                    $total_penjualan += $pembayaran['total_pembayaran'];
                             ?>
                                 <tr>
                                     <td><?= $no++ ?></td>
                                     <td><?= $pembayaran['nomor_pembayaran'] ?></td>
-                                    <td><?= rupiah($pembayaran['tanggal_pembayaran']) ?></td>
+                                    <td><?= $pembayaran['tanggal_pembayaran'] ?></td>
                                     <td>
                                         <?php 
                                             $bank = querysatudata("SELECT * FROM bank WHERE id_bank = ".$pembayaran['id_bank']." ");

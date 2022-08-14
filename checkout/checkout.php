@@ -44,7 +44,7 @@
 							<td>
 								
 								<?php if( $checkout['status_transaksi'] == 1){ ?>
-                                    <a href="<?= base_url('checkout/index.php?halaman=checkout_process&id_checkout=').$checkout['id_checkout'] ?>" target="_blank" class="single-icon badge btn-success text-white"><i class="ti-ticket"></i> <span class="total-count">Lanjutkan checkout</span></a>
+                                    <a href="<?= base_url('checkout/index.php?halaman=checkout_prosess&id_checkout=').$checkout['id_checkout'] ?>" target="_blank" class="single-icon badge btn-success text-white"><i class="ti-ticket"></i> <span class="total-count">Lanjutkan checkout</span></a>
 								<?php }elseif( $checkout['status_transaksi'] == 2){ ?>
 									<?php 
 										$pembayaran = querysatudata("SELECT * FROM pembayaran WHERE id_checkout = ".$checkout['id_checkout']." ");

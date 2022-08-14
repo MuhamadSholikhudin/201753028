@@ -1,3 +1,6 @@
+<?php 
+// error_reporting();
+?>
 <div class="main-content-container container-fluid px-4">
   <!-- Page Header -->
   <div class="page-header row no-gutters py-4">
@@ -54,9 +57,14 @@
                   <td><?= $ger['keterangan'] ?></td>
                   <td>
                     <?php 
-                    $gerai = querysatudata("SELECT gerai.nama_gerai as nama_gerai FROM gerai JOIN karyawan ON gerai.id_gerai =karyawan.id_gerai WHERE karyawan.id_user =" . $ger['id_user'] . " ");
+                      $gerai = querysatudata("SELECT * FROM gerai 
+                      JOIN stok_gerai ON gerai.id_gerai = stok_gerai.id_gerai
+                      WHERE 
+                      stok_gerai.id_gerai = 3
+                      LIMIT 1");
+
+                                          echo $gerai['nama_gerai'];
                     ?>
-                    <?= $gerai['nama_gerai'] ?>
                   </td>
                   <td> 
                     <?php

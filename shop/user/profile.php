@@ -58,26 +58,27 @@
                     Provinsi
                 </div>
                 <div class="col-lg-9">
-                    <?= $profile['nama_lengkap'] ?>
+                    Jawa Tengah
                 </div>
                 <div class="col-lg-3">
                     Kota
                 </div>
                 <div class="col-lg-9">
-                    <?= $profile['email'] ?>
+                    Kudus
                 </div>
 
                 <div class="col-lg-3">
                     Kecamatan
                 </div>
                 <div class="col-lg-9">
-                    <?= $profile['nomer_hp'] ?>
+                    Bae
                 </div>
                 <div class="col-lg-3">
                     Kode Post
                 </div>
 
                 <div class="col-lg-9">
+                    
 
                 </div>
 

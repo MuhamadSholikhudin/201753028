@@ -38,7 +38,7 @@ if (isset($_GET['id_checkout'])) {
 													$keranjang = querysatudata("SELECT * FROM keranjang LEFT JOIN produk ON keranjang.id_produk = keranjang.id_produk WHERE id_keranjang =" . $id_keranjang . " ");
 											?>
 													<tr>
-														<td><img src="https://source.unsplash.com/100x100/?<?= $keranjang['nama_produk'] ?>" alt="#"></td>
+														<td><img src="<?=base_url('gambar/produk/')  ?><?= $keranjang['gambar'] ?>" alt="#"></td>
 														<td class="product-des" data-title="Description">
 															<p class="product-name"><a href="#"><?= $keranjang['nama_produk'] ?></a></p>
 															<p class="product-des"></p>
@@ -204,7 +204,8 @@ if (isset($_GET['id_checkout'])) {
 									foreach ($banks as $bank) {
 									?>
 										<li>
-											<img src="https://source.unsplash.com/50x50/?<?= $bank['nama_bank'] ?>" alt="#">
+											<img src="<?= base_url('gambar/bank/') ?><?= $bank['gambar_logo'] ?>" alt="#" style="width:40px; height:40px;">
+											<!-- <img src="<?= base_url('gambar/bank/') ?><?= $bank['gambar_logo'] ?>" alt="" sizes="10" srcset=""> -->
 											&nbsp;&nbsp;&nbsp;&nbsp;
 											<input name="id_bank" id="<?= $bank['id_bank'] ?>" value="<?= $bank['id_bank'] ?>" type="radio" require>
 											<?= $bank['nama_bank'] ?>
