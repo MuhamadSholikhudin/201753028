@@ -13,17 +13,17 @@
     <div class="col-lg-6">
       <div class="card card-small mb-4">
         <div class="card-header border-bottom">
-          <h6 class="m-0">Form Tambah</h6>
+          <h6 class="m-0">Form Tambah Pean Stok Gerai</h6>
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item p-3">
             <div class="row">
               <div class="col">
                 <form action="<?= base_url('vapor/pesanan_stok_gerai/aksi.php') ?>" enctype="multipart/form-data" method="POST">
-                  <div class="form-row">
+                  <div class="form-row d-none">
                     <div class="form-group col-md-12">
                       <label for="nama_kategori">Nama produk</label>
-                      <input type="text" class="form-control" id="id_user" placeholder="id_user" name="id_user">
+                      <input type="text" class="form-control" id="id_user" placeholder="id_user" name="id_user"  value="<?= $_SESSION['id_user'] ?>">
                       <!-- <input type="text" class="form-control" id="id_produk" placeholder="id_produk" name="id_produk"> -->
                     </div>
                   </div>

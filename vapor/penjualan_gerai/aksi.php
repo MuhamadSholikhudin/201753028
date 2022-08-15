@@ -7,12 +7,13 @@
         $nomor_penjualan = strtotime(date('Y-m-d H:i:s'));
 
         $sql_simpan = "INSERT INTO `penjualan_gerai`
-            ( `nomor_penjualan`, `total_penjualan`, `bayar_tunai`, `kembalian`, `status_penjualan_gerai`) 
+            ( `nomor_penjualan`, `total_penjualan`, `bayar_tunai`, `kembalian`, `tanggal_penjualan_gerai`, `status_penjualan_gerai`) 
                 VALUES (
                 '".$nomor_penjualan."',
                 0,
                 0,
                 0,
+                '".date('Y-m-d')."',
                 'belum bayar')";
 
         $query_simpan = mysqli_query($koneksi, $sql_simpan);

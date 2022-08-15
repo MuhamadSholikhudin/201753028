@@ -21,21 +21,21 @@ if (isset($_GET['id_produk'])) {
                                 </div>
                                 <div class="content">
                                     <p>
-                                    <?= $produk['deskripsi'] ?>
-                                </p>
+                                        <?= $produk['deskripsi'] ?>
+                                    </p>
                                 </div>
                             </div>
                             <div class="share-social mt-4">
                                 <div class="row">
-                                    <?php 
-                                    if(isset($_SESSION['id_user'])){
+                                    <?php
+                                    if (isset($_SESSION['id_user'])) {
 
 
                                     ?>
-                                    <div class="col-12">
-                                        <h5>#Rekomendasi produk untuk anda :</h5>
-                                    </div>
-                                    <?php 
+                                        <div class="col-12">
+                                            <h5>#Rekomendasi produk untuk anda :</h5>
+                                        </div>
+                                    <?php
                                     }
                                     ?>
                                     <div class="col-12 mb-3">
@@ -481,12 +481,15 @@ if (isset($_GET['id_produk'])) {
                                                                 <?php
                                                                 }
 
-                                                                // mengubah array multidimensi menjadi array single
-                                                                $hasil_itemset3single = call_user_func_array('array_merge', $data_tampung_itemset3);
+                                                                if (count($data_tampung_itemset3) > 0) {
 
-                                                                //menghasilkan array unique tidak duplicat
-                                                                $hasil_itemset3unique = array_unique($tampung_itemset3single);
 
+                                                                    // mengubah array multidimensi menjadi array single
+                                                                    $hasil_itemset3single = call_user_func_array('array_merge', $data_tampung_itemset3);
+
+                                                                    //menghasilkan array unique tidak duplicat
+                                                                    $hasil_itemset3unique = array_unique($tampung_itemset3single);
+                                                                }
                                                                 ?>
 
                                                             </table>

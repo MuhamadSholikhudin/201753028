@@ -56,7 +56,9 @@
                     <?php
                     if ($ger['status_pesanan_stok'] == 'tersedia') { ?>
                       <form action="<?= base_url('vapor/pesanan_stok_gerai/aksi.php') ?>" method="post">
-                        <input type="hidden" name="id_pesanan_stok_gerai" value="<?= $ger['id_pesanan_stok_gerai'] ?>" id="">
+                        <input type="hidden" name="id_pesanan_stok_gerai" value="
+                        <?= $ger['id_pesanan_stok_gerai'] ?>
+                        " id="">
                         <button type="submit" name="btnTERIMAPESANAN" class="btn btn-dark">Batal pesan</button>
                       </form>
                     <?php

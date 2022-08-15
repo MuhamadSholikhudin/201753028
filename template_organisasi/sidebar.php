@@ -57,7 +57,7 @@
                 </li>
                 <li class="nav-item">
                   <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=pengguna') ?>">
-                    <i class="material-icons">badge</i>
+                    <i class="material-icons">group</i>
                     <span>Pengguna</span>
                   </a>
                 </li>
@@ -126,7 +126,7 @@
                 </li>
                 <li class="nav-item">
                   <a class="nav-link " href="<?= base_url_halaman('index.php?halaman=pengguna') ?>">
-                    <i class="material-icons">vertical_split</i>
+                    <i class="material-icons">group</i>
                     <span>Pengguna</span>
                   </a>
                 </li>
