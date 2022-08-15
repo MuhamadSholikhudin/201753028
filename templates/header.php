@@ -73,16 +73,12 @@
 										<a href="#">My account <?= $_SESSION['username']; ?> </a>
 									</li>
 									<li><i class="ti-power-off"></i><a href="<?= base_url('logout.php') ?>">Logout</a></li>
-
 								<?php } else { ?>
-
 									<li>
 										<i class="ti-power-off"></i>
 										<a href="<?= base_url('?halaman=login') ?>">Login</a>
 									</li>
-
 								<?php } ?>
-
 							</ul>
 						</div>
 						<!-- End Top Right -->
@@ -105,7 +101,7 @@
 							<div class="top-search"><a href="#0"><i class="ti-search"></i></a></div>
 							<!-- Search Form -->
 							<div class="search-top">
-								<form class="search-form">
+								<form action="<?= base_url('search.php') ?>" method="POST"  class="search-form">
 									<input type="text" placeholder="Cari Produk disini..." name="search">
 									<button value="search" type="submit"><i class="ti-search"></i></button>
 								</form>
@@ -136,7 +132,7 @@
 									<!-- <option>mobile</option>
 									<option>kid’s item</option> -->
 								</select>
-								<form>
+								<form  action="<?= base_url('search.php') ?>" method="POST"  >
 									<input name="search" placeholder="Search Products Here....." type="search">
 									<button class="btnn"><i class="ti-search"></i></button>
 								</form>

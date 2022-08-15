@@ -1,3 +1,8 @@
+<?php 
+if(isset($_GET['search'])){
+    $search = $_GET['search'];
+}
+?>
 <!-- Content -->
 <div class="col-lg-9 col-md-8 col-12">
     <div class="row">
@@ -29,17 +34,18 @@
     </div>
     <div class="row">
 
-        <?php
-
-
-        //Menampilkan data produk banyak dalam arrray
-        $sql_produks = "SELECT * FROM produk";
-        $query_produks = mysqli_query(
-            $koneksi,
-            $sql_produks
-        );
-        $no = 1; //nilai awal nomer
-        while ($data_produks = mysqli_fetch_array($query_produks, MYSQLI_BOTH)) {
+        <?php 
+        
+        
+            //Menampilkan data produk banyak dalam arrray
+            $sql_produks = "SELECT * FROM produk WHERE 
+                nama_produk like ='%".$_GET['search']."%'
+            ";
+            $query_produks = mysqli_query(
+                $koneksi, 
+            $sql_produks);
+            $no=1; //nilai awal nomer
+            while ($data_produks = mysqli_fetch_array($query_produks, MYSQLI_BOTH)){
 
         ?>
 
@@ -53,13 +59,12 @@
                         </a>
                         <div class="button-head">
                             <div class="product-action">
-                                <a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="<?= base_url('shop/index.php?halaman=detail_produk&id_produk=') . $data_produks['id_produk'] ?>">
-                                    <i class=" ti-eye"></i><span>Detail</span>
-                                </a>
-
+                                <a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
+                                <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
+                                <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
                             </div>
                             <div class="product-action-2">
-                                <a title="Add to cart" href="<?= base_url('cart/add_to_cart.php?id=' . $data_produks['id_produk']) ?>">Add to cart</a>
+                                <a title="Add to cart" href="<?= base_url('cart/add_to_cart.php?id='. $data_produks['id_produk']) ?>">Add to cart</a>
                             </div>
                         </div>
                     </div>
@@ -71,10 +76,10 @@
                     </div>
                 </div>
             </div>
-        <?php
-            //auto increment nomer
-            $no++;
-        }
+        <?php 
+                //auto increment nomer
+                $no++;
+            }
         ?>
 
     </div>
