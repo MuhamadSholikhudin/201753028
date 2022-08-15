@@ -29,8 +29,6 @@ if (isset($_GET['id_produk'])) {
                                 <div class="row">
                                     <?php
                                     if (isset($_SESSION['id_user'])) {
-
-
                                     ?>
                                         <div class="col-12">
                                             <h5>#Rekomendasi produk untuk anda :</h5>
@@ -105,14 +103,18 @@ if (isset($_GET['id_produk'])) {
                                                     //count barang
                                                     $count_barang = count($c_barang);
 
-                                                    // nilai minimum 50%
-                                                    $minimum_support = $count_barang * 0.1;
+                                                    // nilai minimum 30%
+                                                    $minimum_support = 0.3;
+                                                    $minimum_jumlah_transaksi = round($count_barang / 2);
+
 
                                                     //membuat variabel transaksi berdasarkan array checkout
                                                     $transaksi = $arraytransaksicheckout;
 
                                                     //menghitung jumlah transaksi
                                                     $count_transaksi = count($transaksi);
+
+                                                    define("ci_transaksi", $count_transaksi);
 
                                                     // function mencari id_produk pada transaksi
                                                     function Search($xvalue, $array)
@@ -130,11 +132,11 @@ if (isset($_GET['id_produk'])) {
                                                     }
                                             ?>
 
-                                                    <div class="col-md-12">
+                                                    <div class="col-md-12 mt-3">
                                                         <table class="table table-bordered">
                                                             <tr>
                                                                 <td>Transaksi</td>
-                                                                <td>Produk</td>
+                                                                <td>Pattern</td>
                                                             </tr>
                                                             <?php
                                                             $no = 1;
@@ -145,7 +147,16 @@ if (isset($_GET['id_produk'])) {
                                                                         <?php
                                                                         $count_index_transaksi = count($transaksi[$row]);
                                                                         for ($col = 0; $col < $count_index_transaksi; $col++) {
-                                                                            echo $transaksi[$row][$col] . ",";
+                                                                            // echo $transaksi[$row][$col] . ",";
+
+                                                                            if($transaksi[$row][$col] == ""){
+
+                                                                            }else{
+                                                                                $produk1 = querysatudata("SELECT * FROM produk WHERE id_produk =" . $transaksi[$row][$col] . " ");
+
+                                                                                echo $produk1['nama_produk']. ", ";
+                                                                            }
+
                                                                         }
                                                                         ?>
                                                                     </td>
@@ -155,11 +166,12 @@ if (isset($_GET['id_produk'])) {
                                                             ?>
                                                         </table>
                                                     </div>
-                                                    <div class="col-md-12">
+                                                    <div class="col-md-12 mt-3">
                                                         <table class="table table-bordered">
                                                             <tr>
                                                                 <th>Pattern Item set 1</th>
-                                                                <th>Super Count</th>
+                                                                <th>Jumlah Transaksi</th>
+                                                                <th>Support </th>
                                                             </tr>
                                                             <?php
                                                             //menampung Item set-1
@@ -171,7 +183,13 @@ if (isset($_GET['id_produk'])) {
                                                                 if ($bar !== "") {
                                                             ?>
                                                                     <tr>
-                                                                        <td><?= $bar ?></td>
+                                                                        <td>
+                                                                            <!-- <?= $bar ?> -->
+                                                                            <?php 
+                                                                                $produk1itemset = querysatudata("SELECT * FROM produk WHERE id_produk =" . $bar . " ");
+                                                                                echo $produk1itemset['nama_produk'];
+                                                                            ?>
+                                                                        </td>
 
                                                                         <?php
 
@@ -184,20 +202,33 @@ if (isset($_GET['id_produk'])) {
                                                                         }
                                                                         ?>
                                                                         <td <?php
-                                                                            if ($supportcount < $minimum_support) {
-                                                                                echo "style='background-color:red;'";
-                                                                            }
+                                                                                $hitung_support1 = ($supportcount / count($barang)) * 100;
+                                                                                if ($supportcount < $minimum_jumlah_transaksi) {
+                                                                                    echo "style='background-color:red;'";
+                                                                                }
                                                                             ?>>
                                                                             <?php
                                                                             echo $supportcount;
                                                                             ?>
 
                                                                         </td>
+                                                                        <td <?php
+
+                                                                            if ($supportcount < $minimum_jumlah_transaksi) {
+                                                                                echo "style='background-color:red;'";
+                                                                            }
+                                                                            ?>
+                                                                            >
+                                                                            <?php 
+                                                                                echo  round($hitung_support1);
+
+                                                                            ?>
+                                                                        </td>
                                                                     </tr>
                                                             <?php
 
 
-                                                                    if ($supportcount >= $minimum_support) {
+                                                                    if ($supportcount >= $minimum_jumlah_transaksi) {
                                                                         //membuat array multidimensi assosiative pattern
                                                                         $pattern = [$bar => $supportcount];
 
@@ -214,9 +245,10 @@ if (isset($_GET['id_produk'])) {
                                                             }
                                                             ?>
                                                         </table>
+                                                        
 
                                                     </div>
-                                                    <div class="col-md-12">
+                                                    <div class="col-md-12 mt-3">
                                                         <?php
                                                         //jika item set 1 memiliki supercount
                                                         if ($cek_jumlah_itemset1_supercount > 0) {
@@ -269,7 +301,8 @@ if (isset($_GET['id_produk'])) {
                                                                 <table class="table border">
                                                                     <tr>
                                                                         <th>Pattern Item set 2</th>
-                                                                        <th>Super Count</th>
+                                                                        <th>Jumlah Transaksi</th>
+                                                                        <th>Support</th>
                                                                     </tr>
                                                                     <?php
                                                                     $tampung_itemset3 = [];
@@ -286,19 +319,42 @@ if (isset($_GET['id_produk'])) {
                                                                             }
                                                                     ?>
                                                                             <tr>
-                                                                                <td><?= $tampung_item_set[$key] . ", " . $tampung_item_set[$v] ?> </td>
+                                                                                <td>
+                                                                                    
+                                                                                <!-- <?= $tampung_item_set[$key] . ", " . $tampung_item_set[$v] ?>  -->
+
+                                                                                <?php 
+                                                                                    $produk2key = querysatudata("SELECT * FROM produk WHERE id_produk =" . $tampung_item_set[$key]. " ");
+                                                                                    echo $produk2key['nama_produk'];
+                                                                                    echo ", ";
+                                                                                    $produk2v = querysatudata("SELECT * FROM produk WHERE id_produk =" . $tampung_item_set[$v]  . " ");
+                                                                                    echo $produk2v['nama_produk'];
+                                                                                ?>
+                                                                            
+                                                                            </td>
                                                                                 <td <?php
-                                                                                    if ($count_tampung_3 < $minimum_support) {
+
+                                                                                $hitung_support2 = ($count_tampung_3 / $count_transaksi) * 100;
+                                                                                
+                                                                                    if ($count_tampung_3 <  $minimum_jumlah_transaksi) {
                                                                                         echo "style='background-color:red;'";
                                                                                     }
-                                                                                    ?>> <?= $count_tampung_3; ?> </td>
+                                                                                    ?>> 
+                                                                                    <?= $count_tampung_3; ?> 
+                                                                                </td>
+                                                                                <td <?php
+                                                                                    if ($count_tampung_3 <  $minimum_jumlah_transaksi) {
+                                                                                        echo "style='background-color:red;'";
+                                                                                    }
+                                                                                    ?>> <?= round($hitung_support2); ?> 
+                                                                                </td>
                                                                             </tr>
 
                                                                     <?php
                                                                             $index_itemset += 1;
 
                                                                             //Eleminasi berdasarkan nminimum support
-                                                                            if ($count_tampung_3 >= $minimum_support) {
+                                                                            if ($count_tampung_3 >=  $minimum_jumlah_transaksi) {
 
                                                                                 $cek_jumlah_itemset2_supercount += 1;
 
@@ -431,11 +487,12 @@ if (isset($_GET['id_produk'])) {
                                                     ?>
 
 
-                                                        <div class="col-xl-12">
+                                                        <div class="col-xl-12 mt-3">
                                                             <table class="table" border="1">
                                                                 <tr>
                                                                     <th>Item set-3</th>
-                                                                    <th>Super Count</th>
+                                                                    <th>Jumlah Transaksi</th>
+                                                                    <th>Suppport</th>
                                                                 </tr>
                                                                 <?php
                                                                 $data_tampung_itemset3 = [];
@@ -449,7 +506,11 @@ if (isset($_GET['id_produk'])) {
                                                                             $dataset = [];
                                                                             for ($col = 0; $col < 3; $col++) {
 
-                                                                                echo $results[$row][$col] . ",";
+                                                                                // echo $results[$row][$col] . ",";
+                                                                                $produk3itemset = querysatudata("SELECT * FROM produk WHERE id_produk =" . $results[$row][$col] . " ");
+                                                                                echo $produk3itemset['nama_produk'];
+                                                                                echo  ", ";
+
 
                                                                                 $dataset[] = $results[$row][$col];
                                                                             }
@@ -471,12 +532,22 @@ if (isset($_GET['id_produk'])) {
                                                                             ?>
                                                                         </td>
                                                                         <td <?php
-                                                                            if ($setdat < $minimum_support) {
+                                                                            if ($setdat < $minimum_jumlah_transaksi) {
                                                                                 echo "style='background-color:red;'";
                                                                             }
                                                                             ?>>
 
-                                                                            <?= $setdat ?></td>
+                                                                            <?= $setdat ?>
+                                                                        </td>
+                                                                        <td <?php
+                                                                            $hitung_support3 = ($setdat / $count_barang) * 100;
+                                                                            if ($setdat < $minimum_jumlah_transaksi) {
+                                                                                echo "style='background-color:red;'";
+                                                                            }
+                                                                            ?>>
+
+                                                                            <?= $setdat ?>
+                                                                        </td>
                                                                     </tr>
                                                                 <?php
                                                                 }

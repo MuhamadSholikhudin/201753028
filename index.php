@@ -55,6 +55,10 @@ include 'templates/header.php';
                         include "checkout/index.php";
                         break;
 
+                    // case 'search':
+                    //     include "search.php";
+                    //     break;
+
                     default: //jika memanggil halaman tidak ada maka..
                         include "home.php";
                         break;

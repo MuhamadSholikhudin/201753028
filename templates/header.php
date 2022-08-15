@@ -136,7 +136,7 @@
 									<!-- <option>mobile</option>
 									<option>kid’s item</option> -->
 								</select>
-								<form>
+								<form action="<?= base_url('search.php') ?>" method="GET">
 									<input name="search" placeholder="Search Products Here....." type="search">
 									<button class="btnn"><i class="ti-search"></i></button>
 								</form>
