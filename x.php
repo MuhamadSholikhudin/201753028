@@ -13,21 +13,21 @@
     <?php
 
     /* 
-    $mysqli = new mysqli("localhost","root","","201753028");
+        $mysqli = new mysqli("localhost","root","","201753028");
 
-    $query = 'SELECT * FROM produk';
+        $query = 'SELECT * FROM produk';
 
-    // Using iterators
-    $result = $mysqli->query($query);
-    foreach ($result as $row) {
-        printf("%s (%s)\n", $row["nama_produk"], $row["harga_produk"]);
-    }
-*/
+        // Using iterators
+        $result = $mysqli->query($query);
+        foreach ($result as $row) {
+            printf("%s (%s)\n", $row["nama_produk"], $row["harga_produk"]);
+        }
+    */
 
     /* 
         Terdapat ada 6 Transaksi
         Dengan jenis barang berjumlah 5
-*/
+    */
 
     $barang0 = '';
     $barang1 = 'onion';
@@ -71,22 +71,22 @@
     }
 
     /*
-    Tentukan minim nilai support
-    Contoh
-    Minim nilai support 50%
-    Minim support = 3 (mengambil item sejumlah)
+        Tentukan minim nilai support
+        Contoh
+        Minim nilai support 50%
+        Minim support = 3 (mengambil item sejumlah)
 
-    - Item set-1	
-    Pattern	Support count
-    onion	4
-    potato	5
-    burger	4
-    milk	4
-    tea	2
+        - Item set-1	
+        Pattern	Support count
+        onion	4
+        potato	5
+        burger	4
+        milk	4
+        tea	2
 
-    Menentukan peluang item sering muncul
-    Item Tea dieliminasi karena tidak memenuhi nilai minimal support 3
-*/
+        Menentukan peluang item sering muncul
+        Item Tea dieliminasi karena tidak memenuhi nilai minimal support 3
+    */
 
     // PHP function to illustrate the use of array_search()
     function Search($xvalue, $array)
@@ -494,8 +494,6 @@
                 echo "</ul>";
             }
 
-
-
             function searchitemset3($value1, $value2, $array)
             {
                 $search1 = (array_search($value1, $array));
@@ -582,10 +580,10 @@
                             $setdat = s3($dataset, $transaksi);
 
                             if ($setdat > $bs)
-                     {
-                        $bs = $setdat;
-                        $bc = array_diff_key($dataset);
-                    }
+                            {
+                                $bs = $setdat;
+                                $bc = array_diff_key($dataset);
+                            }
 
                             // array_push
                             ?>
@@ -605,17 +603,17 @@
             <?php
 
 
-                var_dump($bs);
-                var_dump($bc);
-    foreach($bc as $bf){
-                    echo $bf;
-                }
+            var_dump($bs);
+            var_dump($bc);
+            foreach($bc as $bf){
+                echo $bf;
+            }
 
             $trxs = $transaksi;
             $count_trxs = count($transaksi);
             $s3 = ["onion", "potato", "burger"];
             // echo s3($s3, $trxs);
-echo "<br>";
+            echo "<br>";
             $arr= array(
                 array(110, 20, 52),
                 array(1105, 56, 89, 96),

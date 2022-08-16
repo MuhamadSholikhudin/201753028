@@ -3,7 +3,7 @@
 
 <head>
 	<!-- Meta Tag -->
-	<meta charset="utf-8">
+	<meta charset="utf-8"> 
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name='copyright' content=''>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -132,7 +132,8 @@
 									<!-- <option>mobile</option>
 									<option>kid’s item</option> -->
 								</select>
-								<form  action="<?= base_url('search.php') ?>" method="POST"  >
+
+								<form action="<?= base_url('search.php') ?>" method="GET">
 									<input name="search" placeholder="Search Products Here....." type="search">
 									<button class="btnn"><i class="ti-search"></i></button>
 								</form>
