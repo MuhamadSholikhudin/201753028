@@ -149,12 +149,11 @@ if (isset($_GET['id_produk'])) {
                                                                         for ($col = 0; $col < $count_index_transaksi; $col++) {
                                                                             // echo $transaksi[$row][$col] . ",";
 
-                                                                            if($transaksi[$row][$col] == ""){
-
-                                                                            }else{
+                                                                            if ($transaksi[$row][$col] == "") {
+                                                                            } else {
                                                                                 $produk1 = querysatudata("SELECT * FROM produk WHERE id_produk =" . $transaksi[$row][$col] . " ");
 
-                                                                                echo $produk1['nama_produk']. ", ";
+                                                                                echo $produk1['nama_produk'] . ", ";
                                                                             }
                                                                         }
                                                                         ?>
@@ -184,9 +183,9 @@ if (isset($_GET['id_produk'])) {
                                                                     <tr>
                                                                         <td>
                                                                             <!-- <?= $bar ?> -->
-                                                                            <?php 
-                                                                                $produk1itemset = querysatudata("SELECT * FROM produk WHERE id_produk =" . $bar . " ");
-                                                                                echo $produk1itemset['nama_produk'];
+                                                                            <?php
+                                                                            $produk1itemset = querysatudata("SELECT * FROM produk WHERE id_produk =" . $bar . " ");
+                                                                            echo $produk1itemset['nama_produk'];
                                                                             ?>
                                                                         </td>
 
@@ -201,10 +200,10 @@ if (isset($_GET['id_produk'])) {
                                                                         }
                                                                         ?>
                                                                         <td <?php
-                                                                                $hitung_support1 = ($supportcount / count($barang)) * 100;
-                                                                                if ($supportcount < $minimum_jumlah_transaksi) {
-                                                                                    echo "style='background-color:red;'";
-                                                                                }
+                                                                            $hitung_support1 = ($supportcount / count($barang)) * 100;
+                                                                            if ($supportcount < $minimum_jumlah_transaksi) {
+                                                                                echo "style='background-color:red;'";
+                                                                            }
                                                                             ?>>
                                                                             <?php
                                                                             echo $supportcount;
@@ -216,10 +215,9 @@ if (isset($_GET['id_produk'])) {
                                                                             if ($supportcount < $minimum_jumlah_transaksi) {
                                                                                 echo "style='background-color:red;'";
                                                                             }
-                                                                            ?>
-                                                                            >
-                                                                            <?php 
-                                                                                echo  round($hitung_support1);
+                                                                            ?>>
+                                                                            <?php
+                                                                            echo  round($hitung_support1) . "%";
 
                                                                             ?>
                                                                         </td>
@@ -244,7 +242,7 @@ if (isset($_GET['id_produk'])) {
                                                             }
                                                             ?>
                                                         </table>
-                                                        
+
 
                                                     </div>
                                                     <div class="col-md-12 mt-3">
@@ -321,34 +319,33 @@ if (isset($_GET['id_produk'])) {
                                                                     ?>
                                                                             <tr>
                                                                                 <td>
-                                                                                    
-                                                                                <!-- <?= $tampung_item_set[$key] . ", " . $tampung_item_set[$v] ?>  -->
 
-                                                                                <?php 
-                                                                                    $produk2key = querysatudata("SELECT * FROM produk WHERE id_produk =" . $tampung_item_set[$key]. " ");
+                                                                                    <!-- <?= $tampung_item_set[$key] . ", " . $tampung_item_set[$v] ?>  -->
+
+                                                                                    <?php
+                                                                                    $produk2key = querysatudata("SELECT * FROM produk WHERE id_produk =" . $tampung_item_set[$key] . " ");
                                                                                     echo $produk2key['nama_produk'];
                                                                                     echo ", ";
                                                                                     $produk2v = querysatudata("SELECT * FROM produk WHERE id_produk =" . $tampung_item_set[$v]  . " ");
                                                                                     echo $produk2v['nama_produk'];
-                                                                                ?>
-                                                                            
-                                                                            </td>
+                                                                                    ?>
+
+                                                                                </td>
                                                                                 <td <?php
 
                                                                                     $hitung_support2 = ($count_tampung_3 / $count_transaksi) * 100;
-                                                                                
+
                                                                                     if ($count_tampung_3 <  $minimum_jumlah_transaksi) {
                                                                                         echo "style='background-color:red;'";
                                                                                     }
-                                                                                    ?>
-                                                                                    > 
-                                                                                    <?= $count_tampung_3; ?> 
+                                                                                    ?>>
+                                                                                    <?= $count_tampung_3; ?>
                                                                                 </td>
                                                                                 <td <?php
                                                                                     if ($count_tampung_3 <  $minimum_jumlah_transaksi) {
                                                                                         echo "style='background-color:red;'";
                                                                                     }
-                                                                                    ?>> <?= round($hitung_support2); ?> 
+                                                                                    ?>> <?= round($hitung_support2) . "%"; ?>
                                                                                 </td>
                                                                             </tr>
 
@@ -368,7 +365,6 @@ if (isset($_GET['id_produk'])) {
                                                                                 $keyv = ["$tampung_item_set[$key]" => $tampung_item_set[$v]];
                                                                                 array_push($tampung_confident,  $keyv);
                                                                             }
-
                                                                         }
                                                                     }
                                                                     ?>
@@ -381,83 +377,101 @@ if (isset($_GET['id_produk'])) {
                                                         }
                                                         ?>
                                                     </div>
-                                                    <div class="col-md-12">
-                                                        <?php
-                                                            var_dump($tampung_confident); 
-                                                            echo "<br>";
+
+
+                                                    <?php
+                                                    if (count($tampung_confident) > 0) {
+                                                    ?>
+                                                        <div class="col-xl-12 mt-3 mb-3">
+                                                            <?php
+                                                            // echo count($tampung_confident); 
+                                                            // echo "<br>";
+                                                            // var_dump($tampung_confident); 
+                                                            // echo "<br>";
 
                                                             $keys = array_keys($tampung_confident);
-                                                            for($i = 0; $i < count($tampung_confident); $i++) {
-                                                                echo $keys[$i] . " =>";
-                                                                foreach($tampung_confident[$keys[$i]] as $key => $value) {
-                                                                    echo $key . " : " . $value . "<br>";
-                                                                }
-                                                            }
-                                                           
-                                                        ?>
-                                                        <h3>Confidence</h3>
-                                                        <div>Asosiasi 2 item dari terpilih</div>
+                                                            // for($i = 0; $i < count($tampung_confident); $i++) {
+                                                            //     echo $keys[$i] . " =>";
+                                                            //     foreach($tampung_confident[$keys[$i]] as $key => $value) {
+                                                            //         echo $key . " : " . $value . "<br>";
+                                                            //     }
+                                                            // }
 
-                                                        <table>
-                                                            <tr>
-                                                                <td>Jika membeli</td>
-                                                                <td>key</td>
-                                                                <td>Maka, beli</td>
-                                                                <td>value</td>
-                                                                <td>key value</td>
-                                                                <td>key</td>
-                                                                <td>confiden</td>
-                                                            </tr>
+                                                            ?>
+                                                            <h3>Confidence</h3>
+                                                            <div>Asosiasi 2 item dari terpilih</div>
 
-                                                            <?php 
-                                                            
-                                                            for($i = 0; $i < count($tampung_confident); $i++) {?>
-                                                           
-                                                            <tr>
-                                                                <?php  
-                                                                    foreach($tampung_confident[$keys[$i]] as $key => $value) {
-                                                                ?>
-                                                                    <td>Jika membeli</td>
-                                                                    <td><?= $key  ?></td>
-                                                                    <td>Maka, beli</td>
-                                                                    <td><?= $value ?></td>
-                                                                    <td>
-                                                                        <?php 
-                                                                        $count_valAB = 0;
-                                                                         for ($row = 0; $row < $count_transaksi; $row++) {
-                                                                            $count_valAB += searchitemset2($key, $value, $transaksi[$row]);
+                                                            <table class="table">
+                                                                <tr>
+                                                                    <td></td>
+                                                                    <td>A</td>
+                                                                    <td></td>
+                                                                    <td>B</td>
+                                                                    <td>A&B</td>
+                                                                    <td>A</td>
+                                                                    <td>confiden</td>
+                                                                </tr>
+
+                                                                <?php
+
+                                                                for ($i = 0; $i < count($tampung_confident); $i++) { ?>
+
+                                                                    <tr>
+                                                                        <?php
+                                                                        foreach ($tampung_confident[$keys[$i]] as $key => $value) {
+                                                                        ?>
+                                                                            <td>Jika membeli</td>
+                                                                            <td>
+                                                                                <?php
+                                                                                $confidenmembeli2 = querysatudata("SELECT * FROM produk WHERE id_produk =" . $key . " ");
+                                                                                ?>
+                                                                                <!-- <?= $key  ?> -->
+                                                                                <?= $confidenmembeli2['nama_produk'] ?>
+                                                                            </td>
+                                                                            <td>Maka, beli</td>
+                                                                            <td>
+                                                                                <!-- <?= $value ?> -->
+                                                                                <?php
+                                                                                $confidenmaka2 = querysatudata("SELECT * FROM produk WHERE id_produk =" . $value . " ");
+                                                                                ?>
+                                                                                <?= $confidenmaka2['nama_produk'] ?>
+                                                                            </td>
+                                                                            <td>
+                                                                                <?php
+                                                                                $count_valAB = 0;
+                                                                                for ($row = 0; $row < $count_transaksi; $row++) {
+                                                                                    $count_valAB += searchitemset2($key, $value, $transaksi[$row]);
+                                                                                }
+                                                                                echo $count_valAB;
+
+                                                                                ?>
+                                                                            </td>
+                                                                            <td>
+                                                                                <?php
+                                                                                $count_valA = 0;
+                                                                                for ($row = 0; $row < $count_transaksi; $row++) {
+                                                                                    // $count_c += searchitemset2($key, $value, $transaksi[$row]);
+                                                                                    $count_valA += Search($value, $transaksi[$row]);
+                                                                                }
+                                                                                echo $count_valA;
+                                                                                ?>
+                                                                            </td>
+                                                                            <td>
+                                                                                <?php
+                                                                                echo ($count_valAB / $count_valA);
+                                                                                ?>
+                                                                            </td>
+                                                                        <?php
                                                                         }
-                                                                         echo $count_valAB;
-                                                                        
-                                                                        ?> 
-                                                                    </td>
-                                                                    <td>
-                                                                        <?php 
-                                                                            $count_valA = 0;
-                                                                            for ($row = 0; $row < $count_transaksi; $row++) {
-                                                                                // $count_c += searchitemset2($key, $value, $transaksi[$row]);
-                                                                                $count_valA += Search($value, $transaksi[$row]);
-                                                                            }
-                                                                            echo $count_valA;
-                                                                        
                                                                         ?>
-                                                                    </td>
-                                                                    <td>
-                                                                        <?php  
-                                                                            echo ($count_valAB / $count_valA);
+                                                                    </tr>
+                                                                <?php } ?>
+                                                            </table>
+                                                        </div>
+                                                    <?php
+                                                    }
+                                                    ?>
 
-                                                                        ?>
-                                                                    </td>
-                                                                <?php 
-                                                                    }
-                                                                ?>
-                                                            </tr>
-                                                            <?php } ?>
-                                                        </table>
-
-
-
-                                                    </div>
                                                     <?php
                                                     if ($cek_jumlah_itemset2_supercount > 0) {
 
@@ -596,8 +610,9 @@ if (isset($_GET['id_produk'])) {
                                                                                 $dataset[] = $results[$row][$col];
                                                                             }
                                                                             $setdat = s3($dataset, $transaksi);
+                                                                            // var_dump($dataset);
 
-                                                                            if ($setdat >= $minimum_support) {
+                                                                            if ($setdat >= $minimum_jumlah_transaksi) {
 
                                                                                 //tambahkan cek jumlah item set 3
                                                                                 $cek_jumlah_itemset3_supercount += 1;
@@ -617,7 +632,6 @@ if (isset($_GET['id_produk'])) {
                                                                                 echo "style='background-color:red;'";
                                                                             }
                                                                             ?>>
-
                                                                             <?= $setdat ?>
                                                                         </td>
                                                                         <td <?php
@@ -627,26 +641,140 @@ if (isset($_GET['id_produk'])) {
                                                                             }
                                                                             ?>>
 
-                                                                            <?= $setdat ?>
+                                                                            <?php
+                                                                            echo   round(($setdat  / $count_transaksi) * 100) ."%";
+
+                                                                            ?>
+
+                                                                            <!-- <?= $setdat ?> -->
                                                                         </td>
                                                                     </tr>
                                                                 <?php
                                                                 }
-
-                                                                if (count($data_tampung_itemset3) > 0) {
-
-
-                                                                    // mengubah array multidimensi menjadi array single
-                                                                    $hasil_itemset3single = call_user_func_array('array_merge', $data_tampung_itemset3);
-
-                                                                    //menghasilkan array unique tidak duplicat
-                                                                    $hasil_itemset3unique = array_unique($tampung_itemset3single);
-                                                                }
                                                                 ?>
+
 
                                                             </table>
 
                                                         </div>
+
+                                                        <?php
+                                                        if (count($data_tampung_itemset3) > 0) {
+
+                                                            // var_dump($data_tampung_itemset3);
+                                                        ?>
+                                                        <div class="col-xl-12 mt-3">
+
+
+                                                            <h3>Confidence</h3>
+                                                            <p>Asosiasi 3 item dari terpilih</p>
+                                                            <table class="table mt-3 mb-3">
+                                                                <tr>
+                                                                    <td></td>
+                                                                    <td>A</td>
+                                                                    <td></td>
+                                                                    <td>B</td>
+                                                                    <td>A&B</td>
+                                                                    <td>A</td>
+                                                                    <td>confiden</td>
+                                                                </tr>
+
+                                                                <?php
+
+                                                                        function searchab3($array, $transaksi)
+                                                                        {
+                                                                            $count_trxs = count($transaksi);
+
+                                                                            $ino = 0;
+                                                                            for ($row = 0; $row < $count_trxs; $row++) {
+
+                                                                                $search1 = (array_search(current($array), $transaksi[$row]));
+                                                                                $search2 = (array_search(end($array), $transaksi[$row]));
+
+                                                                                if ($search1 == false and $search2 == false ) {
+                                                                                    $ino += 0;
+                                                                                } elseif ($search1 == true and $search2 == false ) {
+                                                                                    $ino += 0;
+                                                                                }  elseif ($search1 == false and $search2 == true ) {
+                                                                                    $ino += 0;
+                                                                                }  elseif ($search1 == true and $search2 == true ) {
+                                                                                    $ino += 1;
+                                                                                }
+                                                                            }
+                                                                            return  $ino;
+                                                                        }
+
+
+                                                                foreach ($data_tampung_itemset3 as $tampil_itemset3) {
+                                                                    foreach($tampil_itemset3 as $tampil_3){
+                                                                    ?>
+                                                                        <tr>
+                                                                            <td>Jika Membeli</td>
+
+                                                                            <td>
+                                                                                <?php 
+                                                                                    $unset_arr = $tampil_itemset3;
+                                                                                    $key = array_search($tampil_3, $unset_arr);
+                                                                                    unset($unset_arr[$key]);
+                                                                                    // var_dump($unset_arr);
+                                                                                    
+
+                                                                                    foreach($unset_arr as $unar){
+
+                                                                                        $produk3un = querysatudata("SELECT * FROM produk WHERE id_produk =" . $unar . " ");
+                                                                                        echo $produk3un['nama_produk'].", ";
+                                                                                    }
+
+                                                                                ?>
+                                                                            </td>
+                                                                            <td>Maka beli</td>
+                                                                            <td>
+                                                                                <!-- <?= $tampil_3 ?> -->
+
+                                                                                <?php 
+                                                                                    $produk3A = querysatudata("SELECT * FROM produk WHERE id_produk =" . $tampil_3 . " ");
+                                                                                    echo $produk3A['nama_produk'];
+                                                                            
+                                                                                ?>
+                                                                            </td>
+                                                                            <td>
+                                                                                <?php 
+                                                                                    $setdat33 = s3($tampil_itemset3, $transaksi);
+                                                                                    echo $setdat33
+                                                                                    // var_dump($unset_arr);
+                                                                                   
+                                                                                  
+                                                                                ?>
+                                                                            </td>
+                                                                            <td>
+                                                                                
+                                                                                <?php 
+                                                                                    echo $count3_A =  searchab3($unset_arr, $transaksi);
+                                                                                ?>
+                                                                            </td>
+                                                                            <td>
+                                                                                <?php 
+                                                                                echo $setdat33 / $count3_A;
+                                                                                ?>
+                                                                            </td>
+                                                                        </tr>
+                                                                    <?php
+                                                                    }
+                                                                }
+                                                                ?>
+                                                            </table>
+                                                        </div>
+
+
+                                                        <?php
+
+                                                            // mengubah array multidimensi menjadi array single
+                                                            $hasil_itemset3single = call_user_func_array('array_merge', $data_tampung_itemset3);
+
+                                                            //menghasilkan array unique tidak duplicat
+                                                            $hasil_itemset3unique = array_unique($tampung_itemset3single);
+                                                        }
+                                                        ?>
                                                         <?php
                                                     } else {
                                                         // echo "Tidak Ada Isinya";
@@ -654,7 +782,6 @@ if (isset($_GET['id_produk'])) {
 
 
                                                     /// Logika menampilkan hasil 
-
                                                     // Jika itemset satu ada maka
                                                     if ($cek_jumlah_itemset1_supercount > 0) {
 
@@ -677,8 +804,6 @@ if (isset($_GET['id_produk'])) {
                                                     } else {
                                                         $rekomendasi = $c_barang;
                                                     }
-
-
                                                     if ($rekomendasi == null) {
                                                     } else {
                                                         foreach ($rekomendasi as $id_produk) { ?>
@@ -719,13 +844,8 @@ if (isset($_GET['id_produk'])) {
                                                 }
                                                 ?>
 
-
-
-
-
                                             <?php
                                             }
-
                                             ?>
 
 
