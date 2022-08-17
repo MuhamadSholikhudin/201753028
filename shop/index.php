@@ -33,6 +33,10 @@ include '../templates/header.php';
                         include "detail_produk.php";
                         break;
 
+                    case 'search':
+                        include "search.php";
+                        break;
+
                     default: //jika memanggil halaman tidak ada maka..
                         include "home.php";
                         break;
