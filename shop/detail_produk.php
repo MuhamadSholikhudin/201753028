@@ -370,24 +370,24 @@ if (isset($_GET['id_produk'])) {
                                                                     ?>
                                                                 </table>
                                                     </div>
-
+                                                    <!-- Batas Item set 1 -->
                                                     <?php
-                                                    if (count($tampung_confident) > 0) {
+                                                                if (count($tampung_confident) > 0) {
                                                     ?>
                                                         <div class="col-xl-12 mt-3 mb-3">
                                                             <?php
-                                                            // echo count($tampung_confident); 
-                                                            // echo "<br>";
-                                                            // var_dump($tampung_confident); 
-                                                            // echo "<br>";
+                                                                    // echo count($tampung_confident); 
+                                                                    // echo "<br>";
+                                                                    // var_dump($tampung_confident); 
+                                                                    // echo "<br>";
 
-                                                            $keys = array_keys($tampung_confident);
-                                                            // for($i = 0; $i < count($tampung_confident); $i++) {
-                                                            //     echo $keys[$i] . " =>";
-                                                            //     foreach($tampung_confident[$keys[$i]] as $key => $value) {
-                                                            //         echo $key . " : " . $value . "<br>";
-                                                            //     }
-                                                            // }
+                                                                    $keys = array_keys($tampung_confident);
+                                                                    // for($i = 0; $i < count($tampung_confident); $i++) {
+                                                                    //     echo $keys[$i] . " =>";
+                                                                    //     foreach($tampung_confident[$keys[$i]] as $key => $value) {
+                                                                    //         echo $key . " : " . $value . "<br>";
+                                                                    //     }
+                                                                    // }
 
                                                             ?>
                                                             <h3>Confidence</h3>
@@ -406,7 +406,7 @@ if (isset($_GET['id_produk'])) {
 
                                                                 <?php
 
-                                                                for ($i = 0; $i < count($tampung_confident); $i++) { ?>
+                                                                    for ($i = 0; $i < count($tampung_confident); $i++) { ?>
 
                                                                     <tr>
                                                                         <?php
@@ -461,402 +461,396 @@ if (isset($_GET['id_produk'])) {
                                                             </table>
                                                         </div>
 
-
-                                                      <!-- Nilai hitung item sem 2 ada atau tidak -->
-                                                      <?php
-                                                    if ($cek_jumlah_itemset2_supercount > 0) {
-
-                                                        // mengubah array multidimensi menjadi array single
-                                                        $tampung_itemset3single = call_user_func_array('array_merge', $tampung_itemset3);
-
-                                                        //menghasilkan array unique tidak duplicat
-                                                        $tampung_itemset3unique = array_unique($tampung_itemset3single);
-
-                                                        //membuat variabel 
-                                                        $slice_tampung_item_set = $tampung_item_set;
-
-                                                        //menghihitung jumlah array item set
-                                                        $count_item_set = count($tampung_item_set);
-
-                                                        function computePermutations($array)
-                                                        {
-                                                            $result = [];
-
-                                                            $recurse = function ($array, $start_i = 0) use (&$result, &$recurse) {
-                                                                if ($start_i === count($array) - 1) {
-                                                                    array_push($result, $array);
-                                                                }
-
-                                                                for ($i = $start_i; $i < count($array); $i++) {
-                                                                    //Swap array value at $i and $start_i
-                                                                    $t = $array[$i];
-                                                                    $array[$i] = $array[$start_i];
-                                                                    $array[$start_i] = $t;
-
-                                                                    //Recurse
-                                                                    $recurse($array, $start_i + 1);
-
-                                                                    //Restore old order
-                                                                    $t = $array[$i];
-                                                                    $array[$i] = $array[$start_i];
-                                                                    $array[$start_i] = $t;
-                                                                }
-                                                            };
-
-                                                            $recurse($array);
-
-                                                            return $result;
-                                                        }
-
-                                                        //eksekusi permutasi data berdasarkan id_produk yang unique
-                                                        $results = computePermutations($slice_tampung_item_set);
-
-                                                        //menghitung jumlah array unique
-                                                        $count_result = count($slice_tampung_item_set);
-
-                                                        function searchitemset3($value1, $value2, $array)
-                                                        {
-                                                            $search1 = (array_search($value1, $array));
-                                                            $search2 = (array_search($value2, $array));
-
-                                                            if ($search1 == false and $search2 == false) {
-                                                                $val = 0;
-                                                            } elseif ($search1 == false and $search2 == true) {
-                                                                $val = 0;
-                                                            } elseif ($search1 == true and $search2 == false) {
-                                                                $val = 0;
-                                                            } elseif ($search1 == true and $search2 == true) {
-                                                                $val = 1;
-                                                            } else {
-                                                                $val = 1;
-                                                            }
-                                                            return  $val;
-                                                        }
-
-                                                        function arrayitemset3($arraysearch, $arraytransaksi)
-                                                        {
-                                                            searchitemset3($arraysearch[0], $arraysearch[1], $arraysearch[2], $arraytransaksi);
-                                                        }
-
-
-                                                        function s3($array, $transaksi)
-                                                        {
-                                                            $count_trxs = count($transaksi);
-
-                                                            $ino = 0;
-                                                            for ($row = 0; $row < $count_trxs; $row++) {
-
-                                                                $search1 = (array_search($array[0], $transaksi[$row]));
-                                                                $search2 = (array_search($array[1], $transaksi[$row]));
-                                                                $search3 = (array_search($array[2], $transaksi[$row]));
-
-                                                                if ($search1 == false and $search2 == false and $search3 == false) {
-                                                                    $ino += 0;
-                                                                } elseif ($search1 == true and $search2 == false and $search3 == false) {
-                                                                    $ino += 0;
-                                                                } elseif ($search1 == true and $search2 == true and $search3 == false) {
-                                                                    $ino += 0;
-                                                                } elseif ($search1 == true and $search2 == false and $search3 == true) {
-                                                                    $ino += 0;
-                                                                } elseif ($search1 == false and $search2 == true and $search3 == false) {
-                                                                    $ino += 0;
-                                                                } elseif ($search1 == false and $search2 == true and $search3 == true) {
-                                                                    $ino += 0;
-                                                                } elseif ($search1 == false and $search2 == false and $search3 == true) {
-                                                                    $ino += 0;
-                                                                } elseif ($search1 == true and $search2 == true and $search3 == true) {
-                                                                    $ino += 1;
-                                                                }
-                                                            }
-                                                            return  $ino;
-                                                        }
-                                                    ?>
-
-
-                                                        <div class="col-xl-12 mt-3">
-                                                            <table class="table" border="1">
-                                                                <tr>
-                                                                    <th>Item set-3</th>
-                                                                    <th>Jumlah Transaksi</th>
-                                                                    <th>Suppport</th>
-                                                                </tr>
-                                                                <?php
-                                                                $data_tampung_itemset3 = [];
-                                                                $bs = 0;
-                                                                $cek_jumlah_itemset3_supercount = 0;
-                                                                for ($row = 0; $row <  $count_result; $row++) {
-                                                                ?>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <?php
-                                                                            $dataset = [];
-                                                                            for ($col = 0; $col < 3; $col++) {
-
-                                                                                // echo $results[$row][$col] . ",";
-                                                                                $produk3itemset = querysatudata("SELECT * FROM produk WHERE id_produk =" . $results[$row][$col] . " ");
-                                                                                echo $produk3itemset['nama_produk'];
-                                                                                echo  ", ";
-
-
-                                                                                $dataset[] = $results[$row][$col];
-                                                                            }
-                                                                            $setdat = s3($dataset, $transaksi);
-                                                                            // var_dump($dataset);
-
-                                                                            if ($setdat >= $minimum_jumlah_transaksi) {
-
-                                                                                //tambahkan cek jumlah item set 3
-                                                                                $cek_jumlah_itemset3_supercount += 1;
-
-                                                                                array_push($data_tampung_itemset3, $dataset);
-                                                                            }
-
-                                                                            if ($setdat > $bs) {
-                                                                                $bs = $setdat;
-                                                                                $bc = array_diff_key($dataset);
-                                                                            }
-
-                                                                            ?>
-                                                                        </td>
-                                                                        <td <?php
-                                                                            if ($setdat < $minimum_jumlah_transaksi) {
-                                                                                echo "style='background-color:red;'";
-                                                                            }
-                                                                            ?>>
-                                                                            <?= $setdat ?>
-                                                                        </td>
-                                                                        <td <?php
-                                                                            $hitung_support3 = ($setdat / $count_barang) * 100;
-                                                                            if ($setdat < $minimum_jumlah_transaksi) {
-                                                                                echo "style='background-color:red;'";
-                                                                            }
-                                                                            ?>>
-
-                                                                            <?php
-                                                                            echo   round(($setdat  / $count_transaksi) * 100) ."%";
-
-                                                                            ?>
-
-                                                                            <!-- <?= $setdat ?> -->
-                                                                        </td>
-                                                                    </tr>
-                                                                <?php
-                                                                }
-                                                                ?>
-
-
-                                                            </table>
-
-                                                        </div>
-
+                                                        <!-- Batas Item set 2 -->
                                                         <?php
-                                                        if (count($data_tampung_itemset3) > 0) {
+                                                                    if ($cek_jumlah_itemset2_supercount > 0) {
 
-                                                            // var_dump($data_tampung_itemset3);
-                                                        ?>
-                                                        <div class="col-xl-12 mt-3">
+                                                                        // mengubah array multidimensi menjadi array single
+                                                                        $tampung_itemset3single = call_user_func_array('array_merge', $tampung_itemset3);
+
+                                                                        //menghasilkan array unique tidak duplicat
+                                                                        $tampung_itemset3unique = array_unique($tampung_itemset3single);
+
+                                                                        //membuat variabel 
+                                                                        $slice_tampung_item_set = $tampung_item_set;
+
+                                                                        //menghihitung jumlah array item set
+                                                                        $count_item_set = count($tampung_item_set);
+
+                                                                        function computePermutations($array)
+                                                                        {
+                                                                            $result = [];
+
+                                                                            $recurse = function ($array, $start_i = 0) use (&$result, &$recurse) {
+                                                                                if ($start_i === count($array) - 1) {
+                                                                                    array_push($result, $array);
+                                                                                }
+
+                                                                                for ($i = $start_i; $i < count($array); $i++) {
+                                                                                    //Swap array value at $i and $start_i
+                                                                                    $t = $array[$i];
+                                                                                    $array[$i] = $array[$start_i];
+                                                                                    $array[$start_i] = $t;
+
+                                                                                    //Recurse
+                                                                                    $recurse($array, $start_i + 1);
+
+                                                                                    //Restore old order
+                                                                                    $t = $array[$i];
+                                                                                    $array[$i] = $array[$start_i];
+                                                                                    $array[$start_i] = $t;
+                                                                                }
+                                                                            };
+
+                                                                            $recurse($array);
+
+                                                                            return $result;
+                                                                        }
+
+                                                                        //eksekusi permutasi data berdasarkan id_produk yang unique
+                                                                        $results = computePermutations($slice_tampung_item_set);
+
+                                                                        //menghitung jumlah array unique
+                                                                        $count_result = count($slice_tampung_item_set);
+
+                                                                        function searchitemset3($value1, $value2, $array)
+                                                                        {
+                                                                            $search1 = (array_search($value1, $array));
+                                                                            $search2 = (array_search($value2, $array));
+
+                                                                            if ($search1 == false and $search2 == false) {
+                                                                                $val = 0;
+                                                                            } elseif ($search1 == false and $search2 == true) {
+                                                                                $val = 0;
+                                                                            } elseif ($search1 == true and $search2 == false) {
+                                                                                $val = 0;
+                                                                            } elseif ($search1 == true and $search2 == true) {
+                                                                                $val = 1;
+                                                                            } else {
+                                                                                $val = 1;
+                                                                            }
+                                                                            return  $val;
+                                                                        }
+
+                                                                        function arrayitemset3($arraysearch, $arraytransaksi)
+                                                                        {
+                                                                            searchitemset3($arraysearch[0], $arraysearch[1], $arraysearch[2], $arraytransaksi);
+                                                                        }
 
 
-                                                            <h3>Confidence</h3>
-                                                            <p>Asosiasi 3 item dari terpilih</p>
-                                                            <table class="table mt-3 mb-3">
-                                                                <tr>
-                                                                    <td></td>
-                                                                    <td>A</td>
-                                                                    <td></td>
-                                                                    <td>B</td>
-                                                                    <td>A&B</td>
-                                                                    <td>A</td>
-                                                                    <td>confiden</td>
-                                                                </tr>
-
-                                                                <?php
-
-                                                                        function searchab3($array, $transaksi)
+                                                                        function s3($array, $transaksi)
                                                                         {
                                                                             $count_trxs = count($transaksi);
 
                                                                             $ino = 0;
                                                                             for ($row = 0; $row < $count_trxs; $row++) {
 
-                                                                                $search1 = (array_search(current($array), $transaksi[$row]));
-                                                                                $search2 = (array_search(end($array), $transaksi[$row]));
+                                                                                $search1 = (array_search($array[0], $transaksi[$row]));
+                                                                                $search2 = (array_search($array[1], $transaksi[$row]));
+                                                                                $search3 = (array_search($array[2], $transaksi[$row]));
 
-                                                                                if ($search1 == false and $search2 == false ) {
+                                                                                if ($search1 == false and $search2 == false and $search3 == false) {
                                                                                     $ino += 0;
-                                                                                } elseif ($search1 == true and $search2 == false ) {
+                                                                                } elseif ($search1 == true and $search2 == false and $search3 == false) {
                                                                                     $ino += 0;
-                                                                                }  elseif ($search1 == false and $search2 == true ) {
+                                                                                } elseif ($search1 == true and $search2 == true and $search3 == false) {
                                                                                     $ino += 0;
-                                                                                }  elseif ($search1 == true and $search2 == true ) {
+                                                                                } elseif ($search1 == true and $search2 == false and $search3 == true) {
+                                                                                    $ino += 0;
+                                                                                } elseif ($search1 == false and $search2 == true and $search3 == false) {
+                                                                                    $ino += 0;
+                                                                                } elseif ($search1 == false and $search2 == true and $search3 == true) {
+                                                                                    $ino += 0;
+                                                                                } elseif ($search1 == false and $search2 == false and $search3 == true) {
+                                                                                    $ino += 0;
+                                                                                } elseif ($search1 == true and $search2 == true and $search3 == true) {
                                                                                     $ino += 1;
                                                                                 }
                                                                             }
                                                                             return  $ino;
                                                                         }
+                                                        ?>
 
-
-                                                                foreach ($data_tampung_itemset3 as $tampil_itemset3) {
-                                                                    foreach($tampil_itemset3 as $tampil_3){
+                                                            <div class="col-xl-12 mt-3">
+                                                                <table class="table" border="1">
+                                                                    <tr>
+                                                                        <th>Item set-3</th>
+                                                                        <th>Jumlah Transaksi</th>
+                                                                        <th>Suppport</th>
+                                                                    </tr>
+                                                                    <?php
+                                                                        $data_tampung_itemset3 = [];
+                                                                        $bs = 0;
+                                                                        $cek_jumlah_itemset3_supercount = 0;
+                                                                        for ($row = 0; $row <  $count_result; $row++) {
                                                                     ?>
                                                                         <tr>
-                                                                            <td>Jika Membeli</td>
-
                                                                             <td>
-                                                                                <?php 
-                                                                                    $unset_arr = $tampil_itemset3;
-                                                                                    $key = array_search($tampil_3, $unset_arr);
-                                                                                    unset($unset_arr[$key]);
-                                                                                    // var_dump($unset_arr);
-                                                                                    
+                                                                                <?php
+                                                                                $dataset = [];
+                                                                                for ($col = 0; $col < 3; $col++) {
 
-                                                                                    foreach($unset_arr as $unar){
+                                                                                    // echo $results[$row][$col] . ",";
+                                                                                    $produk3itemset = querysatudata("SELECT * FROM produk WHERE id_produk =" . $results[$row][$col] . " ");
+                                                                                    echo $produk3itemset['nama_produk'];
+                                                                                    echo  ", ";
 
-                                                                                        $produk3un = querysatudata("SELECT * FROM produk WHERE id_produk =" . $unar . " ");
-                                                                                        echo $produk3un['nama_produk'].", ";
-                                                                                    }
+
+                                                                                    $dataset[] = $results[$row][$col];
+                                                                                }
+                                                                                $setdat = s3($dataset, $transaksi);
+                                                                                // var_dump($dataset);
+
+                                                                                if ($setdat >= $minimum_jumlah_transaksi) {
+
+                                                                                    //tambahkan cek jumlah item set 3
+                                                                                    $cek_jumlah_itemset3_supercount += 1;
+
+                                                                                    array_push($data_tampung_itemset3, $dataset);
+                                                                                }
+
+                                                                                if ($setdat > $bs) {
+                                                                                    $bs = $setdat;
+                                                                                    $bc = array_diff_key($dataset);
+                                                                                }
 
                                                                                 ?>
                                                                             </td>
-                                                                            <td>Maka beli</td>
-                                                                            <td>
-                                                                                <!-- <?= $tampil_3 ?> -->
+                                                                            <td <?php
+                                                                                if ($setdat < $minimum_jumlah_transaksi) {
+                                                                                    echo "style='background-color:red;'";
+                                                                                }
+                                                                                ?>>
+                                                                                <?= $setdat ?>
+                                                                            </td>
+                                                                            <td <?php
+                                                                                $hitung_support3 = ($setdat / $count_barang) * 100;
+                                                                                if ($setdat < $minimum_jumlah_transaksi) {
+                                                                                    echo "style='background-color:red;'";
+                                                                                }
+                                                                                ?>>
 
-                                                                                <?php 
-                                                                                    $produk3A = querysatudata("SELECT * FROM produk WHERE id_produk =" . $tampil_3 . " ");
-                                                                                    echo $produk3A['nama_produk'];
-                                                                            
+                                                                                <?php
+                                                                                echo   round(($setdat  / $count_transaksi) * 100) . "%";
+
                                                                                 ?>
-                                                                            </td>
-                                                                            <td>
-                                                                                <?php 
-                                                                                    $setdat33 = s3($tampil_itemset3, $transaksi);
-                                                                                    echo $setdat33
-                                                                                    // var_dump($unset_arr);
-                                                                                   
-                                                                                  
-                                                                                ?>
-                                                                            </td>
-                                                                            <td>
-                                                                                
-                                                                                <?php 
-                                                                                    echo $count3_A =  searchab3($unset_arr, $transaksi);
-                                                                                ?>
-                                                                            </td>
-                                                                            <td>
-                                                                                <?php 
-                                                                                echo $setdat33 / $count3_A;
-                                                                                ?>
+
+                                                                                <!-- <?= $setdat ?> -->
                                                                             </td>
                                                                         </tr>
                                                                     <?php
+                                                                        }
+                                                                    ?>
+
+
+                                                                </table>
+
+                                                            </div>
+
+                                                            <?php
+                                                                        if (count($data_tampung_itemset3) > 0) {
+
+                                                                            // var_dump($data_tampung_itemset3);
+                                                            ?>
+                                                                <div class="col-xl-12 mt-3">
+
+
+                                                                    <h3>Confidence</h3>
+                                                                    <p>Asosiasi 3 item dari terpilih</p>
+                                                                    <table class="table mt-3 mb-3">
+                                                                        <tr>
+                                                                            <td></td>
+                                                                            <td>A</td>
+                                                                            <td></td>
+                                                                            <td>B</td>
+                                                                            <td>A&B</td>
+                                                                            <td>A</td>
+                                                                            <td>confiden</td>
+                                                                        </tr>
+
+                                                                        <?php
+
+                                                                            function searchab3($array, $transaksi)
+                                                                            {
+                                                                                $count_trxs = count($transaksi);
+
+                                                                                $ino = 0;
+                                                                                for ($row = 0; $row < $count_trxs; $row++) {
+
+                                                                                    $search1 = (array_search(current($array), $transaksi[$row]));
+                                                                                    $search2 = (array_search(end($array), $transaksi[$row]));
+
+                                                                                    if ($search1 == false and $search2 == false) {
+                                                                                        $ino += 0;
+                                                                                    } elseif ($search1 == true and $search2 == false) {
+                                                                                        $ino += 0;
+                                                                                    } elseif ($search1 == false and $search2 == true) {
+                                                                                        $ino += 0;
+                                                                                    } elseif ($search1 == true and $search2 == true) {
+                                                                                        $ino += 1;
+                                                                                    }
+                                                                                }
+                                                                                return  $ino;
+                                                                            }
+
+
+                                                                            foreach ($data_tampung_itemset3 as $tampil_itemset3) {
+                                                                                foreach ($tampil_itemset3 as $tampil_3) {
+                                                                        ?>
+                                                                                <tr>
+                                                                                    <td>Jika Membeli</td>
+
+                                                                                    <td>
+                                                                                        <?php
+                                                                                        $unset_arr = $tampil_itemset3;
+                                                                                        $key = array_search($tampil_3, $unset_arr);
+                                                                                        unset($unset_arr[$key]);
+                                                                                        // var_dump($unset_arr);
+
+
+                                                                                        foreach ($unset_arr as $unar) {
+
+                                                                                            $produk3un = querysatudata("SELECT * FROM produk WHERE id_produk =" . $unar . " ");
+                                                                                            echo $produk3un['nama_produk'] . ", ";
+                                                                                        }
+
+                                                                                        ?>
+                                                                                    </td>
+                                                                                    <td>Maka beli</td>
+                                                                                    <td>
+                                                                                        <!-- <?= $tampil_3 ?> -->
+
+                                                                                        <?php
+                                                                                        $produk3A = querysatudata("SELECT * FROM produk WHERE id_produk =" . $tampil_3 . " ");
+                                                                                        echo $produk3A['nama_produk'];
+
+                                                                                        ?>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <?php
+                                                                                        $setdat33 = s3($tampil_itemset3, $transaksi);
+                                                                                        echo $setdat33
+                                                                                        // var_dump($unset_arr);
+
+
+                                                                                        ?>
+                                                                                    </td>
+                                                                                    <td>
+
+                                                                                        <?php
+                                                                                        echo $count3_A =  searchab3($unset_arr, $transaksi);
+                                                                                        ?>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <?php
+                                                                                        echo $setdat33 / $count3_A;
+                                                                                        ?>
+                                                                                    </td>
+                                                                                </tr>
+                                                                        <?php
+                                                                                }
+                                                                            }
+                                                                        ?>
+                                                                    </table>
+                                                                </div>
+
+
+                                                            <?php
+
+                                                                            // mengubah array multidimensi menjadi array single
+                                                                            $hasil_itemset3single = call_user_func_array('array_merge', $data_tampung_itemset3);
+
+                                                                            //menghasilkan array unique tidak duplicat
+                                                                            $hasil_itemset3unique = array_unique($tampung_itemset3single);
+                                                                        }
+                                                            ?>
+                                                            <!-- Batas Item set 2 -->
+                                                        <?php
                                                                     }
+                                                        ?>
+                                                        <!-- Batas Item set 1 -->
+
+
+                                                <?php
                                                                 }
-                                                                ?>
-                                                            </table>
-                                                        </div>
-
-
-                                                        <?php
-
-                                                            // mengubah array multidimensi menjadi array single
-                                                            $hasil_itemset3single = call_user_func_array('array_merge', $data_tampung_itemset3);
-
-                                                            //menghasilkan array unique tidak duplicat
-                                                            $hasil_itemset3unique = array_unique($tampung_itemset3single);
-                                                        }
-                                                        ?>
-                                                        <?php
-                                                    } else {
-                                                        // echo "Tidak Ada Isinya";
-                                                    }
-                                                    ?>
-
-                                                    <!-- Batas Item set 3 -->
-
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                        <?php
-                                                            }
-                                                        } else {
-                                                            /// Nilai rekomendasi itemset 1
-                                                        }
-                                                        ?>
-                                                    
-
-
-
-
-                             <?php
-
-
-                                                    /// Logika menampilkan hasil 
-                                                    // Jika itemset satu ada maka
-                                                    if ($cek_jumlah_itemset1_supercount > 0) {
-
-                                                        // cek jika itemset 2 ada
-                                                        if ($cek_jumlah_itemset2_supercount > 0) {
-
-                                                            // cek jika itemset 3 ada
-                                                            if ($cek_jumlah_itemset3_supercount > 0) {
-                                                                $rekomendasi = $hasil_itemset3unique;
-                                                                // cek jika itemset 3 tidak ada
                                                             } else {
-                                                                $rekomendasi = $tampung_itemset3unique;
+                                                                /// Nilai rekomendasi itemset 1
                                                             }
+                                                ?>
 
-                                                            // cek jika itemset 2 tidak ada
+
+                                                <?php
+                                                        } else {
+                                                            // echo "Tidak Ada Isinya";
+                                                        }
+
+
+                                                        /// Logika menampilkan hasil 
+                                                        // Jika itemset satu ada maka
+                                                        if ($cek_jumlah_itemset1_supercount > 0) {
+
+                                                            // cek jika itemset 2 ada
+                                                            if ($cek_jumlah_itemset2_supercount > 0) {
+
+                                                                // cek jika itemset 3 ada
+                                                                if ($cek_jumlah_itemset3_supercount > 0) {
+                                                                    $rekomendasi = $hasil_itemset3unique;
+                                                                    // cek jika itemset 3 tidak ada
+                                                                } else {
+                                                                    $rekomendasi = $tampung_itemset3unique;
+                                                                }
+
+                                                                // cek jika itemset 2 tidak ada
+                                                            } else {
+                                                                $rekomendasi = $c_barang;
+                                                            }
+                                                            //jika items set 1 tidak ada
                                                         } else {
                                                             $rekomendasi = $c_barang;
                                                         }
-                                                        //jika items set 1 tidak ada
-                                                    } else {
-                                                        $rekomendasi = $c_barang;
-                                                    }
-                                                    if ($rekomendasi == null) {
-                                                    } else {
-                                                        foreach ($rekomendasi as $id_produk) { ?>
-                                                            <div class="col-xl-3 col-lg-4 col-md-4 col-12">
-                                                                <div class="single-product">
-                                                                    <div class="product-img">
-                                                                        <a href="<?= base_url('shop/index.php?halaman=detail_produk&id_produk=') . $id_produk ?>">
-                                                                            <?php
-                                                                            $hasilproduk = querysatudata("SELECT * FROM produk WHERE id_produk =" . $id_produk . " ");
+                                                        if ($rekomendasi == null) {
+                                                        } else {
+                                                            foreach ($rekomendasi as $id_produk) { ?>
+                                                    <div class="col-xl-3 col-lg-4 col-md-4 col-12">
+                                                        <div class="single-product">
+                                                            <div class="product-img">
+                                                                <a href="<?= base_url('shop/index.php?halaman=detail_produk&id_produk=') . $id_produk ?>">
+                                                                    <?php
+                                                                    $hasilproduk = querysatudata("SELECT * FROM produk WHERE id_produk =" . $id_produk . " ");
 
 
-                                                                            ?>
-                                                                            <img class="default-img" src="<?= base_url('gambar/produk/') ?><?= $hasilproduk['gambar'] ?>" height="200" alt="<?= $hasilproduk['gambar'] ?>" alt="#">
-                                                                            <img class="hover-img" src="https://source.unsplash.com/550x750" alt="#">
-                                                                        </a>
-                                                                        <div class="button-head">
-                                                                            <div class="product-action">
-                                                                                <a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-                                                                                <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
-                                                                                <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
-                                                                            </div>
-                                                                            <div class="product-action-2">
-                                                                                <a title="Add to cart" href="<?= base_url('cart/add_to_cart.php?id=' . $hasilproduk['id_produk']) ?>">Add to cart</a>
-                                                                            </div>
-                                                                        </div>
+                                                                    ?>
+                                                                    <img class="default-img" src="<?= base_url('gambar/produk/') ?><?= $hasilproduk['gambar'] ?>" height="200" alt="<?= $hasilproduk['gambar'] ?>" alt="#">
+                                                                    <img class="hover-img" src="https://source.unsplash.com/550x750" alt="#">
+                                                                </a>
+                                                                <div class="button-head">
+                                                                    <div class="product-action">
+                                                                        <a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
+                                                                        <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
+                                                                        <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
                                                                     </div>
-                                                                    <div class="product-content">
-                                                                        <h3><a href="<?= base_url('welcome/detail/') . $hasilproduk['id_produk'] ?>"><?= $hasilproduk['nama_produk'] ?></a></h3>
-                                                                        <div class="product-price">
-                                                                            <span><?= rupiah($hasilproduk['harga_produk']) ?></span>
-                                                                        </div>
+                                                                    <div class="product-action-2">
+                                                                        <a title="Add to cart" href="<?= base_url('cart/add_to_cart.php?id=' . $hasilproduk['id_produk']) ?>">Add to cart</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <div class="product-content">
+                                                                <h3><a href="<?= base_url('welcome/detail/') . $hasilproduk['id_produk'] ?>"><?= $hasilproduk['nama_produk'] ?></a></h3>
+                                                                <div class="product-price">
+                                                                    <span><?= rupiah($hasilproduk['harga_produk']) ?></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-                                                <?php }
+                                        <?php }
+                                                        }
                                                     }
-                                                }
-                                                ?>
+                                        ?>
 
-                                            <?php
+                                    <?php
                                             }
-                                            ?>
+                                    ?>
 
 
 
