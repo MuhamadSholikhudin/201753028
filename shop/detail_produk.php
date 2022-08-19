@@ -753,7 +753,8 @@ if (isset($_GET['id_produk'])) {
                                                                             }
                                                                         ?>
                                                                     </table>
-                                                                </div>
+                                                                    </div>
+                                                               
 
 
                                                             <?php
