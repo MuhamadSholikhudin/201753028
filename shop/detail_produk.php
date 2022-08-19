@@ -370,15 +370,7 @@ if (isset($_GET['id_produk'])) {
                                                                     }
                                                                     ?>
                                                                 </table>
-
-                                                        <?php
-                                                            }
-                                                        } else {
-                                                            /// Nilai rekomendasi itemset 1
-                                                        }
-                                                        ?>
                                                     </div>
-
 
                                                     <?php
                                                     if (count($tampung_confident) > 0) {
@@ -469,11 +461,10 @@ if (isset($_GET['id_produk'])) {
                                                                 <?php } ?>
                                                             </table>
                                                         </div>
-                                                    <?php
-                                                    }
-                                                    ?>
 
-                                                    <?php
+
+                                                      <!-- Nilai hitung item sem 2 ada atau tidak -->
+                                                      <?php
                                                     if ($cek_jumlah_itemset2_supercount > 0) {
 
                                                         // mengubah array multidimensi menjadi array single
@@ -780,6 +771,25 @@ if (isset($_GET['id_produk'])) {
                                                     } else {
                                                         // echo "Tidak Ada Isinya";
                                                     }
+                                                    ?>
+
+                                                    <!-- Batas Item set 3 -->
+
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                        <?php
+                                                            }
+                                                        } else {
+                                                            /// Nilai rekomendasi itemset 1
+                                                        }
+                                                        ?>
+                                                    
+
+
+
+
+                             <?php
 
 
                                                     /// Logika menampilkan hasil 
