@@ -67,7 +67,7 @@
                         <img src="https://source.unsplash.com/75x75?<?= $bar_bar['nama_produk']; ?>" alt="#">
                     </div>
                     <div class="content">
-                        <h5><a href="<?= $bar_bar['id_produk']; ?>"><?= $bar_bar['nama_produk']; ?></a></h5>
+                        <h5><a href="<?= base_url('shop/index.php?halaman=detail_produk&id_produk=') . $bar_bar['id_produk'] ?>"><?= $bar_bar['nama_produk']; ?></a></h5>
                         <p class="price"><?= rupiah($bar_bar['harga_produk']); ?></p>
                         <ul class="reviews">
                             <a href="<?= base_url('shop/index.php?halaman=detail_produk&id_produk=') ?><?= $bar_bar['id_produk']; ?>">

@@ -64,7 +64,7 @@
                         </div>
                     </div>
                     <div class="product-content">
-                        <h3><a href="<?= base_url('welcome/detail/') . $data_produks['id_produk'] ?>"><?= $data_produks['nama_produk'] ?></a></h3>
+                        <h3><a href="<?= base_url('shop/index.php?halaman=detail_produk&id_produk=') . $data_produks['id_produk'] ?>"><?= $data_produks['nama_produk'] ?></a></h3>
                         <div class="product-price">
                             <span><?= rupiah($data_produks['harga_produk']) ?></span>
                         </div>

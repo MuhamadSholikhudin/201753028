@@ -94,7 +94,7 @@ include 'templates/header.php';
                                     </div>
                                 </div>
                                 <div class="product-content">
-                                    <h3><a href="<?= base_url('welcome/detail/') . $data_produks['id_produk'] ?>"><?= $data_produks['nama_produk'] ?></a></h3>
+                                    <h3><a href="<?= base_url('shop/index.php?halaman=detail_produk&id_produk=') . $data_produks['id_produk'] ?>"><?= $data_produks['nama_produk'] ?> </a></h3>
                                     <div class="product-price">
                                         <span><?= rupiah($data_produks['harga_produk']) ?></span>
                                     </div>
@@ -136,15 +136,14 @@ include 'templates/header.php';
 
                         // $c_arr_kategori = count($array_kategory);
 
-                         $sql_minati = "SELECT * FROM produk WHERE id_kategori = (".implode(" OR ",$array_kategory).") AND ".implode(" AND ",$tampung_where_id_produk)." LIMIT 4";
+                        $sql_minati = "SELECT * FROM produk WHERE id_kategori = (".implode(" OR ",$array_kategory).") AND ".implode(" AND ",$tampung_where_id_produk)." LIMIT 4";
 
-    $minati4 = querybanyak($sql_minati);
+                        $minati4 = querybanyak($sql_minati);
                        
 
-foreach($minati4 as $min){
+                        foreach($minati4 as $min){
 
-    $produksearkategori = querysatudata("SELECT * FROM produk WHERE  id_produk = ".$min['id_produk']."");
-
+                            $produksearkategori = querysatudata("SELECT * FROM produk WHERE  id_produk = ".$min['id_produk']."");
 
                         ?>
                             <div class="col-xl-3 col-lg-4 col-md-4 col-12">
@@ -167,7 +166,7 @@ foreach($minati4 as $min){
                                         </div>
                                     </div>
                                     <div class="product-content">
-                                        <h3><a href="<?= base_url('welcome/detail/') . $produksearkategori['id_produk'] ?>"><?= $produksearkategori['nama_produk'] ?></a></h3>
+                                        <h3><a href="<?= base_url('shop/index.php?halaman=detail_produk&id_produk=') . $produksearkategori['id_produk'] ?>"><?= $produksearkategori['nama_produk'] ?></a></h3>
                                         <div class="product-price">
                                             <span><?= rupiah($produksearkategori['harga_produk']) ?></span>
                                         </div>
@@ -224,7 +223,7 @@ foreach($minati4 as $min){
                                             </div>
                                         </div>
                                         <div class="product-content">
-                                            <h3><a href="<?= base_url('welcome/detail/') . $data_produks['id_produk'] ?>"><?= $data_produks['nama_produk'] ?></a></h3>
+                                            <h3><a href="<?= base_url('shop/index.php?halaman=detail_produk&id_produk=') . $produksearkategori['id_produk'] ?></a></h3>
                                             <div class="product-price">
                                                 <span><?= rupiah($data_produks['harga_produk']) ?></span>
                                             </div>

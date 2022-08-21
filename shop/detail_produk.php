@@ -28,6 +28,7 @@ if (isset($_GET['id_produk'])) {
 
                             <div class="share-social mt-4">
                                 <div class="row">
+
                                     <?php
                                     if (isset($_SESSION['id_user'])) {
                                     ?>
@@ -105,8 +106,8 @@ if (isset($_GET['id_produk'])) {
                                                     $count_barang = count($c_barang);
 
                                                     // nilai minimum 30%
-                                                    $minimum_support = 0.3;
-                                                    $minimum_jumlah_transaksi = round($count_barang / 2);
+                                                    $minimum_support = 0.03;
+                                                    $minimum_jumlah_transaksi = round(($count_barang / 100) * $minimum_support);
 
 
                                                     //membuat variabel transaksi berdasarkan array checkout
@@ -132,11 +133,13 @@ if (isset($_GET['id_produk'])) {
                                                         return  $val;
                                                     }
                                             ?>
-
                                                     <div class="col-md-12 mt-3">
+
+                                                        <h1>error 1</h1>
+
                                                         <table class="table table-bordered">
                                                             <tr>
-                                                                <td>Transaksi</td>
+                                                                <td>Transaksi </td>
                                                                 <td>Pattern</td>
                                                             </tr>
                                                             <?php
@@ -165,7 +168,10 @@ if (isset($_GET['id_produk'])) {
                                                             ?>
                                                         </table>
                                                     </div>
+                                                    
                                                     <div class="col-md-12 mt-3">
+                                                        <h1>error 2</h1>
+
                                                         <table class="table table-bordered">
                                                             <tr>
                                                                 <th>Pattern Item set 1</th>
@@ -243,14 +249,15 @@ if (isset($_GET['id_produk'])) {
                                                             }
                                                             ?>
                                                         </table>
-
-
                                                     </div>
-                                                    <div class="col-md-12 mt-3">
+
+
                                                         <?php
                                                         //jika item set 1 memiliki supercount
-                                                        if ($cek_jumlah_itemset1_supercount > 0) {
+                                                        if ($cek_jumlah_itemset1_supercount > 0) { ?>
+                                                    <div class="col-md-12 mt-3">
 
+                                                            <?php
                                                             if (count($itemset1_values) > 1) {
                                                                 // membuat tampung data item set
                                                                 $tampung_item_set = [];
@@ -650,12 +657,8 @@ if (isset($_GET['id_produk'])) {
 
                                                             <?php
                                                                         if (count($data_tampung_itemset3) > 0) {
-
-                                                                            // var_dump($data_tampung_itemset3);
                                                             ?>
                                                                 <div class="col-xl-12 mt-3">
-
-
                                                                     <h3>Confidence</h3>
                                                                     <p>Asosiasi 3 item dari terpilih</p>
                                                                     <table class="table mt-3 mb-3">
@@ -753,10 +756,7 @@ if (isset($_GET['id_produk'])) {
                                                                             }
                                                                         ?>
                                                                     </table>
-                                                                    </div>
-                                                               
-
-
+                                                                </div>
                                                             <?php
 
                                                                             // mengubah array multidimensi menjadi array single
@@ -781,7 +781,7 @@ if (isset($_GET['id_produk'])) {
                                                 ?>
 
 
-                                                <?php
+                                            <?php
                                                         } else {
                                                             // echo "Tidak Ada Isinya";
                                                         }
@@ -810,19 +810,84 @@ if (isset($_GET['id_produk'])) {
                                                         } else {
                                                             $rekomendasi = $c_barang;
                                                         }
-                                                        if ($rekomendasi == null) {
-                                                        } else {
-                                                            foreach ($rekomendasi as $id_produk) { ?>
+                                            ?>
+
+
+                                            <?php
+
+                                                    if ($rekomendasi == null) {
+                                                    } else {
+
+                                            ?>
+                                                <div class="row">
+                                                    <?php
+                                                        foreach ($rekomendasi as $id_produk) { ?>
+                                                        <div class="col-xl-3 col-lg-4 col-md-4 col-12">
+                                                            <div class="single-product">
+                                                                <div class="product-img">
+                                                                    <a href="<?= base_url('shop/index.php?halaman=detail_produk&id_produk=') . $id_produk ?>">
+                                                                        <?php
+                                                                        $hasilproduk = querysatudata("SELECT * FROM produk WHERE id_produk =" . $id_produk . " ");
+
+
+                                                                        ?>
+                                                                        <img class="default-img" src="<?= base_url('gambar/produk/') ?><?= $hasilproduk['gambar'] ?>" height="200" alt="<?= $hasilproduk['gambar'] ?>" alt="#">
+                                                                        <img class="hover-img" src="https://source.unsplash.com/550x750" alt="#">
+                                                                    </a>
+                                                                    <div class="button-head">
+                                                                        <div class="product-action">
+                                                                            <a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
+                                                                            <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
+                                                                            <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
+                                                                        </div>
+                                                                        <div class="product-action-2">
+                                                                            <a title="Add to cart" href="<?= base_url('cart/add_to_cart.php?id=' . $hasilproduk['id_produk']) ?>">Add to cart</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="product-content">
+                                                                    <h3><a href="<?= base_url('welcome/detail/') . $hasilproduk['id_produk'] ?>"><?= $hasilproduk['nama_produk'] ?></a></h3>
+                                                                    <div class="product-price">
+                                                                        <span><?= rupiah($hasilproduk['harga_produk']) ?></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                <?php }
+                                                    }
+                                                ?>
+                                                </div>
+
+                                            <?php
+                                                }
+                                            ?>
+
+                                        <?php
+                                            }
+                                        ?>
+
+
+
+                                        </div>
+
+                                        <div class="col-12 mt-3">
+                                            <h5>#Produk yang mungkin anda minati :</h5>
+
+                                            <div class="row">
+                                                <?php
+                                                //Menampilkan data produk banyak dalam arrray
+                                                $sql_produks = "SELECT * FROM produk WHERE id_kategori = " . $produk['id_kategori'] . " ORDER BY id_produk DESC LIMIT 4 ";
+                                                $query_produks = mysqli_query($koneksi, $sql_produks);
+                                                $no = 1; //nilai awal nomer
+                                                while ($data_produks = mysqli_fetch_array($query_produks, MYSQLI_BOTH)) {
+                                                ?>
                                                     <div class="col-xl-3 col-lg-4 col-md-4 col-12">
                                                         <div class="single-product">
                                                             <div class="product-img">
-                                                                <a href="<?= base_url('shop/index.php?halaman=detail_produk&id_produk=') . $id_produk ?>">
-                                                                    <?php
-                                                                    $hasilproduk = querysatudata("SELECT * FROM produk WHERE id_produk =" . $id_produk . " ");
-
-
-                                                                    ?>
-                                                                    <img class="default-img" src="<?= base_url('gambar/produk/') ?><?= $hasilproduk['gambar'] ?>" height="200" alt="<?= $hasilproduk['gambar'] ?>" alt="#">
+                                                                <a href="<?= base_url('shop/index.php?halaman=detail_produk&id_produk=') . $data_produks['id_produk'] ?>">
+                                                                    <!-- <img class="default-img" src="https://source.unsplash.com/550x750" alt="#"> -->
+                                                                    <img class="default-img" src="<?= base_url('gambar/produk/') ?><?= $data_produks['gambar'] ?>" alt="#">
                                                                     <img class="hover-img" src="https://source.unsplash.com/550x750" alt="#">
                                                                 </a>
                                                                 <div class="button-head">
@@ -832,214 +897,163 @@ if (isset($_GET['id_produk'])) {
                                                                         <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
                                                                     </div>
                                                                     <div class="product-action-2">
-                                                                        <a title="Add to cart" href="<?= base_url('cart/add_to_cart.php?id=' . $hasilproduk['id_produk']) ?>">Add to cart</a>
+                                                                        <a title="Add to cart" href="<?= base_url('cart/add_to_cart.php?id=' . $data_produks['id_produk']) ?>">Add to cart</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="product-content">
-                                                                <h3><a href="<?= base_url('welcome/detail/') . $hasilproduk['id_produk'] ?>"><?= $hasilproduk['nama_produk'] ?></a></h3>
+                                                                <h3><a href="<?= base_url('welcome/detail/') . $data_produks['id_produk'] ?>"><?= $data_produks['nama_produk'] ?></a></h3>
                                                                 <div class="product-price">
-                                                                    <span><?= rupiah($hasilproduk['harga_produk']) ?></span>
+                                                                    <span><?= rupiah($data_produks['harga_produk']) ?></span>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-
-                                        <?php }
-                                                        }
-                                                    }
-                                        ?>
-
-                                    <?php
-                                            }
-                                    ?>
-
-
-
+                                                <?php
+                                                    //auto increment nomer
+                                                    $no++;
+                                                }
+                                                ?>
+                                            </div>
                                         </div>
-                                    </div>
+                                        <!-- Batas -->
+                                        <div class="col-12 mt-3">
+                                            <h5>#Produk Terbaru Kami :</h5>
 
-                                    <div class="col-12 mt-3">
-                                        <h5>#Produk yang mungkin anda minati :</h5>
-
-                                        <div class="row">
-                                            <?php
-                                            //Menampilkan data produk banyak dalam arrray
-                                            $sql_produks = "SELECT * FROM produk WHERE id_kategori = ".$produk['id_kategori']." ORDER BY id_produk DESC LIMIT 4 ";
-                                            $query_produks = mysqli_query($koneksi, $sql_produks);
-                                            $no = 1; //nilai awal nomer
-                                            while ($data_produks = mysqli_fetch_array($query_produks, MYSQLI_BOTH)) {
-                                            ?>
-                                                <div class="col-xl-3 col-lg-4 col-md-4 col-12">
-                                                    <div class="single-product">
-                                                        <div class="product-img">
-                                                            <a href="<?= base_url('shop/index.php?halaman=detail_produk&id_produk=') . $data_produks['id_produk'] ?>">
-                                                                <!-- <img class="default-img" src="https://source.unsplash.com/550x750" alt="#"> -->
-                                                                <img class="default-img" src="<?= base_url('gambar/produk/') ?><?= $data_produks['gambar'] ?>" alt="#">
-                                                                <img class="hover-img" src="https://source.unsplash.com/550x750" alt="#">
-                                                            </a>
-                                                            <div class="button-head">
-                                                                <div class="product-action">
-                                                                    <a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-                                                                    <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
-                                                                    <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
-                                                                </div>
-                                                                <div class="product-action-2">
-                                                                    <a title="Add to cart" href="<?= base_url('cart/add_to_cart.php?id=' . $data_produks['id_produk']) ?>">Add to cart</a>
+                                            <div class="row">
+                                                <?php
+                                                //Menampilkan data produk banyak dalam arrray
+                                                $sql_produks = "SELECT * FROM produk ORDER BY id_produk DESC LIMIT 4 ";
+                                                $query_produks = mysqli_query($koneksi, $sql_produks);
+                                                $no = 1; //nilai awal nomer
+                                                while ($data_produks = mysqli_fetch_array($query_produks, MYSQLI_BOTH)) {
+                                                ?>
+                                                    <div class="col-xl-3 col-lg-4 col-md-4 col-12">
+                                                        <div class="single-product">
+                                                            <div class="product-img">
+                                                                <a href="<?= base_url('shop/index.php?halaman=detail_produk&id_produk=') . $data_produks['id_produk'] ?>">
+                                                                    <!-- <img class="default-img" src="https://source.unsplash.com/550x750" alt="#"> -->
+                                                                    <img class="default-img" src="<?= base_url('gambar/produk/') ?><?= $data_produks['gambar'] ?>" alt="#">
+                                                                    <img class="hover-img" src="https://source.unsplash.com/550x750" alt="#">
+                                                                </a>
+                                                                <div class="button-head">
+                                                                    <div class="product-action">
+                                                                        <a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
+                                                                        <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
+                                                                        <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
+                                                                    </div>
+                                                                    <div class="product-action-2">
+                                                                        <a title="Add to cart" href="<?= base_url('cart/add_to_cart.php?id=' . $data_produks['id_produk']) ?>">Add to cart</a>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="product-content">
-                                                            <h3><a href="<?= base_url('welcome/detail/') . $data_produks['id_produk'] ?>"><?= $data_produks['nama_produk'] ?></a></h3>
-                                                            <div class="product-price">
-                                                                <span><?= rupiah($data_produks['harga_produk']) ?></span>
+                                                            <div class="product-content">
+                                                                <h3><a href="<?= base_url('welcome/detail/') . $data_produks['id_produk'] ?>"><?= $data_produks['nama_produk'] ?></a></h3>
+                                                                <div class="product-price">
+                                                                    <span><?= rupiah($data_produks['harga_produk']) ?></span>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            <?php
-                                                //auto increment nomer
-                                                $no++;
-                                            }
-                                            ?>
+                                                <?php
+                                                    //auto increment nomer
+                                                    $no++;
+                                                }
+                                                ?>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12 mt-3">
-                                        <h5>#Produk Terbaru Kami :</h5>
 
-                                        <div class="row">
-                                            <?php
-                                            //Menampilkan data produk banyak dalam arrray
-                                            $sql_produks = "SELECT * FROM produk ORDER BY id_produk DESC LIMIT 4 ";
-                                            $query_produks = mysqli_query($koneksi, $sql_produks);
-                                            $no = 1; //nilai awal nomer
-                                            while ($data_produks = mysqli_fetch_array($query_produks, MYSQLI_BOTH)) {
-                                            ?>
-                                                <div class="col-xl-3 col-lg-4 col-md-4 col-12">
-                                                    <div class="single-product">
-                                                        <div class="product-img">
-                                                            <a href="<?= base_url('shop/index.php?halaman=detail_produk&id_produk=') . $data_produks['id_produk'] ?>">
-                                                                <!-- <img class="default-img" src="https://source.unsplash.com/550x750" alt="#"> -->
-                                                                <img class="default-img" src="<?= base_url('gambar/produk/') ?><?= $data_produks['gambar'] ?>" alt="#">
-                                                                <img class="hover-img" src="https://source.unsplash.com/550x750" alt="#">
-                                                            </a>
-                                                            <div class="button-head">
-                                                                <div class="product-action">
-                                                                    <a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-                                                                    <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
-                                                                    <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
-                                                                </div>
-                                                                <div class="product-action-2">
-                                                                    <a title="Add to cart" href="<?= base_url('cart/add_to_cart.php?id=' . $data_produks['id_produk']) ?>">Add to cart</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="product-content">
-                                                            <h3><a href="<?= base_url('welcome/detail/') . $data_produks['id_produk'] ?>"><?= $data_produks['nama_produk'] ?></a></h3>
-                                                            <div class="product-price">
-                                                                <span><?= rupiah($data_produks['harga_produk']) ?></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            <?php
-                                                //auto increment nomer
-                                                $no++;
-                                            }
-                                            ?>
-                                        </div>
                                     </div>
-
                                 </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-12">
+                    <div class="main-sidebar">
+                        <!-- Single Widget -->
+
+                        <div class="card">
+                            <div class="card-header text-white" style="background-color:#F7941D ;">
+                                <b>
+                                    Atur Jumlah Pembelian
+                                </b>
+                            </div>
+                            <div class="card-body">
+
+
+                                <h5 class="card-title">Stok Tersedia : <?= $produk['stok_produk'] ?></h5>
+                                <input type="hidden" name="harga_produk" value="<?= $produk['harga_produk'] ?>" id="harga_produk">
+                                <h5 class="card-title">Harga : <?= rupiah($produk['harga_produk']) ?></h5>
+
+                                <br>
+                                <tr>
+                                    <td class="qty" data-title="Qty">
+                                        <!-- Input Order -->
+                                        <div class="input-group ">
+                                            <div class="button minus">
+                                                <button type="button" class="btn btn-primary btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+                                                    <i class="ti-minus"></i>
+                                                </button>
+                                            </div>
+                                            <input type="text" name="quant[1]" id="atur_jumlah" onchange="atur_jumlah()" class="input-number" data-min="1" data-max="<?= $produk['stok_produk'] ?>" value="1" style="width:80px;">
+                                            <div class="button plus">
+                                                <button type="button" class="btn btn-primary btn-number" data-type="plus" data-field="quant[1]">
+                                                    <i class="ti-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!--/ End Input Order -->
+                                    </td>
+                                </tr>
+
+                                <br>
+                                <br>
+                                <form action="<?= base_url('cart/add_to_cart.php') ?>" method="post">
+
+                                    <input type="number" class="d-none" name="id_produk" value="<?= $produk['id_produk'] ?>" id="">
+                                    <input type="number" class="d-none" name="jumlah_keranjang" id="jumlah_keranjang" value="1">
+                                    <input type="number" class="d-none" name="harga_keranjang" id="harga_keranjang" value="<?= $produk['harga_produk'] ?>">
+                                    <h5 class="card-title" id="total_harga">Total : <?= rupiah($produk['harga_produk']) ?></h5>
+
+                                    <button type="submit" name="btnTAMBAHKERANJANGPRODUK" class="btn btn-primary btn-badge text-white" style="width:100%;">+ keranjang</button>
+                                </form>
                             </div>
                         </div>
 
+                        <!--/ End Single Widget -->
+                        <!-- Single Widget -->
+                        <div class="single-widget category">
+                            <h3 class="title">Kategori</h3>
+                            <ul class="categor-list">
+                                <?php
+                                // perulangan data kategoori  
+                                $sql_kategories = "SELECT * FROM kategori";
+                                $query_kategories = mysqli_query($koneksi, $sql_kategories);
+                                $no = 1; //nilai awal nomer
+                                while ($data_kategori = mysqli_fetch_array($query_kategories, MYSQLI_BOTH)) {
 
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-12">
-                <div class="main-sidebar">
-                    <!-- Single Widget -->
-
-                    <div class="card">
-                        <div class="card-header text-white" style="background-color:#F7941D ;">
-                            <b>
-                                Atur Jumlah Pembelian
-                            </b>
+                                ?>
+                                    <li><a href="<?= base_url('shop/index.php?halaman=kategori&kategori=') ?><?= $data_kategori['kategori'] ?>"><?= $data_kategori['kategori'] ?></a></li>
+                                <?php
+                                    //auto increment nomer
+                                    $no++;
+                                }
+                                ?>
+                            </ul>
                         </div>
-                        <div class="card-body">
+                        <!--/ End Single Widget -->
+                        <!-- Single Widget -->
+                        <div>
 
-
-                            <h5 class="card-title">Stok Tersedia : <?= $produk['stok_produk'] ?></h5>
-                            <input type="hidden" name="harga_produk" value="<?= $produk['harga_produk'] ?>" id="harga_produk">
-                            <h5 class="card-title">Harga : <?= rupiah($produk['harga_produk']) ?></h5>
-
-                            <br>
-                            <tr>
-                                <td class="qty" data-title="Qty">
-                                    <!-- Input Order -->
-                                    <div class="input-group ">
-                                        <div class="button minus">
-                                            <button type="button" class="btn btn-primary btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
-                                                <i class="ti-minus"></i>
-                                            </button>
-                                        </div>
-                                        <input type="text" name="quant[1]" id="atur_jumlah" onchange="atur_jumlah()" class="input-number" data-min="1" data-max="<?= $produk['stok_produk'] ?>" value="1" style="width:80px;">
-                                        <div class="button plus">
-                                            <button type="button" class="btn btn-primary btn-number" data-type="plus" data-field="quant[1]">
-                                                <i class="ti-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <!--/ End Input Order -->
-                                </td>
-                            </tr>
-
-                            <br>
-                            <br>
-                            <form action="<?= base_url('cart/add_to_cart.php') ?>" method="post">
-
-                                <input type="number" class="d-none" name="id_produk" value="<?= $produk['id_produk'] ?>" id="">
-                                <input type="number" class="d-none" name="jumlah_keranjang" id="jumlah_keranjang" value="1">
-                                <input type="number" class="d-none" name="harga_keranjang" id="harga_keranjang" value="<?= $produk['harga_produk'] ?>">
-                                <h5 class="card-title" id="total_harga">Total : <?= rupiah($produk['harga_produk']) ?></h5>
-
-                                <button type="submit" name="btnTAMBAHKERANJANGPRODUK" class="btn btn-primary btn-badge text-white" style="width:100%;">+ keranjang</button>
-                            </form>
                         </div>
-                    </div>
 
-                    <!--/ End Single Widget -->
-                    <!-- Single Widget -->
-                    <div class="single-widget category">
-                        <h3 class="title">Kategori</h3>
-                        <ul class="categor-list">
-                            <?php
-                            // perulangan data kategoori  
-                            $sql_kategories = "SELECT * FROM kategori";
-                            $query_kategories = mysqli_query($koneksi, $sql_kategories);
-                            $no = 1; //nilai awal nomer
-                            while ($data_kategori = mysqli_fetch_array($query_kategories, MYSQLI_BOTH)) {
-
-                            ?>
-                                <li><a href="<?= base_url('shop/index.php?halaman=kategori&kategori=') ?><?= $data_kategori['kategori'] ?>"><?= $data_kategori['kategori'] ?></a></li>
-                            <?php
-                                //auto increment nomer
-                                $no++;
-                            }
-                            ?>
-                        </ul>
-                    </div>
-                    <!--/ End Single Widget -->
-                    <!-- Single Widget -->
-                    <div>
 
                     </div>
-
-
                 </div>
             </div>
         </div>
-    </div>
 </section>
