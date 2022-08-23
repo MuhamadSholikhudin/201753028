@@ -25,11 +25,19 @@
                     </div>
                     <div class="d-flex flex-column m-auto">
                         <div class="stats-small__data text-center">
-                            <span class="stats-small__label text-uppercase">Posts</span>
-                            <h6 class="stats-small__value count my-3">2,390</h6>
+                            <span class="stats-small__label text-uppercase">User</span>
+                            <h6 class="stats-small__value count my-3">
+                                <?php
+                                
+                                $user = querysatudata("SELECT COUNT(id_user) as jumlah_user FROM user ");
+
+                                echo $user['jumlah_user'];
+
+                                ?>
+                            </h6>
                         </div>
                         <div class="stats-small__data">
-                            <span class="stats-small__percentage stats-small__percentage--increase">4.7%</span>
+                            <!-- <span class="stats-small__percentage stats-small__percentage--increase">4.7%</span> -->
                         </div>
                     </div>
                     <canvas height="76" class="blog-overview-stats-small-1 chartjs-render-monitor" width="191" style="display: block; width: 191px; height: 76px;"></canvas>
@@ -49,11 +57,17 @@
                     </div>
                     <div class="d-flex flex-column m-auto">
                         <div class="stats-small__data text-center">
-                            <span class="stats-small__label text-uppercase">Pages</span>
-                            <h6 class="stats-small__value count my-3">182</h6>
+                            <span class="stats-small__label text-uppercase">Gerai</span>
+                            <h6 class="stats-small__value count my-3">
+                                <?php 
+                                    $gerai = querysatudata("SELECT COUNT(id_gerai) as jumlah_gerai FROM gerai ");
+
+                                    echo $gerai['jumlah_gerai'];
+                                ?>
+                            </h6>
                         </div>
                         <div class="stats-small__data">
-                            <span class="stats-small__percentage stats-small__percentage--increase">12.4%</span>
+                            <!-- <span class="stats-small__percentage stats-small__percentage--increase">12.4%</span> -->
                         </div>
                     </div>
                     <canvas height="76" class="blog-overview-stats-small-2 chartjs-render-monitor" width="191" style="display: block; width: 191px; height: 76px;"></canvas>
@@ -73,11 +87,17 @@
                     </div>
                     <div class="d-flex flex-column m-auto">
                         <div class="stats-small__data text-center">
-                            <span class="stats-small__label text-uppercase">Comments</span>
-                            <h6 class="stats-small__value count my-3">8,147</h6>
+                            <span class="stats-small__label text-uppercase">Produk</span>
+                            <h6 class="stats-small__value count my-3">
+                            <?php 
+                                $produk = querysatudata("SELECT COUNT(id_produk) as jumlah_produk FROM produk ");
+
+                                echo $produk['jumlah_produk'];
+                            ?>
+                            </h6>
                         </div>
                         <div class="stats-small__data">
-                            <span class="stats-small__percentage stats-small__percentage--decrease">3.8%</span>
+                            <!-- <span class="stats-small__percentage stats-small__percentage--decrease">3.8%</span> -->
                         </div>
                     </div>
                     <canvas height="76" class="blog-overview-stats-small-3 chartjs-render-monitor" width="191" style="display: block; width: 191px; height: 76px;"></canvas>
@@ -97,11 +117,17 @@
                     </div>
                     <div class="d-flex flex-column m-auto">
                         <div class="stats-small__data text-center">
-                            <span class="stats-small__label text-uppercase">Users</span>
-                            <h6 class="stats-small__value count my-3">2,413</h6>
+                            <span class="stats-small__label text-uppercase">Checkout online</span>
+                            <h6 class="stats-small__value count my-3">
+                            <?php 
+                                $checkout = querysatudata("SELECT COUNT(id_checkout) as jumlah_checkout FROM checkout WHERE status_transaksi = 1");
+
+                                echo $checkout['jumlah_checkout'];
+                            ?>
+                            </h6>
                         </div>
                         <div class="stats-small__data">
-                            <span class="stats-small__percentage stats-small__percentage--increase">12.4%</span>
+                            <!-- <span class="stats-small__percentage stats-small__percentage--increase">12.4%</span> -->
                         </div>
                     </div>
                     <canvas height="76" class="blog-overview-stats-small-4 chartjs-render-monitor" width="191" style="display: block; width: 191px; height: 76px;"></canvas>
@@ -121,11 +147,17 @@
                     </div>
                     <div class="d-flex flex-column m-auto">
                         <div class="stats-small__data text-center">
-                            <span class="stats-small__label text-uppercase">Subscribers</span>
-                            <h6 class="stats-small__value count my-3">17,281</h6>
+                            <span class="stats-small__label text-uppercase">Pembayaran Online</span>
+                            <h6 class="stats-small__value count my-3">
+                            <?php 
+                                $pembayaran = querysatudata("SELECT COUNT(id_pembayaran) as jumlah_pembayaran FROM pembayaran WHERE status_pembayaran > 1");
+
+                                echo $pembayaran['jumlah_pembayaran'];
+                            ?>
+                            </h6>
                         </div>
                         <div class="stats-small__data">
-                            <span class="stats-small__percentage stats-small__percentage--decrease">2.4%</span>
+                            <!-- <span class="stats-small__percentage stats-small__percentage--decrease">2.4%</span> -->
                         </div>
                     </div>
                     <canvas height="76" class="blog-overview-stats-small-5 chartjs-render-monitor" width="191" style="display: block; width: 191px; height: 76px;"></canvas>

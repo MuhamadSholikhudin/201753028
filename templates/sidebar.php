@@ -64,7 +64,7 @@
             ?>
                 <div class="single-post first">
                     <div class="image">
-                        <img src="https://source.unsplash.com/75x75?<?= $bar_bar['nama_produk']; ?>" alt="#">
+                        <img src="<?= base_url('gambar/produk/') ?><?= $bar_bar['gambar']; ?>" alt="#">
                     </div>
                     <div class="content">
                         <h5><a href="<?= base_url('shop/index.php?halaman=detail_produk&id_produk=') . $bar_bar['id_produk'] ?>"><?= $bar_bar['nama_produk']; ?></a></h5>

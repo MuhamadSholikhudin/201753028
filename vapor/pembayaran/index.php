@@ -32,12 +32,12 @@
        
 	<div class="card-body bg-white">
 		<?php
-  //Membuat varialbel username dari session login username
-  $username = $_SESSION['username'];
+			//Membuat varialbel username dari session login username
+			$username = $_SESSION['username'];
 
-  //Mencari data profile dari tabel user
-  $profile = querysatudata("SELECT * FROM user WHERE username = '$username' ");
-  ?>
+			//Mencari data profile dari tabel user
+			$profile = querysatudata("SELECT * FROM user WHERE username = '$username' ");
+		?>
 			<table id="table_id" class="table mb-0 row-border" >
 				<thead>
 					<tr>
@@ -51,24 +51,20 @@
 
 				</thead>
 				<tbody>
-					<?php
-     $no = 1;
-     $pembayarans = querybanyak('SELECT * FROM pembayaran WHERE status_pembayaran > 1');
+				<?php
+					$no = 1;
+					$pembayarans = querybanyak('SELECT * FROM pembayaran WHERE status_pembayaran > 1');
 
-     foreach ($pembayarans as $pembayaran) { ?>
+					foreach ($pembayarans as $pembayaran) { ?>
 					<tr >
 						<td><?= $no ?></td>
 						<td><?= rupiah($pembayaran['total_pembayaran']) ?></td>
 						<td>
 							<?php if ($pembayaran['bukti_pembayaran'] !== null) { ?> 
 								<a href="<?= base_url('vapor/pembayaran/lihat.php?id_pembayaran=').$pembayaran['id_pembayaran'] ?>">
-
-							<img src="<?= 'http://localhost/201753028/gambar/butkipembayaran/' .
-           $pembayaran['bukti_pembayaran'] ?>" width="40px" height="40px" style="" alt="logo">
+									<img src="<?= 'http://localhost/201753028/gambar/butkipembayaran/'.$pembayaran['bukti_pembayaran'] ?>" width="40px" height="40px" style="" alt="logo">
 								</a>
-								
 							<?php } else { ?> 
-								
 							<?php } ?>
 						</td>
 						<td><?= $pembayaran['tanggal_pembayaran'] ?></td>
@@ -101,20 +97,14 @@
 							
 						</td>
 					</tr>
-					<?php $no++;}
-     ?>
+				<?php $no++;}  ?>
 				</tbody>
 			</table>
-
-
         </div>
       </div>
     </div>
   </div>
   <!-- End Small Stats Blocks -->
-
-
-
 
 </div>
 </div>

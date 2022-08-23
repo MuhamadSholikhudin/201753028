@@ -49,9 +49,7 @@ include 'templates/header.php';
                     </div>
                 </div>
                 <div class="row">
-
                     <?php
-
 
                     //Menampilkan data produk banyak dalam arrray
                     if (isset($_GET['search'])) {
@@ -79,11 +77,11 @@ include 'templates/header.php';
                                     <a href="<?= base_url('shop/index.php?halaman=detail_produk&id_produk=') . $data_produks['id_produk'] ?>">
                                         <!-- <img class="default-img" src="https://source.unsplash.com/550x750" alt="#"> -->
                                         <img class="default-img" src="<?= base_url('gambar/produk/') ?><?= $data_produks['gambar'] ?>" alt="#">
-                                        <img class="hover-img" src="https://source.unsplash.com/550x750" alt="#">
+                                        <!-- <img class="hover-img" src="https://source.unsplash.com/550x750" alt="#"> -->
                                     </a>
                                     <div class="button-head">
                                         <div class="product-action">
-                                            <a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="<?= base_url('shop/index.php?halaman=detail_produk&id_produk=') . $data_produks['id_produk'] ?>">
+                                            <a  title="Quick View" href="<?= base_url('shop/index.php?halaman=detail_produk&id_produk=') . $data_produks['id_produk'] ?>">
                                                 <i class=" ti-eye"></i><span>Detail</span>
                                             </a>
 
@@ -109,22 +107,13 @@ include 'templates/header.php';
 
                 </div>
 
-                <div class="row">
 
+                <div class="row">
                     <?php if ($banyakpencarian['banyakpencarian'] > 0) { ?>
                         <div class="col-xl-12 col-lg-4 col-md-4 col-12">
-
-
-                            <h6>
-                                &nbsp;
-                                &nbsp;
-                                &nbsp;
-                                Produk yang mungkin anda minati
-                            </h6>
-
+                            <h6>  &nbsp;   &nbsp; &nbsp;Produk yang mungkin anda minati</h6>
                         </div>
                         <?php 
-
                         $array_kategory = array_unique($tampung_array_kategory);
                         // var_dump($array_kategory);
                         // echo implode(" OR ",$array_kategory);
@@ -140,9 +129,8 @@ include 'templates/header.php';
 
                         $minati4 = querybanyak($sql_minati);
                        
-
                         foreach($minati4 as $min){
-
+                            //menampikan produk
                             $produksearkategori = querysatudata("SELECT * FROM produk WHERE  id_produk = ".$min['id_produk']."");
 
                         ?>
@@ -156,7 +144,7 @@ include 'templates/header.php';
                                         </a>
                                         <div class="button-head">
                                             <div class="product-action">
-                                                <a href="<?= base_url('shop/index.php?halaman=detail_produk&id_produk=') . $produksearkategori['id_produk'] ?>" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
+                                                <a href="<?= base_url('shop/index.php?halaman=detail_produk&id_produk=') . $produksearkategori['id_produk'] ?>" title="Quick View"><i class=" ti-eye"></i><span>Quick Shop</span></a>
                                                 <!-- <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a> -->
                                                 <!-- <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a> -->
                                             </div>
@@ -178,22 +166,9 @@ include 'templates/header.php';
                         <?php 
                         }
 
-
                     } else { ?>
-
-
-                        <div class="row">
-
                             <div class="col-xl-12 col-lg-4 col-md-4 col-12">
-
-
-                                <h6>
-                                    &nbsp;
-                                    &nbsp;
-                                    &nbsp;
-                                    Produk yang mungkin anda minati
-                                </h6>
-
+                                <h6> &nbsp; &nbsp; &nbsp;  Produk yang mungkin anda minati  </h6>
                             </div>
 
                             <?php
@@ -241,7 +216,7 @@ include 'templates/header.php';
                     <?php }  ?>
                     <div class="col-xl-3 col-lg-4 col-md-4 col-12">
 
-                        <!-- <?= $banyakpencarian['banyakpencarian'] ?> -->
+                        
                     </div>
                 </div>
 

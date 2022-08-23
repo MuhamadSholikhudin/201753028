@@ -96,7 +96,7 @@ if (isset($_GET['id_pembayaran'])) {
                             <div class="content">
                                 <ul>
                                     <li>
-                                        <input type="file" name="butkipembayaran" class="form-control " id="">
+                                        <input type="file" name="butkipembayaran" class="form-control " id="" required>
                                     </li>
                                 </ul>
                             </div>
@@ -105,7 +105,7 @@ if (isset($_GET['id_pembayaran'])) {
                         <div class="single-widget get-button">
                             <div class="content">
                                 <div class="button">
-                                    <input type="hidden" name="id_pembayaran" value="<?= $pembayaran['id_pembayaran'] ?>" id="">
+                                    <input type="hidden" name="id_pembayaran" value="<?= $pembayaran['id_pembayaran'] ?>" id="" >
                                     <button type="submit" name="btnUPLOADBUKTIPEMBAYARAN" class="btn">Upload Pembayaran</button>
                                 </div>
                             </div>

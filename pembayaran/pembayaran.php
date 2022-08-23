@@ -7,12 +7,12 @@
 
 	<div class="card-body bg-white">
 		<?php
-  //Membuat varialbel username dari session login username
-  $username = $_SESSION['username'];
+			//Membuat varialbel username dari session login username
+			$username = $_SESSION['username'];
 
-  //Mencari data profile dari tabel user
-  $profile = querysatudata("SELECT * FROM user WHERE username = '$username' ");
-  ?>
+			//Mencari data profile dari tabel user
+			$profile = querysatudata("SELECT * FROM user WHERE username = '$username' ");
+		?>
 			<table class="table">
 				<thead>
 					<tr>
@@ -26,11 +26,11 @@
 
 				</thead>
 				<tbody>
-					<?php
-     $no = 1;
-     $pembayarans = querybanyak('SELECT * FROM pembayaran WHERE id_user = ' . $profile['id_user'] . '');
+				<?php
+					$no = 1;
+					$pembayarans = querybanyak('SELECT * FROM pembayaran WHERE id_user = ' . $profile['id_user'] . '');
 
-     foreach ($pembayarans as $pembayaran) { ?>
+					foreach ($pembayarans as $pembayaran) { ?>
 					<tr >
 						<td><?= $no ?></td>
 						<td><?= rupiah($pembayaran['total_pembayaran']) ?></td>
@@ -67,8 +67,7 @@
 							<?php } ?>
 						</td>
 					</tr>
-					<?php $no++;}
-     ?>
+				<?php $no++;} ?>
 				</tbody>
 			</table>
 		</div>

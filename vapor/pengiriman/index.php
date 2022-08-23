@@ -24,18 +24,14 @@
 					</h6>
 				</div>
 				<div class="card-body  pb-3 text-center">
-
-
 					<div class="card-body bg-white">
-						<?php
-      //Membuat varialbel username dari session login username
-      $username = $_SESSION['username'];
+					<?php
+						//Membuat varialbel username dari session login username
+						$username = $_SESSION['username'];
 
-      //Mencari data profile dari tabel user
-      $profile = querysatudata(
-          "SELECT * FROM user WHERE username = '$username' "
-      );
-      ?>
+						//Mencari data profile dari tabel user
+						$profile = querysatudata("SELECT * FROM user WHERE username = '$username' "					);
+					?>
 						<table id="table_id" class="table mb-0 row-border">
 							<thead>
 								<tr>
@@ -46,22 +42,15 @@
 									<th>Status</th>
 									<th>Aksi</th>
 								</tr>
-
 							</thead>
 							<tbody>
-								<?php
-        $no = 1;
-        $pengirimans = querybanyak('SELECT * FROM pengiriman JOIN pembayaran 
-	 ON  pengiriman.id_pembayaran = pembayaran.id_pembayaran 
-	 WHERE pembayaran.status_pembayaran > 3');
+							<?php
+								$no = 1;
+								$pengirimans = querybanyak('SELECT * FROM pengiriman JOIN pembayaran 
+								ON  pengiriman.id_pembayaran = pembayaran.id_pembayaran 
+								WHERE pembayaran.status_pembayaran > 3');
 
-        foreach ($pengirimans as $pengiriman) { ?>
-
-									<?php
-            //  $count_pengiriman = querysatudata(
-            //     'SELECT COUNT(id_pengiriman) as pengiriman FROM pengiriman  WHERE id_pembayaran = '.$pembayaran['id_pembayaran'].''
-            //  );
-            ?>
+									foreach ($pengirimans as $pengiriman) { ?>
 									<tr>
 										<td><?= $no ?></td>
 										<td><?= $pengiriman['nomor_pembayaran'] ?></td>
@@ -104,20 +93,13 @@
 
 										</td>
 									</tr>
-								<?php $no++;}
-        ?>
+								<?php $no++; }	?>
 							</tbody>
 						</table>
-
-
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- End Small Stats Blocks -->
-
-
-
-
 	</div>
 </div>

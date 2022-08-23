@@ -154,7 +154,12 @@
 
 							<?php if (isset($_SESSION['id_user'])) { ?>
 								<div class="sinlge-bar">
-									<a href="http://localhost/201753028/shop/user/index.php" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
+									<?php if($_SESSION['hakakses'] ==  4){ ?>
+										<a href="http://localhost/201753028/shop/user/index.php" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
+									<?php }elseif($_SESSION['hakakses'] < 4){ ?>
+										<a href="http://localhost/201753028/vapor/index.php?halaman=beranda" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>										
+									<?php }	?>
+								
 								</div>
 
 							<?php } else { ?>

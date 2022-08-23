@@ -53,7 +53,7 @@
                         </a>
                         <div class="button-head">
                             <div class="product-action">
-                                <a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="<?= base_url('shop/index.php?halaman=detail_produk&id_produk=') . $data_produks['id_produk'] ?>">
+                                <a title="Quick View" href="<?= base_url('shop/index.php?halaman=detail_produk&id_produk=') . $data_produks['id_produk'] ?>">
                                     <i class=" ti-eye"></i><span>Detail</span>
                                 </a>
 

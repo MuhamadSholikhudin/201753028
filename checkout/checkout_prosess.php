@@ -36,9 +36,9 @@ if (isset($_GET['id_checkout'])) {
 
 												foreach ($explode_id_keranjang as $id_keranjang) {
 													$keranjang = querysatudata("SELECT * FROM keranjang LEFT JOIN produk ON keranjang.id_produk = keranjang.id_produk WHERE id_keranjang =" . $id_keranjang . " ");
-											?>
+												?>
 													<tr>
-														<td><img src="<?=base_url('gambar/produk/')  ?><?= $keranjang['gambar'] ?>" alt="#"></td>
+														<td><img src="<?=base_url('gambar/produk/')  ?><?= $keranjang['gambar'] ?>" alt="<?= $keranjang['nama_produk'] ?>"></td>
 														<td class="product-des" data-title="Description">
 															<p class="product-name"><a href="#"><?= $keranjang['nama_produk'] ?></a></p>
 															<p class="product-des"></p>
@@ -59,7 +59,7 @@ if (isset($_GET['id_checkout'])) {
 				</div>
 			</div>
 			<div class="col-lg-4 col-12 ">
-					<form action="<?= base_url('pembayaran/aksi.php') ?>" method="post">
+					<form action="<?= base_url('pembayaran/aksi.php') ?>" method="POST">
 					<div class="order-details">
 						<!-- Order Widget -->
 						<div class="single-widget">
@@ -92,9 +92,10 @@ if (isset($_GET['id_checkout'])) {
 															<label for="provinc">Provinsi
 																<span>*</span>
 															</label> <br>
-															<select name="provinsi" id="provinc" style="width:100%; height:35px;">
+															<!-- <select name="provinsi" id="provinc" style="width:100%; height:35px;">
 																<option value="jawa tengah">Jawa Tengah</option>
-															</select>
+															</select> -->
+															<input type="text" name="provinsi" placeholder="" required="required" style="width:100%;">
 														</div>
 													</div>
 													<div class="col-lg-12 col-md-6 col-12">
@@ -102,11 +103,13 @@ if (isset($_GET['id_checkout'])) {
 															<label for="country">Kota / Kabupaten
 																<span>*</span>
 															</label>
-															<select name="kota" id="country" style="width:100%; height:35px;">
+															<!-- <select name="kota" id="country" style="width:100%; height:35px;">
 																<option value="Kudus">Kudus</option>
 																<option value="Pati">Pati</option>
 																<option value="Jepara">Jepara</option>
-															</select>
+															</select> -->
+
+															<input type="text" name="kota" placeholder="" required="required" style="width:100%;">
 														</div>
 													</div>
 													<div class="col-lg-12 col-md-6 col-12">
@@ -114,11 +117,13 @@ if (isset($_GET['id_checkout'])) {
 															<label for="distric">Kecamatan
 																<span>*</span>
 															</label>
-															<select name="kecamatan" id="distric" style="width:100%; height:35px;">
+															<input type="text" name="kecamatan" placeholder="" required="required" style="width:100%;">
+
+															<!-- <select name="kecamatan" id="distric" style="width:100%; height:35px;">
 																<option value="Kudus Kota">Kudus Kota</option>
 																<option value="Pati Kota">Pati Kota</option>
 																<option value="Jepara Kota">Jepara Kota</option>
-															</select>
+															</select> -->
 														</div>
 													</div>
 													<div class="col-lg-12 col-md-6 col-12">
@@ -207,7 +212,7 @@ if (isset($_GET['id_checkout'])) {
 											<img src="<?= base_url('gambar/bank/') ?><?= $bank['gambar_logo'] ?>" alt="#" style="width:40px; height:40px;">
 											<!-- <img src="<?= base_url('gambar/bank/') ?><?= $bank['gambar_logo'] ?>" alt="" sizes="10" srcset=""> -->
 											&nbsp;&nbsp;&nbsp;&nbsp;
-											<input name="id_bank" id="<?= $bank['id_bank'] ?>" value="<?= $bank['id_bank'] ?>" type="radio" require>
+											<input name="id_bank" id="<?= $bank['id_bank'] ?>" value="<?= $bank['id_bank'] ?>" type="radio" required>
 											<?= $bank['nama_bank'] ?>
 										</li>
 									<?php
