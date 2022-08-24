@@ -35,19 +35,24 @@ if (isset($_GET['id_pengiriman'])) {
                         <div class="row">
                             <div class="col-md-12">
                                 <form action="<?= base_url('vapor/pengiriman/aksi.php') ?>" enctype="multipart/form-data" method="POST">
-                                <input type="hidden" class="form-control" name="id_pengiriman" value="<?= $_GET['id_pengiriman'] ?>">
-                                    
-                                <div class="form-row">
+                                    <input type="hidden" class="form-control" name="id_pengiriman" value="<?= $_GET['id_pengiriman'] ?>">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12">
+                                            <label for="feDescription">Tanggal Pengiriman</label>
+                                            <input type="date" class="form-control" name="tanggal_pengiriman" value="<?= $pengiriman['tanggal_pengiriman'] ?>" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <label for="feDescription">Keterangan</label>
-                                            <textarea class="form-control" name="keterangan" require><?= $pengiriman['keterangan'] ?></textarea>
+                                            <textarea class="form-control" name="keterangan" required><?= $pengiriman['keterangan'] ?></textarea>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group ">
                                             <label for="gambar">Bukti Pengiriman</label>
-                                            <img id="output" src="<?= base_url("gambar/buktipengiriman/").$pengiriman['bukti_pengiriman'] ?>" />
-                                            <input type="file" class="form-control" id="gambar" name="bukti_pengiriman" accept="image/png, image/jpeg, image/jpg, image/img" onchange="loadFile(event)" require>
+                                            <img id="output" src="<?= base_url("gambar/buktipengiriman/") . $pengiriman['bukti_pengiriman'] ?>" />
+                                            <input type="file" class="form-control" id="gambar" name="bukti_pengiriman" accept="image/png, image/jpeg, image/jpg, image/img" onchange="loadFile(event)" required>
                                         </div>
                                         <script>
                                             var loadFile = function(event) {

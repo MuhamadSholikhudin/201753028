@@ -6,9 +6,7 @@ include '../function.php';
 
 if (isset($_POST['btnPROSESPEMBAYARAN'])) {
 
-    var_dump($_POST);
-
-    /*
+    
     //update status keranjang
     $explode_id_keranjang = explode(",", $_POST['implode_id_keranjang']);
 
@@ -44,6 +42,8 @@ if (isset($_POST['btnPROSESPEMBAYARAN'])) {
     // cari pembayaran yang di simpan
     $cari_pembayaran = querysatudata("SELECT * FROM pembayaran WHERE id_checkout = ".$_POST['id_checkout']."");
     
+    // print("<pre>".print_r($cari_pembayaran,true)."</pre>");
+
     // simpan data pengiriman
     $sql_insert_pengiriman = "INSERT INTO `pengiriman`( `id_user`, `id_pembayaran`, `nama_penerima`, `nomor_penerima` , `provinsi`, `kota`, `kecamatan`, `kode_pos`, `alamat_lengkap`, `status_pengiriman`) VALUES 
     (
@@ -55,11 +55,16 @@ if (isset($_POST['btnPROSESPEMBAYARAN'])) {
         '".$_POST['kota']."',
         '".$_POST['kecamatan']."',
         '".$_POST['kode_pos']."',
+        '".$_POST['alamat_jalan']."',
         '".$_POST['alamat_lengkap']."',
         1
     )";
 
+    // echo $sql_insert_pengiriman;
+
     $query_insert_pengiriman = mysqli_query($koneksi, $sql_insert_pengiriman);
+
+    // var_dump($query_insert_pengiriman);
 
     if ($query_insert_pembayaran) {
         // Mencari pembayaran yang sudah di insert
@@ -72,7 +77,7 @@ if (isset($_POST['btnPROSESPEMBAYARAN'])) {
         echo "<meta http-equiv='refresh' content='0; url=http://localhost/201753028/checkout/index.php?halaman=checkout&id_checkout=" . $_POST['id_checkout'] . "'>";
     }
 
-    */
+    
 } 
 // Upload Bukti Pembayaran
 elseif (isset($_POST['btnUPLOADBUKTIPEMBAYARAN'])) {

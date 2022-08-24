@@ -9,14 +9,14 @@ if(isset($_POST['btnSIMPANBUKTIPENGIRIMAN'])){
     
     $sql_update_pengiriman = "UPDATE `pengiriman` SET 
         `status_pengiriman`= 2,
+        `tanggal_pengiriman` = ".$_POST['tanggal_pengiriman'].",
         `keterangan`='".$_POST['keterangan']."',
         `bukti_pengiriman`='".$_POST['bukti_pengiriman']."' 
         WHERE id_pengiriman = ".$_POST['id_pengiriman']."";
 
      move_uploaded_file($lokasi, "../../gambar/bukti_pengiriman/".$bukti_pengiriman);
 
-     $query_simpan = mysqli_query($koneksi, $sql_update_pengiriman);
-
+    $query_simpan = mysqli_query($koneksi, $sql_update_pengiriman);
 
     $bukti_pengiriman = (strtotime('now') . $_FILES['bukti_pengiriman']['name']);
     $lokasi = $_FILES['bukti_pengiriman']['tmp_name'];
@@ -38,8 +38,6 @@ if(isset($_POST['btnSIMPANBUKTIPENGIRIMAN'])){
             echo "<script>alert('Simpan Bukti Pengiriman Gagal')</script>";
             echo "<meta http-equiv='refresh' content='0; url=http://localhost/201753028/vapor/index.php?halaman=pengiriman'>";
         } //proses simpan selesai
-
-
 
 }elseif(isset($_POST['btnUPDATEBUKTIPENGIRIMAN'])){
 

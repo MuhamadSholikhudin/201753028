@@ -3,7 +3,31 @@
   <div class="page-header row no-gutters py-4">
     <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
       <span class="text-uppercase page-subtitle">Page</span>
-      <h3 class="page-title">Pesanan Stok Gerai</h3>
+
+
+      <?php 
+        /*
+          SELECT id_produk
+            FROM stok_gerai
+            EXCEPT
+          SELECT id_produk 
+            FROM produk;
+        */
+         
+         if($_SESSION['hakakses'] == 3){
+
+          $user = querysatudata("SELECT * FROM user WHERE id_user =".$_SESSION['id_user']." ");
+
+          $gerai = querysatudata("SELECT * FROM gerai WHERE id_gerai =".$user['id_gerai']." ");
+          
+          $nama_gerai = $gerai['cabang'];
+
+         }else{
+           $nama_gerai = "";
+         }
+
+      ?>
+      <h3 class="page-title">Pesanan Stok Gerai  <?= $nama_gerai ?></h3>
     </div>
   </div>
   <!-- End Page Header -->
@@ -38,7 +62,7 @@
             </thead>
             <tbody>
               <?php $no = 1;
-              $stok_gerai = querybanyak('SELECT * FROM pesanan_stok_gerai');
+              $stok_gerai = querybanyak("SELECT * FROM pesanan_stok_gerai WHERE id_user = ".$user['id_user']." ");
               foreach ($stok_gerai as $ger) : ?>
                 <tr>
                   <td> <?= $no++ ?></td>
@@ -56,9 +80,7 @@
                     <?php
                     if ($ger['status_pesanan_stok'] == 'tersedia') { ?>
                       <form action="<?= base_url('vapor/pesanan_stok_gerai/aksi.php') ?>" method="post">
-                        <input type="hidden" name="id_pesanan_stok_gerai" value="
-                        <?= $ger['id_pesanan_stok_gerai'] ?>
-                        " id="">
+                        <input type="hidden" name="id_pesanan_stok_gerai" value="<?= $ger['id_pesanan_stok_gerai'] ?>" id="">
                         <button type="submit" name="btnTERIMAPESANAN" class="btn btn-dark">Batal pesan</button>
                       </form>
                     <?php
