@@ -30,7 +30,7 @@
 
         ?>
 
-      <h3 class="page-title">Penjualan Gerai</h3>
+      <h3 class="page-title">Penjualan Gerai <?= $nama_gerai ?></h3>
     </div>
   </div>
   <!-- End Page Header -->
@@ -67,8 +67,19 @@
               </tr>
             </thead>
             <tbody>
-              <?php $no = 1;               
-              $penjualan_gerai = querybanyak('SELECT * FROM penjualan_gerai');
+              <?php 
+              
+              if($_SESSION['hakakses'] == 3){
+
+                $penjualan_gerai = querybanyak("SELECT * FROM penjualan_gerai 
+                JOIN keranjang_gerai ON penjualan_gerai.id_penjualan_gerai = keranjang_gerai.id_penjualan_gerai
+                WHERE keranjang_gerai.id_stok_gerai = ".$gerai['id_gerai']."");
+                
+              }else{
+
+                $penjualan_gerai = querybanyak('SELECT * FROM penjualan_gerai');
+              }
+              $no = 1;               
               foreach ($penjualan_gerai as $penj) : ?>
                 <tr>
                   <td> <?= $no++ ?></td>

@@ -15,13 +15,15 @@
             ="UPDATE stok_gerai SET id_produk = "&D2&" WHERE id_produk="&B2&";"
         */
          
+         if($_SESSION['hakakses'] == 3){ // Jika hakakses sama dengan karyawan
 
-         if($_SESSION['hakakses'] == 3){
-
+          //menampilkan data user
           $user = querysatudata("SELECT * FROM user WHERE id_user =".$_SESSION['id_user']." ");
-
+          
+          //menampilkan data gerai
           $gerai = querysatudata("SELECT * FROM gerai WHERE id_gerai =".$user['id_gerai']." ");
           
+          //menampilkan output data gerai
           $nama_gerai = $gerai['cabang'];
 
          }else{
@@ -59,7 +61,7 @@
                 <th scope="col" class="border-0">Gerai</th>
                 <th scope="col" class="border-0">Produk</th>
                 <th scope="col" class="border-0">Stok Produk</th>
-                <th scope="col" class="border-0">Aksi</th>
+                <!-- <th scope="col" class="border-0">Aksi</th> -->
               </tr>
             </thead>
             <tbody>
@@ -70,13 +72,13 @@
                   <td> <?= $no++ ?></td>
                   <td>
                     <?php
-                    $gerai = querysatudata("SELECT * FROM gerai WHERE id_gerai = " . $ger['id_gerai'] . "");
+                      $gerai = querysatudata("SELECT * FROM gerai WHERE id_gerai = " . $ger['id_gerai'] . "");
                     ?>
                     <?= $gerai['nama_gerai'] ?>
                   </td>
                   <td>
                     <?php
-                    $produk = querysatudata("SELECT * FROM produk WHERE id_produk = " . $ger['id_produk'] . "");
+                      $produk = querysatudata("SELECT * FROM produk WHERE id_produk = " . $ger['id_produk'] . "");
                     ?>
                     <!-- <?= $ger['id_produk'] ?> -->
                     <?= $produk['nama_produk'] ?>
@@ -84,9 +86,10 @@
                   <td>
                     <?= $ger['stok_gerai'] ?>
                   </td>
-                  <td> <a href="<?= base_url('vapor/index.php?halaman=stok_gerai_edit&id_stok_gerai=' . $ger['id_stok_gerai']) ?>" type="button" class="btn btn-success"> Edit</a>
+                  <!-- <td> 
+                    <a href="<?= base_url('vapor/index.php?halaman=stok_gerai_edit&id_stok_gerai=' . $ger['id_stok_gerai']) ?>" type="button" class="btn btn-success"> Edit</a>
                     <a href="<?= base_url('pemilik/stok_gerai/hapus/' . $ger['id_stok_gerai']) ?>" type="button" class="btn btn-danger"> Hapus</a>
-                  </td>
+                  </td> -->
                 </tr>
               <?php endforeach; ?>
 

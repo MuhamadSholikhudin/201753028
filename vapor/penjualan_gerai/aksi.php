@@ -21,7 +21,7 @@
 
         if($query_simpan){
             echo "<script>alert('Simpan Berhasil')</script>";
-            echo "<meta http-equiv='refresh' content='0; url=http://localhost/201753028/vapor/index.php?halaman=penjualan_gerai_keranjang&id_penjualan_gerai=".$penjualan_gerai['id_penjulan_gerai']."'>";
+            echo "<meta http-equiv='refresh' content='0; url=http://localhost/201753028/vapor/index.php?halaman=penjualan_gerai_keranjang&id_penjualan_gerai=".$penjualan_gerai['id_penjualan_gerai']."'>";
         
         }else{
             echo "<script>alert('Simpan Gagal')</script>";

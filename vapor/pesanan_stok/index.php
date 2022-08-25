@@ -6,7 +6,7 @@
   <div class="page-header row no-gutters py-4">
     <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
       <span class="text-uppercase page-subtitle">Page</span>
-      <h3 class="page-title">Pesanan Stok Gerai</h3>
+      <h3 class="page-title">Pesanan Stok Gerai Admin</h3>
     </div>
   </div>
   <!-- End Page Header -->
@@ -44,8 +44,8 @@
               <?php $no = 1;
               $stok_gerai = querybanyak("SELECT * FROM pesanan_stok_gerai WHERE status_pesanan_stok = 'pesan' ORDER BY status_pesanan_stok, id_user DESC ");
               foreach ($stok_gerai as $ger) : ?>
-               <form action="<?= base_url('vapor/pesanan_stok/aksi.php') ?>" method="post">
                 <tr>
+                  <form action="<?= base_url('vapor/pesanan_stok/aksi.php') ?>" method="POST">
                   <td> <?= $no++ ?></td>
                   <td>
                     <?php
@@ -56,14 +56,15 @@
                   <td><?= $ger['pesanan_stok'] ?></td>
                   <td><?= $ger['keterangan'] ?></td>
                   <td>
-                    <?php 
-                      $gerai = querysatudata("SELECT * FROM gerai 
-                      JOIN stok_gerai ON gerai.id_gerai = stok_gerai.id_gerai
-                      WHERE 
-                      stok_gerai.id_gerai = 3
-                      LIMIT 1");
 
-                                          echo $gerai['nama_gerai'];
+                    <?php
+                      // menampilkan data user
+                      $user = querysatudata("SELECT * FROM user WHERE id_user =".$ger['id_user']." ");
+                      
+                      //menampilkan data stok gerai
+                      $gerai = querysatudata("SELECT * FROM gerai WHERE id_gerai = ".$user['id_gerai']." ");
+
+                      echo $gerai['cabang'];
                     ?>
                   </td>
                   <td> 
@@ -72,13 +73,13 @@
                     ?>
                     <input type="hidden" name="id_pesanan_stok_gerai" value="<?= $ger['id_pesanan_stok_gerai'] ?>" id="">
                     <input type="hidden" name="id_produk" value="<?= $ger['id_produk'] ?>" id="">
-                    <input type="number" name="stok_tersedia" min="1" max="<?= $maxtersedia['stok_produk'] ?>" value="<?= $get['stok_tersedia'] ?>" id=""></td>
+                    <input type="number" name="stok_tersedia" min="0" max="<?= $maxtersedia['stok_produk'] ?>" value="<?= $get['stok_tersedia'] ?>" id=""></td>
                   <td>
                     <?php
-                    if ($ger['status_pesanan_stok'] == 'tersedia') { ?>
-                    <button type="submit" name="btnBATALTERSEDIA" class="btn btn-wheat">Tersedia</button>
+                    if ($ger['status_pesanan_stok'] == "tersedia") { ?>
+                    <button type="submit" name="btnBATALTERSEDIA" class="btn btn-wheat">Batal Tersedia</button>
                     <?php
-                    } elseif ($ger['status_pesanan_stok'] == 'pesan') { ?>          
+                    } elseif ($ger['status_pesanan_stok'] == "pesan") { ?>          
                         <button type="submit" name="btnTERSEDIA" class="btn btn-wheat">Tersedia</button>
                       
                     <?php
@@ -88,9 +89,9 @@
                     }
                     ?>
                   </td>
-                </tr>
+                </form>
+              </tr>
 
-               </form>
               <?php endforeach; ?>
 
             </tbody>
