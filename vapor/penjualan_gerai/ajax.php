@@ -2,9 +2,9 @@
 include '../../koneksi.php';
 include '../../function.php';
 
-if (isset($_POST['searchkeranjang']) and isset($_POST['id_penjualan_gerai'])) {
+if (isset($_POST['searchkeranjang']) and isset($_POST['id_penjualan_gerai']) and isset($_POST['id_gerai'])) {
 
-    $sql = "SELECT * FROM stok_gerai LEFT JOIN produk ON stok_gerai.id_produk = produk.id_produk  WHERE produk.nama_produk  LIKE '%" . $_POST['searchkeranjang'] . "%' LIMIT 5";
+    $sql = "SELECT * FROM stok_gerai LEFT JOIN produk ON stok_gerai.id_produk = produk.id_produk  WHERE produk.nama_produk  LIKE '%" . $_POST['searchkeranjang'] . "%' AND stok_gerai.id_gerai =".$_POST['id_gerai']." LIMIT 5";
 
     $cari = mysqli_query($koneksi, $sql);
 

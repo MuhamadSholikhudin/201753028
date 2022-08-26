@@ -167,7 +167,33 @@
     // Hapus Kernjang
     elseif(isset($_GET['id_keranjang_gerai']) AND isset($_GET['id_penjualan_gerai'])){
 
+        //menampilkan data penjualan gerai
+        $penjualan_gerai = querysatudata("SELECT * FROM penjualan_gerai WHERE id_penjualan_gerai = ".$_GET['id_penjualan_gerai']."");
+        
+        //menampilkan data keranjang gerai
+        $keranjang_gerai = querysatudata("SELECT * FROM keranjang_gerai WHERE id_keranjang_gerai = ".$_GET['id_keranjang_gerai']."");
 
+        // total_penjualan baru
+        $total_penjualan_baru = $penjualan_gerai['total_penjualan'] - $keranjang_gerai['jumlah_harga'];
+
+        // sql update data penjualan 
+        $sql_update_penjualan = "UPDATE penjualan_gerai SET total_penjualan = ".$total_penjualan_baru." WHERE id_penjualan_gerai = ".$penjualan_gerai['id_penjualan_gerai']."";
+        
+        // execute update penjualan
+        $execute_update_penjualan = mysqli_query($koneksi, $sql_update_penjualan);
+
+        //mulai proses hapus
+        $sql_hapus_keranjang = "DELETE FROM keranjang_gerai WHERE
+            id_keranjang_gerai='".$_GET['id_keranjang_gerai']."'";
+        $query_hapus_keranjang = mysqli_query($koneksi, $sql_hapus_keranjang);
+
+        if($query_hapus_keranjang){
+            echo "<script>alert('Hapus Berhasil')</script>";
+            echo "<meta http-equiv='refresh' content='0; url=http://localhost/201753028/vapor/index.php?halaman=penjualan_gerai_keranjang&id_penjualan_gerai=".$_GET['id_penjualan_gerai']."'>";
+        }else{
+            echo "<script>alert('Gagal Berhasil')</script>";
+            echo "<meta http-equiv='refresh' content='0; url=http://localhost/201753028/vapor/index.php?halaman=penjualan_gerai_keranjang&id_penjualan_gerai=".$_GET['id_penjualan_gerai']."'>";
+        } //proses ubah selesai
 
     }
 

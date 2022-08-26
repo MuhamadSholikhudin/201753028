@@ -4,10 +4,12 @@ function keluar() {
   console.log(search);
 }
 
+// Pencarian produk berdasarkan stok gerai
 $("#searchkeranjang").keydown(function () {
   // var keyword = $(this).val();
   var searchkeranjang = document.getElementById("searchkeranjang").value;
   var id_penjualan_gerai = document.getElementById("id_penjualan_gerai").value;
+  var id_gerai = document.getElementById("id_gerai").value;
   // alert(searchkeranjang);
 
   $.ajax({
@@ -16,11 +18,11 @@ $("#searchkeranjang").keydown(function () {
     data: {
       searchkeranjang: searchkeranjang,
       id_penjualan_gerai: id_penjualan_gerai,
+      id_gerai: id_gerai
     },
     dataType: "json",
     beforeSend: function () {
       $("#hasil_cari").hide();
-      // alert('1');
     },
     success: function (data) {
       //   console.log(data);
@@ -30,10 +32,12 @@ $("#searchkeranjang").keydown(function () {
   });
 });
 
+// Pencarian produk berdasarkan stok gerai
 $("#searchkeranjang").keyup(function () {
   // var keyword = $(this).val();
   var searchkeranjang = document.getElementById("searchkeranjang").value;
   var id_penjualan_gerai = document.getElementById("id_penjualan_gerai").value;
+  var id_gerai = document.getElementById("id_gerai").value;
   // alert(searchkeranjang);
 
   $.ajax({
@@ -42,31 +46,18 @@ $("#searchkeranjang").keyup(function () {
     data: {
       searchkeranjang: searchkeranjang,
       id_penjualan_gerai: id_penjualan_gerai,
+      id_gerai: id_gerai
     },
     dataType: "json",
     beforeSend: function () {
       $("#hasil_cari").hide();
     },
     success: function (data) {
+      //   console.log(data);
       $("#hasil_cari").show();
       $("#hasil_cari").html(data);
     },
   });
-});
-
-// aotomatis hitung bayar
-$("#bayar").keydown(function () {
-  $("#kembali").css("background-color", "yellow");
-  $("#bayar").css("background-color", "yellow");
-  var bayar = $(this).val();
-  var total = $("#total_belanja").val();
-  var kembali = bayar - total;
-  $("#kembali").val(kembali);
-  if(kembali >= 0){
-    butonbayar.disabled = false;
-  }else{
-    butonbayar.disabled = true;
-  }
 });
 
 $("#bayar").keyup(function () {
@@ -130,7 +121,6 @@ $(".qty").on("change", function () {
     },
   });
 });
-
 
 
 $(document).ready(function () {
