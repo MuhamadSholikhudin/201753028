@@ -49,7 +49,7 @@
 
         if($query_simpan_pesanan_stok_gerai){ // Jika pesanan tersedia
             echo "<script>alert('Simpan Berhasil')</script>";
-            echo "<meta http-equiv='refresh' content='0; url=http://localhost/201753028/vapor/index.php?halaman=pesanan_stok_gerai'>";
+            echo "<meta http-equiv='refresh' content='0; url=http://localhost/201753028/vapor/index.php?halaman=pesanan_stok'>";
         }else{
             echo "<script>alert('Simpan Gagal')</script>";
             echo "<meta http-equiv='refresh' content='0; url=http://localhost/201753028/vapor/index.php?halaman=pesanan_stok_gerai_tambah'>";

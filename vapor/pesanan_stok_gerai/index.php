@@ -5,29 +5,34 @@
       <span class="text-uppercase page-subtitle">Page</span>
 
 
-      <?php 
-        /*
+      <?php
+      /*
           SELECT id_produk
             FROM stok_gerai
             EXCEPT
           SELECT id_produk 
             FROM produk;
         */
-         
-         if($_SESSION['hakakses'] == 3){
 
-          $user = querysatudata("SELECT * FROM user WHERE id_user =".$_SESSION['id_user']." ");
+      if ($_SESSION['hakakses'] == 3) {
 
-          $gerai = querysatudata("SELECT * FROM gerai WHERE id_gerai =".$user['id_gerai']." ");
+        $user = querysatudata("SELECT * FROM user WHERE id_user =" . $_SESSION['id_user'] . " ");
+
+        $gerai = querysatudata("SELECT * FROM gerai WHERE id_gerai =" . $user['id_gerai'] . " ");
+
+        $nama_gerai = $gerai['cabang'];
+        $id_gerai = $gerai['id_gerai'];
+      } else {
+          //menampilkan data gerai
+          $gerai = querysatudata("SELECT * FROM gerai WHERE id_gerai = 1 ");
           
+          //menampilkan output data gerai
           $nama_gerai = $gerai['cabang'];
-
-         }else{
-           $nama_gerai = "";
-         }
+          $id_gerai = 1;
+      }
 
       ?>
-      <h3 class="page-title">Pesanan Stok Gerai  <?= $nama_gerai ?></h3>
+      <h3 class="page-title">Pesanan Stok Gerai <?= $nama_gerai ?></h3>
     </div>
   </div>
   <!-- End Page Header -->
@@ -62,7 +67,33 @@
             </thead>
             <tbody>
               <?php $no = 1;
-              $stok_gerai = querybanyak("SELECT * FROM pesanan_stok_gerai WHERE id_user = ".$user['id_user']." ");
+
+              //Jika akun login adalah karyawan  maka
+              if ($_SESSION['hakakses'] == 3) {
+
+                $stok_gerai = querybanyak("SELECT * FROM pesanan_stok_gerai
+                  JOIN user ON user.id_user = pesanan_stok_gerai.id_user
+                  JOIN gerai ON gerai.id_gerai = user.id_gerai
+                  WHERE gerai.id_gerai = " . $id_gerai . "");
+
+                // $stok_gerai = querybanyak("SELECT * FROM pesanan_stok_gerai 
+                //     LEFT JOIN stok_gerai ON pesanan_stok_gerai.id_produk = stok_gerai.id_produk
+                //     WHERE stok_gerai.id_gerai = " . $id_gerai . " ORDER BY pesanan_stok_gerai.id_pesanan_stok_gerai DESC ");
+
+              } else { // jika dia buka karyawan maka dia pemilik dan admin
+
+                $stok_gerai = querybanyak("SELECT * FROM pesanan_stok_gerai
+                JOIN user ON user.id_user = pesanan_stok_gerai.id_user
+                JOIN gerai ON gerai.id_gerai = user.id_gerai
+                WHERE gerai.id_gerai = " . $id_gerai . "");
+
+
+                // $stok_gerai = querybanyak("SELECT * FROM pesanan_stok_gerai 
+                //     LEFT JOIN stok_gerai ON pesanan_stok_gerai.id_produk = stok_gerai.id_produk
+                //     WHERE stok_gerai.id_gerai = " . $id_gerai . " ORDER BY pesanan_stok_gerai.id_pesanan_stok_gerai DESC ");
+              }
+
+
               foreach ($stok_gerai as $ger) : ?>
                 <tr>
                   <td> <?= $no++ ?></td>

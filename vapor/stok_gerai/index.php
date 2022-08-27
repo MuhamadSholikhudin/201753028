@@ -25,9 +25,17 @@
           
           //menampilkan output data gerai
           $nama_gerai = $gerai['cabang'];
+          $id_gerai = $gerai['id_gerai'];
+
 
          }else{
-           $nama_gerai = "";
+          //menampilkan data gerai
+          $gerai = querysatudata("SELECT * FROM gerai WHERE id_gerai = 1 ");
+          
+          //menampilkan output data gerai
+          $nama_gerai = $gerai['cabang'];
+          $id_gerai = 1;
+
          }
 
       ?>
@@ -65,8 +73,11 @@
               </tr>
             </thead>
             <tbody>
-              <?php $no = 1;
-              $stok_gerai = querybanyak("SELECT * FROM stok_gerai WHERE id_gerai = " . $gerai['id_gerai'] ."  ");
+              <?php 
+              $no = 1; // no stok di mulai dari 1
+
+              
+              $stok_gerai = querybanyak("SELECT * FROM stok_gerai WHERE id_gerai = " . $id_gerai ."  ");
               foreach ($stok_gerai as $ger) : ?>
                 <tr>
                   <td> <?= $no++ ?></td>

@@ -10,6 +10,26 @@
             // $profile = $this->db->query("SELECT * FROM user WHERE username = '$username' ")->row();
             $profile = querysatudata("SELECT * FROM user WHERE username = '$username'  ");
 
+            $cari_alamat = querysatudata("SELECT COUNT(id_alamat) as jumlah_alamat FROM alamat WHERE id_user = " . $profile['id_user'] . "");
+
+            if ($cari_alamat['jumlah_alamat'] > 0) {
+                $alamat = querysatudata("SELECT * FROM alamat WHERE id_user = " . $profile['id_user'] . "");
+
+                $provinsi = $alamat['provinsi'];
+                $kota = $alamat['kota'];
+                $kecamatan = $alamat['kecamatan'];
+                $kode_pos = $alamat['kode_pos'];
+                $alamat_lengkap = $alamat['alamat_lengkap'];
+
+            }else{
+                $provinsi = "";
+                $kota = "";
+                $kecamatan = "";
+                $kode_pos = "";
+                $alamat_lengkap = "";
+
+            }
+
             ?>
 
             <div class="row">
@@ -47,9 +67,6 @@
         </div>
     </div>
 
-
-
-
     <div class="card bg-light mb-3 mt-3" style="max-width: 50rem;">
         <div class="card-header" style=" background-color: #F7941D; color:#fff;">ALAMAT SAYA</div>
         <div class="card-body bg-white">
@@ -58,27 +75,27 @@
                     Provinsi
                 </div>
                 <div class="col-lg-9">
-                    Jawa Tengah
+                    <?= $provinsi ?>
                 </div>
                 <div class="col-lg-3">
                     Kota
                 </div>
                 <div class="col-lg-9">
-                    Kudus
+                <?= $kota ?>
                 </div>
 
                 <div class="col-lg-3">
                     Kecamatan
                 </div>
                 <div class="col-lg-9">
-                    Bae
+                <?= $kecamatan ?>
                 </div>
                 <div class="col-lg-3">
                     Kode Post
                 </div>
 
                 <div class="col-lg-9">
-                    
+                <?= $kode_pos ?>
 
                 </div>
 
@@ -86,13 +103,22 @@
                     Detail Alamat
                 </div>
                 <div class="col-lg-9">
-                    <textarea name="" id="" class="form-control" cols="30" rows="5"></textarea>
+                    <textarea name="" id="" class="form-control" cols="30" rows="5"><?=$alamat_lengkap?></textarea>
                 </div>
                 <div class="col-lg-3">
 
                 </div>
                 <div class="col-lg-9">
-                    <a href="<?= base_url('raja_vapor/user/edit_alamat') ?>"><span class="badge badge-warning">Edit Alamat</span></a>
+                    <?php
+                    if ($cari_alamat['jumlah_alamat'] > 0) { ?>
+                     <a href="<?= base_url('shop/user/index.php?halaman=alamat_edit&id_user=') ?><?= $profile['id_user'] ?>"><span class="badge badge-warning">Edit Alamat</span></a>
+
+                    <?php
+                    } else { ?>
+                    <a href="<?= base_url('shop/user/index.php?halaman=alamat_tambah') ?>"<?= $profile['id_user'] ?>><span class="badge badge-warning">Edit Alamat</span></a>
+
+                    <?php
+                    } ?>
                 </div>
 
 

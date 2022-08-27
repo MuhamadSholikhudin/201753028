@@ -40,6 +40,18 @@ include '../../templates/header.php';
                         include "profile_edit.php";
                         break;
 
+                        // Tampilan edit data profile
+                    case 'alamat_tambah':
+                        include 'sidebar.php'; //memanggil file sidebar.php
+                        include "alamat.php";
+                        break;
+
+                        // Tampilan edit data profile
+                    case 'alamat_edit':
+                        include 'sidebar.php'; //memanggil file sidebar.php
+                        include "alamat_edit.php";
+                        break;
+
                         // Tampilan edit password
                     case 'profile_password':
                         include 'sidebar.php'; //memanggil file sidebar.php

@@ -20,8 +20,15 @@
       $id_gerai = $gerai['id_gerai'];
 
       }else{
-        $nama_gerai = "";
-        $id_gerai = 1;
+
+        $user = querysatudata("SELECT * FROM user WHERE id_user =".$_SESSION['id_user']." ");
+
+          //menampilkan data gerai
+          $gerai = querysatudata("SELECT * FROM gerai WHERE id_gerai = 1 ");
+          
+          //menampilkan output data gerai
+          $nama_gerai = $gerai['cabang'];
+          $id_gerai = 1;
       }
 
   ?>
@@ -42,8 +49,8 @@
                     <div class="form-group col-md-12">
                       <label for="nama_kategori">Nama Gerai</label>
                       <input type="text" class="form-control" id="id_produk" value="<?= $nama_gerai ?>" disabled>
-                      <input type="text" class="form-control d-none" id="id_user" placeholder="id_user" name="id_user"  value="<?= $_SESSION['id_user'] ?>">
-                      <input type="text" class="form-control d-none" id="id_gerai" placeholder="id_gerai" name="id_gerai"  value="<?= $id_gerai?>">
+                      <input type="text" class="form-control " id="id_user" placeholder="id_user" name="id_user"  value="<?= $_SESSION['id_user'] ?>">
+                      <input type="text" class="form-control " id="id_gerai" placeholder="id_gerai" name="id_gerai"  value="<?= $id_gerai?>">
                     </div>
                   </div>
                   <div class="form-group">

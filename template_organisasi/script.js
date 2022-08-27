@@ -10,7 +10,7 @@ $("#searchkeranjang").keydown(function () {
   var searchkeranjang = document.getElementById("searchkeranjang").value;
   var id_penjualan_gerai = document.getElementById("id_penjualan_gerai").value;
   var id_gerai = document.getElementById("id_gerai").value;
-  // alert(searchkeranjang);
+  //alert(searchkeranjang);
 
   $.ajax({
     type: "POST",

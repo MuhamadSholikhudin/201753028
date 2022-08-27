@@ -1,6 +1,6 @@
 <?php
 if (isset($_GET['id_penjualan_gerai'])) {
-    echo $id_penjualan_gerai = $_GET['id_penjualan_gerai'];
+    $id_penjualan_gerai = $_GET['id_penjualan_gerai'];
     $penjualan_gerai = querysatudata("SELECT * FROM penjualan_gerai WHERE id_penjualan_gerai =" . $_GET['id_penjualan_gerai'] . " ");
 
     if($_SESSION['hakakses'] == 3){
@@ -9,15 +9,15 @@ if (isset($_GET['id_penjualan_gerai'])) {
 
         $gerai = querysatudata("SELECT * FROM gerai WHERE id_gerai =".$user['id_gerai']." ");
         
-        $nama_gerai = $gerai['cabang'];
-        $id_gerai = $gerai['id_gerai'];
+       echo $nama_gerai = $gerai['cabang'];
+       echo $id_gerai = $gerai['id_gerai'];
 
     }else{
            
-           $nama_gerai = "";
+        echo $nama_gerai = "";
            
            //gerai rajavapor gebog
-           $id_gerai = 3;
+           echo $id_gerai = 3;
     }
 
 }
@@ -42,7 +42,7 @@ if (isset($_GET['id_penjualan_gerai'])) {
             <div class="card card-small mb-4">
                 <div class="card-header border-bottom">
                     <h6 class="m-0">
-                        <input type="text" id="id_gerai" name="id_gerai" value="<?= $id_gerai ?>" class="form-control d-none" >
+                        <input type="text" id="id_gerai" name="id_gerai" value="<?= $id_gerai ?>" class="form-control" >
                         <input type="text" id="searchkeranjang" class="form-control" name="nomer_penjualan" placeholder="KETIKKAN NAMA BARANG UNTUK MENALPILKAN BARANG" style="width:400px;">
                         <input type="text" id="id_penjualan_gerai" class="form-control d-none" name="" value="<?= $id_penjualan_gerai; ?>" style="width:400px;">
                     </h6>

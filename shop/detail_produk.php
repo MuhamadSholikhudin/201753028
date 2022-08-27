@@ -90,7 +90,6 @@ if (isset($_GET['id_produk'])) {
                                                     //menghilangkan shitf
                                                     $shift_shift = array_shift($c_barang);
 
-
                                                     //count barang
                                                     $count_barang = count($c_barang);
 
@@ -100,22 +99,26 @@ if (isset($_GET['id_produk'])) {
                                                     //minimum jumlah transaksi support
                                                     $minimum_jumlah_transaksi = round($count_barang * $minimum_support);
 
-
                                                     //membuat variabel transaksi berdasarkan array checkout
                                                     $transaksi = $arraytransaksicheckout;
 
                                                     //menghitung jumlah transaksi
                                                     $count_transaksi = count($transaksi);
 
+                                                    //memmbuat constan banyak transaksi
                                                     define("ci_transaksi", $count_transaksi);
 
                                                     // function mencari id_produk pada transaksi
                                                     function Search($xvalue, $array)
                                                     {
+                                                        //mencari id produk berdasarkan nilai array
                                                         $search = (array_search($xvalue, $array));
 
+                                                        //jika tidak ada id_produk pada arrat
                                                         if ($search == false) {
                                                             $val = 0;
+
+                                                        //jika ada id_produk pada array
                                                         } elseif ($search == 0) {
                                                             $val = 1;
                                                         } else {
@@ -133,28 +136,39 @@ if (isset($_GET['id_produk'])) {
                                                                 <td>Pattern</td>
                                                             </tr>
                                                             <?php
-                                                            $no = 1;
+                                                            $no = 1; // no dimulai dari 1
+
+                                                            //Looping menggunakan for pada id_produk
                                                             for ($row = 0; $row < $count_transaksi; $row++) { ?>
                                                                 <tr>
                                                                     <td><?= $no++ ?></td>
                                                                     <td>
                                                                         <?php
+                                                                        //menghitung jumlah transaksi per checkout
                                                                         $count_index_transaksi = count($transaksi[$row]);
+
+                                                                        // Looping id_peoduk sebanyak transaksi checkout untuk mencari jumlah item id_produk pada transaksi
                                                                         for ($col = 0; $col < $count_index_transaksi; $col++) {
                                                                             // echo $transaksi[$row][$col] . ",";
 
+                                                                            //jika id_produk tidak ada pada transaksi maka biarkan
                                                                             if ($transaksi[$row][$col] == "") {
+
+                                                                            //kecuali id_produk ada pada transaksi maka tampilkan
                                                                             } else {
+
+                                                                                //menampilkan produk berdasarkan id_produk
                                                                                 $produk1 = querysatudata("SELECT * FROM produk WHERE id_produk =" . $transaksi[$row][$col] . " ");
 
+                                                                                //output nama produk
                                                                                 echo $produk1['nama_produk'] . ", ";
                                                                             }
-                                                                        }
+                                                                        } // End Looping transaksi
                                                                         ?>
                                                                     </td>
                                                                 </tr>
                                                             <?php
-                                                            }
+                                                            } // End Looping id_produk
                                                             ?>
                                                         </table>
                                                     </div>
@@ -170,9 +184,9 @@ if (isset($_GET['id_produk'])) {
                                                             </tr>
                                                             <?php
                                                             //menampung Item set-1
-                                                            $itemset1 = [];
-                                                            $itemset1_values = [];
-                                                            $cek_jumlah_itemset1_supercount = 0;
+                                                            $itemset1 = []; //array kosong sebagai penampung $itemset1
+                                                            $itemset1_values = []; //array kosong sebagai penampung $itemset1_values
+                                                            $cek_jumlah_itemset1_supercount = 0; // variabel penampung dimulai dari 0 
 
                                                             foreach ($barang as $bar) { // Looping Produk 
                                                                 if ($bar !== "") { // Jika data produk tidak sama dengan kosong atau nulll
@@ -181,6 +195,7 @@ if (isset($_GET['id_produk'])) {
                                                                         <td>
                                                                             <!-- <?= $bar ?> -->
                                                                             <?php
+                                                                            //menampilkan produk berdasarkan id_produk
                                                                             $produk1itemset = querysatudata("SELECT * FROM produk WHERE id_produk =" . $bar . " ");
                                                                             echo $produk1itemset['nama_produk'];
                                                                             ?>
@@ -191,48 +206,61 @@ if (isset($_GET['id_produk'])) {
                                                                         //index support count dimulai dari 0
                                                                         $supportcount = 0;
 
-                                                                        for ($row = 0; $row < $count_transaksi; $row++) {
-                                                                            //kolom support count
+                                                                        //Looping id_produk sebanyak transaksi
+                                                                        for ($row = 0; $row < $count_transaksi; $row++) { 
+                                                                            
+                                                                            //cek muncul banyaknya id_produk pada transaki checkout
                                                                             $supportcount += Search($bar, $transaksi[$row]);
                                                                         }
                                                                         ?>
                                                                         <td <?php
+                                                                            //hitung jumlah id_produk yang muncul pada transaksi 
                                                                             $hitung_support1 = ($supportcount / count($barang)) * 100;
+
+                                                                            //jika id_produk kurang dari jumlah minimum transaksi maka kolol berwarna merah
                                                                             if ($supportcount < $minimum_jumlah_transaksi) {
                                                                                 echo "style='background-color:red;'";
                                                                             }
                                                                             ?>>
                                                                             <?php
+
+                                                                            //jumlah id_produk yang muncul pada transaksi
                                                                             echo $supportcount;
                                                                             ?>
 
                                                                         </td>
                                                                         <td <?php
 
+                                                                            //jumlah id_produk yang muncul pada transaksi
                                                                             if ($supportcount < $minimum_jumlah_transaksi) {
                                                                                 echo "style='background-color:red;'";
                                                                             }
                                                                             ?>>
                                                                             <?php
+                                                                            //output hitung persen support
                                                                             echo  round($hitung_support1) . "%";
 
                                                                             ?>
                                                                         </td>
                                                                     </tr>
                                                                     <?php
-
-
+                                                                    
+                                                                    //jika id_produk memenuhi nilai minimum support maka tampung dalam array $pattern
                                                                     if ($supportcount >= $minimum_jumlah_transaksi) {
+
                                                                         //membuat array multidimensi assosiative pattern
                                                                         $pattern = [$bar => $supportcount];
 
-                                                                        // menggabungkan pattern pada item set 1
+                                                                        // menambahkan pattern pada item set 1
                                                                         array_push($itemset1, $pattern);
 
+                                                                        ///menambahkan 1 setiap ada id_produk yang memenuhi 
                                                                         $cek_jumlah_itemset1_supercount += 1;
 
                                                                         //membuat array assosiative pattern
                                                                         $pattern_value = [$bar];
+
+                                                                        // menambahkan pattern pada item set 1
                                                                         array_push($itemset1_values, $pattern_value);
                                                                     }
                                                                 } // Jika data produk tidak sama dengan kosong atau nulll
@@ -279,9 +307,13 @@ if (isset($_GET['id_produk'])) {
                                                                 //mencari data item set2 berdasarkan transaksi
                                                                 function searchitemset2($value1, $value2, $array)
                                                                 {
+                                                                    //mencari id_produk 1 pada data transaksi checkout
                                                                     $search1 = (array_search($value1, $array));
+
+                                                                    //mencari id_produk 2 pada data transaksi checkout
                                                                     $search2 = (array_search($value2, $array));
 
+                                                                    // cek jika ada 2 id_produk pada transaksi checkout
                                                                     if ($search1 == false and $search2 == false) {
                                                                         $val = 0;
                                                                     } elseif ($search1 == false and $search2 == true) {
@@ -293,6 +325,8 @@ if (isset($_GET['id_produk'])) {
                                                                     } else {
                                                                         $val = 1;
                                                                     }
+
+                                                                    //kembalikan nilai $val
                                                                     return  $val;
                                                                 }
                                                             ?>
@@ -304,23 +338,27 @@ if (isset($_GET['id_produk'])) {
                                                                         <th>Support</th>
                                                                     </tr>
                                                                     <?php
-                                                                    $tampung_itemset3 = [];
-                                                                    $index_itemset = 0;
-                                                                    $cek_jumlah_itemset2_supercount = 0;
+                                                                    $tampung_itemset3 = []; // buat array kosong $tampung_itemset3 untuk mrnampung data array yang memenuhi nilai support
+                                                                    $index_itemset = 0; // buat indek id_produk yang memenuhi dimulai dari 0
+                                                                    $cek_jumlah_itemset2_supercount = 0; // buat variabel cek jumlah id_Produk yang memenuhi support
 
-                                                                    $tampung_confident = [];
+                                                                    $tampung_confident = []; // buat array kosong $tampung_confident untuk menampung data itemset yang memenuhi support
 
-                                                                    //Looping data array produk
+                                                                    //Looping data array id_produk memenuhi support 1 
                                                                     foreach ($slice_tampung_item_set as $key => $value) {
+                                                                        // mulai di looping dari 0 + 1
                                                                         $mulai = $key + 1;
 
                                                                         //Looping data array produk dengan item ke 2
                                                                         for ($v = $mulai; $v < $count_item_set; $v++) {
 
-                                                                            $count_tampung_3 = 0;
+
+                                                                            $count_tampung_3 = 0; // buat variabel untuk menghitung pencarian id_produk pada transaksi
 
                                                                             // hitung item set yang juumlahnya ada 2
                                                                             for ($row = 0; $row < $count_transaksi; $row++) {
+
+                                                                                // cek 2 id_produk yang pada transaksi checkout
                                                                                 $count_tampung_3 += searchitemset2($tampung_item_set[$key], $tampung_item_set[$v], $transaksi[$row]);
                                                                             }
                                                                             ?>
@@ -331,18 +369,22 @@ if (isset($_GET['id_produk'])) {
                                                                                     <!-- <?= $tampung_item_set[$key] . ", " . $tampung_item_set[$v] ?>  -->
 
                                                                                     <?php
+                                                                                    //menampilkan produk 1
                                                                                     $produk2key = querysatudata("SELECT * FROM produk WHERE id_produk =" . $tampung_item_set[$key] . " ");
                                                                                     echo $produk2key['nama_produk'];
                                                                                     echo ", ";
+
+                                                                                    //menampilkan produk 2
                                                                                     $produk2v = querysatudata("SELECT * FROM produk WHERE id_produk =" . $tampung_item_set[$v]  . " ");
                                                                                     echo $produk2v['nama_produk'];
                                                                                     ?>
 
                                                                                 </td>
                                                                                 <td <?php
-
+                                                                                    // hitung prosen 2 id_produk yang memenuhi supoort
                                                                                     $hitung_support2 = ($count_tampung_3 / $count_transaksi) * 100;
 
+                                                                                    // jika  2 id_produk tidak memenuhi supoort maka sel baris berwarna merah
                                                                                     if ($count_tampung_3 <  $minimum_jumlah_transaksi) {
                                                                                         echo "style='background-color:red;'";
                                                                                     }
@@ -350,6 +392,7 @@ if (isset($_GET['id_produk'])) {
                                                                                     <?= $count_tampung_3; ?>
                                                                                 </td>
                                                                                 <td <?php
+                                                                                    // jika  2 id_produk tidak memenuhi supoort maka sel baris berwarna merah
                                                                                     if ($count_tampung_3 <  $minimum_jumlah_transaksi) {
                                                                                         echo "style='background-color:red;'";
                                                                                     }
@@ -358,18 +401,28 @@ if (isset($_GET['id_produk'])) {
                                                                             </tr>
 
                                                                         <?php
-                                                                            $index_itemset += 1;
+
+                                                                            $index_itemset += 1; // menambah 1 pada setiap transaksi pada 2 id_produk yang memenuhi support sebagai array key
 
                                                                             //Eleminasi berdasarkan nminimum support
                                                                             if ($count_tampung_3 >=  $minimum_jumlah_transaksi) {
 
+                                                                                //menambahkan 1 pada cek_jumlah_itemset2_supercount jika memenuhi support
                                                                                 $cek_jumlah_itemset2_supercount += 1;
 
+                                                                                //membuat data array berdasarkan index dan id_produk 1
                                                                                 $pattern_value1 = [$index_itemset => $tampung_item_set[$key]];
+
+                                                                                //membuat data array berdasarkan index dan id_produk 1
                                                                                 $pattern_value2 = [$index_itemset => $tampung_item_set[$v]];
+
+                                                                                //menambahkan array $pattern_value1 kedalam array $tampung_itemset3
                                                                                 array_push($tampung_itemset3, $pattern_value1);
+
+                                                                                //menambahkan array $pattern_value2 kedalam array $tampung_itemset3
                                                                                 array_push($tampung_itemset3, $pattern_value2);
 
+                                                                                //membuat array $keyvdengan key dan value nya $tampung_item_set[$v]
                                                                                 $keyv = ["$tampung_item_set[$key]" => $tampung_item_set[$v]];
 
                                                                                 //menambahkan array berdasarkan produk yang memenuhi nilai minimum_jumlah_transaksi 
@@ -385,11 +438,12 @@ if (isset($_GET['id_produk'])) {
 
 
                                                             <?php
-                                                            //jika data tampung array lebih dari 0 
+                                                            //jika data tampung array $tampung_confident lebih dari 0 
                                                             if (count($tampung_confident) > 0) {
                                                             ?>
                                                                 <div class="col-xl-12 mt-3 mb-3">
                                                                     <?php
+                                                                        // mencari key pada $tampung_confident
                                                                         $keys = array_keys($tampung_confident);
                                                                     ?>
                                                                     <h3>Confidence</h3>
@@ -407,16 +461,18 @@ if (isset($_GET['id_produk'])) {
                                                                         </tr>
 
                                                                         <?php
-
+                                                                        //Looping data confident berdasarkan jumlah confident
                                                                         for ($i = 0; $i < count($tampung_confident); $i++) { ?>
 
                                                                             <tr>
                                                                                 <?php
+                                                                                // Looping data $tampung_confident dengan index key dan value $tampung_confident
                                                                                 foreach ($tampung_confident[$keys[$i]] as $key => $value) {
                                                                                 ?>
                                                                                     <td>Jika membeli</td>
                                                                                     <td>
                                                                                         <?php
+                                                                                        //menampilkan data produk
                                                                                         $confidenmembeli2 = querysatudata("SELECT * FROM produk WHERE id_produk =" . $key . " ");
                                                                                         ?>
                                                                                         <!-- <?= $key  ?> -->
@@ -426,32 +482,41 @@ if (isset($_GET['id_produk'])) {
                                                                                     <td>
                                                                                         <!-- <?= $value ?> -->
                                                                                         <?php
+                                                                                        //menampilkan data produk
                                                                                         $confidenmaka2 = querysatudata("SELECT * FROM produk WHERE id_produk =" . $value . " ");
                                                                                         ?>
                                                                                         <?= $confidenmaka2['nama_produk'] ?>
                                                                                     </td>
                                                                                     <td>
                                                                                         <?php
-                                                                                        $count_valAB = 0;
+                                                                                        $count_valAB = 0; // hitung jumlah AB di mulai dari 0
                                                                                         for ($row = 0; $row < $count_transaksi; $row++) {
+
+                                                                                            //hitung jumlah AB ditambahkan 1 jika ada pada transaksi
                                                                                             $count_valAB += searchitemset2($key, $value, $transaksi[$row]);
                                                                                         }
+
+                                                                                        //output jumlah AB
                                                                                         echo $count_valAB;
 
                                                                                         ?>
                                                                                     </td>
                                                                                     <td>
                                                                                         <?php
-                                                                                        $count_valA = 0;
+                                                                                        $count_valA = 0; // hitung jumlah A di mulai dari 0
                                                                                         for ($row = 0; $row < $count_transaksi; $row++) {
-                                                                                            // $count_c += searchitemset2($key, $value, $transaksi[$row]);
+
+                                                                                            //hitung jumlah AB ditambahkan 1 jika ada pada transaksi
                                                                                             $count_valA += Search($value, $transaksi[$row]);
                                                                                         }
+
+                                                                                        //output jumlah A
                                                                                         echo $count_valA;
                                                                                         ?>
                                                                                     </td>
                                                                                     <td>
                                                                                         <?php
+                                                                                        //output Confident
                                                                                         echo ($count_valAB / $count_valA);
                                                                                         ?>
                                                                                     </td>
@@ -473,7 +538,9 @@ if (isset($_GET['id_produk'])) {
                                                     //jika jumlah itemset yang memenuhi item set 2 lebih dari 0
                                                     if ($cek_jumlah_itemset2_supercount > 0) {
 
+                                                        //membuat uniq data confident 2 atau menghilangkan duplikayt id_produk
                                                         $single_tampung_confident = array_unique($tampung_confident);
+
                                                         $rekomendasi = $single_tampung_confident;
 
                                                         // mengubah array multidimensi menjadi array single
@@ -489,9 +556,10 @@ if (isset($_GET['id_produk'])) {
                                                         //menghihitung jumlah array item set
                                                         $count_item_set = count($tampung_item_set);
 
+                                                        // membuat function permutation dengan parameter array 
                                                         function computePermutations($array)
                                                         {
-                                                            $result = [];
+                                                            $result = []; // buat array $result
 
                                                             $recurse = function ($array, $start_i = 0) use (&$result, &$recurse) {
                                                                 if ($start_i === count($array) - 1) {
@@ -550,6 +618,7 @@ if (isset($_GET['id_produk'])) {
                                                         }
 
 
+                                                        // membuat function s3 untuk mengecek data 3 id_produk pada transaksi
                                                         function s3($array, $transaksi)
                                                         {
                                                             $count_trxs = count($transaksi);
@@ -592,33 +661,44 @@ if (isset($_GET['id_produk'])) {
                                                                     <th>Suppport</th>
                                                                 </tr>
                                                                 <?php
-                                                                $data_tampung_itemset3 = [];
-                                                                $bs = 0;
-                                                                $cek_jumlah_itemset3_supercount = 0;
+                                                                $data_tampung_itemset3 = []; // membuat array $data_tampung_itemset3 untuk menampung data yang memenuhi support
+                                                                $bs = 0;  // buat variabel bs dimulai dari 0
+                                                                $cek_jumlah_itemset3_supercount = 0; // buat variabel bs dimulai dari 0
+
+                                                                //Looping data permutasi yang di buat berdasarkan jumlah hasil permutasi
                                                                 for ($row = 0; $row <  $count_result; $row++) {
                                                                 ?>
                                                                     <tr>
                                                                         <td>
                                                                             <?php
-                                                                            $dataset = [];
+                                                                            $dataset = []; // membuat array data set untuk menampung array 
+
+                                                                            //Looping data 3 id_produk dari hasil permutasi 3 berdasarkan index 0,1,2 
                                                                             for ($col = 0; $col < 3; $col++) {
 
                                                                                 // echo $results[$row][$col] . ",";
+
+                                                                                //menampilkan data produk
                                                                                 $produk3itemset = querysatudata("SELECT * FROM produk WHERE id_produk =" . $results[$row][$col] . " ");
                                                                                 echo $produk3itemset['nama_produk'];
                                                                                 echo  ", ";
 
 
+                                                                                //menampung data array permutasi 3 produk ke $dataset
                                                                                 $dataset[] = $results[$row][$col];
                                                                             }
+
+                                                                            //cek jumlah kombinasi e id_produk pada tranasaksi checkout
                                                                             $setdat = s3($dataset, $transaksi);
                                                                             // var_dump($dataset);
 
+                                                                            //jika $setdat dari jumlah minimum support maka
                                                                             if ($setdat >= $minimum_jumlah_transaksi) {
 
                                                                                 //tambahkan cek jumlah item set 3
                                                                                 $cek_jumlah_itemset3_supercount += 1;
 
+                                                                                //tambahkan nilai array pada array $data_tampung_itemset3 
                                                                                 array_push($data_tampung_itemset3, $dataset);
                                                                             }
 
@@ -630,6 +710,7 @@ if (isset($_GET['id_produk'])) {
                                                                             ?>
                                                                         </td>
                                                                         <td <?php
+                                                                            //$setdat kurang dari jumlah minimum support maka berwarna merah
                                                                             if ($setdat < $minimum_jumlah_transaksi) {
                                                                                 echo "style='background-color:red;'";
                                                                             }
@@ -638,12 +719,14 @@ if (isset($_GET['id_produk'])) {
                                                                         </td>
                                                                         <td <?php
                                                                             $hitung_support3 = ($setdat / $count_barang) * 100;
+                                                                            //$setdat kurang dari jumlah minimum support maka berwarna merah
                                                                             if ($setdat < $minimum_jumlah_transaksi) {
                                                                                 echo "style='background-color:red;'";
                                                                             }
                                                                             ?>>
 
                                                                             <?php
+                                                                            //output prosen setdat dari transaksi
                                                                             echo   round(($setdat  / $count_transaksi) * 100) ."%";
 
                                                                             ?>
@@ -666,7 +749,7 @@ if (isset($_GET['id_produk'])) {
                                                         if (count($data_tampung_itemset3) > 0) {
 
                                                             // $rekomendasi = $data_tampung_itemset3;
-                                                            var_dump($data_tampung_itemset3);
+                                                           // var_dump($data_tampung_itemset3);
                                                         ?>
                                                         <div class="col-xl-12 mt-3">
 
@@ -706,6 +789,8 @@ if (isset($_GET['id_produk'])) {
                                                                                 $ino += 1;
                                                                             }
                                                                         }
+
+                                                                        // mengembalikan data $ino
                                                                         return  $ino;
                                                                     }
 
@@ -800,35 +885,7 @@ if (isset($_GET['id_produk'])) {
                                                         }  //jika item set 1 memiliki supercount
                                                     ?>
 
-
-
-
                                                 <?php
-
-                                                    /// Logika menampilkan hasil 
-                                                    // Jika itemset satu ada maka
-                                                    // if ($cek_jumlah_itemset1_supercount > 0) {
-
-                                                    //     // cek jika itemset 2 ada
-                                                    //     if ($cek_jumlah_itemset2_supercount > 0) {
-
-                                                    //         // cek jika itemset 3 ada
-                                                    //         if ($cek_jumlah_itemset3_supercount > 0) {
-                                                    //             $rekomendasi = $hasil_itemset3unique;
-                                                    //             // cek jika itemset 3 tidak ada
-                                                    //         } else {
-                                                    //             $rekomendasi = $tampung_itemset3unique;
-                                                    //         }
-
-                                                    //         // cek jika itemset 2 tidak ada
-                                                    //     } else {
-                                                    //         $rekomendasi = $c_barang;
-                                                    //     }
-                                                    //     //jika items set 1 tidak ada
-                                                    // } else {
-                                                    //     $rekomendasi = $c_barang;
-                                                    // }
-
 
                                                     if ($rekomendasi == null) {
                                                     } else {
