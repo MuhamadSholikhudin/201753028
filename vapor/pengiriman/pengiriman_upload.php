@@ -39,7 +39,7 @@ if (isset($_GET['id_pengiriman'])) {
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
                                             <label for="feDescription">Tanggal Pengiriman</label>
-                                            <input type="date" class="form-control" name="tanggal_pengiriman" required>
+                                            <input type="date" class="form-control" name="tanggal_pengiriman" value="<?= date('Y-m-d') ?>" required>
                                         </div>
                                     </div>
                                     <div class="form-row">

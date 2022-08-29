@@ -45,7 +45,7 @@ if (isset($_POST['btnPROSESPEMBAYARAN'])) {
     // print("<pre>".print_r($cari_pembayaran,true)."</pre>");
 
     // simpan data pengiriman
-    $sql_insert_pengiriman = "INSERT INTO `pengiriman`( `id_user`, `id_pembayaran`, `nama_penerima`, `nomor_penerima` , `provinsi`, `kota`, `kecamatan`, `kode_pos`, `alamat_lengkap`, `status_pengiriman`) VALUES 
+    $sql_insert_pengiriman = "INSERT INTO pengiriman( `id_user`, `id_pembayaran`, `nama_penerima`, `nomor_penerima`, `provinsi`, `kota`, `kecamatan`, `kode_pos`, `alamat_jalan`, `alamat_lengkap`, `status_pengiriman`) VALUES 
     (
         ".$_POST['id_user'].",
         ".$cari_pembayaran['id_pembayaran'].",
@@ -60,9 +60,13 @@ if (isset($_POST['btnPROSESPEMBAYARAN'])) {
         1
     )";
 
+    // print("<pre>".print_r($cari_pembayaran,true)."</pre>");
+    // print("<pre>".print_r($sql_insert_pengiriman,true)."</pre>");
+
     // echo $sql_insert_pengiriman;
 
     $query_insert_pengiriman = mysqli_query($koneksi, $sql_insert_pengiriman);
+    // print("<pre>".print_r($query_insert_pengiriman,true)."</pre>");
 
     // var_dump($query_insert_pengiriman);
 
