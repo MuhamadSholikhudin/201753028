@@ -1,4 +1,7 @@
 <?php
+
+error_reporting(0);
+
 if (isset($_GET['id_produk'])) {
     $produk = querysatudata("SELECT * FROM produk WHERE id_produk =" . $_GET['id_produk'] . " ");
 }
@@ -83,12 +86,24 @@ if (isset($_GET['id_produk'])) {
                                                     // menghilangkan data id_produk yang duplicat dengan unique
                                                     $barang = array_unique($array_unique);
 
-
                                                     //membuat variabel count barang
                                                     $c_barang = array_unique($array_unique);
 
-                                                    //menghilangkan shitf
+                                                    //menghilangkan shift
                                                     $shift_shift = array_shift($c_barang);
+
+                                                    // Tampung data array
+                                                    $delkos = $c_barang;
+
+                                                    //mencari index array yang mau dihilangkan
+                                                    $delkey = array_search("", $delkos);
+
+                                                    //Menghilangkan satu array di berdasarkan key
+                                                    unset($delkos[$delkey]);
+
+                                                    // print("<pre>".print_r($delkos,true)."</pre>");
+
+                                                    $rekomendasi = $delkos;
 
                                                     //count barang
                                                     $count_barang = count($c_barang);
@@ -126,7 +141,7 @@ if (isset($_GET['id_produk'])) {
                                                         }
                                                         return  $val;
                                                     } // function mencari id_produk pada transaksi
-                                                ?>
+                                                    ?>
 
                                                     <!-- Transaksi -->
                                                     <div class="col-md-12 mt-3"> 
@@ -276,7 +291,7 @@ if (isset($_GET['id_produk'])) {
                                                         //jika item set 1 memiliki supercount
                                                         if ($cek_jumlah_itemset1_supercount > 0) {
 
-                                                                $rekomendasi = $c_barang;
+                                                                $rekomendasi = $delkos;
 
                                                             //Jika array dari itemset 1 lebih dari satu
                                                             if (count($itemset1_values) > 1) {
@@ -888,6 +903,7 @@ if (isset($_GET['id_produk'])) {
                                                 <?php
 
                                                     if ($rekomendasi == null) {
+
                                                     } else {
 
                                                         // Jika pengunjung LOgin
