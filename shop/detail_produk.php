@@ -32,7 +32,7 @@ if (isset($_GET['id_produk'])) {
                                 <div class="row">
                                     <div class="col-12 mb-3">
                                         <div class="row">
-
+                                        <div style="display: none;">
                                             <?php
                                             //Jika pengunjung login 
                                             if (isset($_SESSION['id_user'])) {
@@ -900,8 +900,11 @@ if (isset($_GET['id_produk'])) {
                                                         }  //jika item set 1 memiliki supercount
                                                     ?>
 
-                                                <?php
 
+                                        </div>
+                                                
+                                                
+                                                <?php
                                                     if ($rekomendasi == null) {
 
                                                     } else {
